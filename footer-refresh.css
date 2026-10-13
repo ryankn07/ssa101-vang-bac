@@ -159,3 +159,107 @@ html.force-instant-top {scroll-behavior:auto !important;}
     margin-right:0;
   }
 }
+
+/* Vang Bac mobile type scale v2:
+   Body copy 15px / secondary copy 12–13px / labels 11–12px /
+   section titles 32–40px. Preserve oversized editorial display text.
+   These rules come last to override the old 8–13px mobile overrides. */
+@media(max-width:800px) {
+  .hero-intro p,
+  .section-title-row p,
+  .outcomes-title p,
+  .problem p,
+  .outcome p,
+  .session-description p,
+  .demo-case-copy p,
+  .demo-summary p,
+  .video-layout p,
+  .faq-questions p,
+  .register-content p,
+  .footer-identity p,
+  .footer-join p {
+    font-size:15px;
+    line-height:1.72;
+    letter-spacing:0;
+  }
+
+  .eyebrow,
+  .section-tag,
+  .hero-topline,
+  .hero-ticker span,
+  .problem-id,
+  .session-format,
+  .demo-case-index,
+  .demo-summary strong,
+  .footer-label {
+    font-size:11.5px;
+    line-height:1.5;
+    letter-spacing:.065em;
+  }
+  .section-tag { gap:10px; }
+  .section-tag .tiny-box { flex-shrink:0; }
+
+  .section-title-row h2,
+  .video-layout h2,
+  .register h2 {
+    font-size:clamp(32px,8.9vw,40px);
+    line-height:1.14;
+    letter-spacing:-.05em;
+    text-wrap:balance;
+  }
+  .outcomes-title h2 {
+    font-size:clamp(36px,9.2vw,44px);
+    line-height:1.11;
+  }
+  .hero-intro h2 {
+    font-size:clamp(34px,9vw,42px);
+    line-height:1.15;
+  }
+
+  .problem h3,
+  .outcome h3,
+  .session-description h3,
+  .demo-case h3 {
+    line-height:1.28;
+    letter-spacing:-.035em;
+  }
+
+  .brand-copy strong { font-size:13px;letter-spacing:.105em; }
+  .brand-copy small { font-size:10px;line-height:1.4; }
+  .nav-cta,
+  .text-link,
+  .registration-link,
+  .footer-cta { font-size:12px;line-height:1.5; }
+
+  .demo-case-source { font-size:11px;line-height:1.6; }
+  .demo-mobile-hint { font-size:12px;line-height:1.6; }
+  .demo-caveat,
+  .register-actions small,
+  .footer-bottom small {
+    font-size:12px;
+    line-height:1.72;
+  }
+  .demo-caveat { color:#52616a; }
+  .register-actions small { color:#59666d; }
+  .video-frame > span { font-size:11px;line-height:1.5; }
+  .video-frame .video-pending-mark + p { font-size:11px;line-height:1.6; }
+
+  .faq-questions summary { font-size:15px;line-height:1.55; }
+  .footer-nav a { font-size:14px;line-height:1.55; }
+  .footer-back-top { font-size:12px;line-height:1.6; }
+}
+
+@media(max-width:510px) {
+  .hero-ticker span { font-size:11px; }
+  .hero-topline { font-size:11px; }
+  .session-format { font-size:11px; }
+  .session-description h3 { font-size:21px; }
+  .session-description p { font-size:14px;line-height:1.65; }
+  .session-row { gap:12px; }
+  .demo-heading { gap:16px; }
+  .demo-case-copy p { font-size:15px; }
+  .demo-case h3 { font-size:26px; }
+  .footer-nav a { font-size:14px; }
+  .footer-join p,.footer-identity p { font-size:15px; }
+  .footer-bottom small { font-size:12px; }
+}
