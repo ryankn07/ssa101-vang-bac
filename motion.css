@@ -38,7 +38,7 @@
 }
 .site-header.is-scrolled {
   box-shadow: 0 9px 26px rgba(16, 34, 46, .065);
-  background: rgba(241, 238, 230, .97);
+  background: rgb(241, 238, 230);
 }
 .desktop-nav a { position: relative; transition: color 240ms ease; }
 .desktop-nav a::after {
