@@ -1,0 +1,116 @@
+/* Vàng Bạc · SSA101 — Footer refresh and readable type spacing.
+   Deliberately independent from the Motion V4 animation rules. */
+:root { --footer-ink: #0d2030; --footer-text: #e9ebe7; }
+
+/* Add breathing room without changing the site's visual hierarchy. */
+.hero-intro h2 { line-height: 1.17; }
+.section-title-row h2, .video-layout h2 { line-height: 1.13; }
+.outcomes-title h2 { line-height: 1.1; }
+.register h2 { line-height: 1.095; }
+.faq-lead h2 { line-height: 1; }
+.hero-intro p, .section-title-row p, .problem p,
+.outcome p, .session-description p, .demo-sheet p,
+.video-layout p, .faq-questions p, .register p { line-height: 1.86; }
+
+.site-footer {
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:var(--footer-ink);
+  color:var(--footer-text);
+}
+.site-footer::before {
+  content:""; position:absolute; top:-150px; right:-260px;
+  width:700px; height:700px; pointer-events:none; border-radius:50%;
+  border:1px solid rgba(255,255,255,.075);
+  box-shadow:0 0 0 90px rgba(255,255,255,.014),0 0 0 190px rgba(255,255,255,.012);
+  z-index:-1;
+}
+.site-footer a { color:inherit; }
+.footer-shell { padding-top:44px; padding-bottom:26px; }
+.footer-topline {
+  display:flex;justify-content:space-between;align-items:center;gap:20px;
+  border-bottom:1px solid rgba(231,237,238,.23);padding-bottom:29px;
+  font-size:10px;font-weight:800;letter-spacing:.16em;color:#b3c3ce;
+}
+.footer-topline .footer-orange-mark { width:9px;height:9px;background:var(--orange);display:inline-block;margin-right:10px; }
+.footer-grid {
+  display:grid;grid-template-columns:minmax(0,1.45fr) minmax(180px,.83fr) minmax(220px,.94fr);
+  gap:clamp(24px,4vw,66px); padding-block:54px 74px;
+}
+.footer-brand-col {min-width:0;}
+.footer-brand {
+  display:inline-flex;align-items:center;gap:18px; min-height:80px;
+}
+.footer-brand img {
+  width:76px;height:76px;object-fit:contain;display:block;flex-shrink:0;
+  transition:transform .45s cubic-bezier(.16,1,.3,1);
+}
+.footer-brand:hover img { transform:translateY(-3px) scale(1.04); }
+.footer-brand-name {display:flex;flex-direction:column;align-items:flex-start;gap:6px;}
+.footer-brand-name strong {
+  font-family:var(--display);font-size:clamp(19px,2.05vw,27px);font-weight:900;
+  letter-spacing:-.015em;line-height:1.3;color:white;
+}
+.footer-brand-name strong i {font-style:normal;color:var(--orange);}
+.footer-brand-name small {font-size:9px;font-weight:700;letter-spacing:.19em;color:#9faebb;line-height:1.75;}
+.footer-big-title { margin:42px 0 20px; font-family:var(--display);font-weight:900;
+  font-size:clamp(34px,4.2vw,58px); line-height:1.14;letter-spacing:-.055em;color:#fff;
+}
+.footer-big-title span {color:var(--orange);}
+.footer-lead {max-width:360px;color:#b4c3cc;font-size:13px;line-height:1.9;margin-bottom:0;}
+.footer-label {font-size:10px;letter-spacing:.22em;font-weight:800;color:#91a7b4;margin:9px 0 24px;display:block;}
+.footer-links {display:flex;flex-direction:column;min-width:0;}
+.footer-links a {border-bottom:1px solid rgba(219,229,233,.18);padding:14px 0;display:flex;align-items:center;gap:11px;
+  font-size:12px;font-weight:650;letter-spacing:.025em;line-height:1.75;transition:color .2s,transform .2s;}
+.footer-links a:first-of-type {border-top:1px solid rgba(219,229,233,.18);}
+.footer-links a:hover {color:#fff;transform:translateX(4px);}
+.footer-links a small {font-size:9px;color:var(--orange);font-weight:850;letter-spacing:.08em;}
+.footer-links a span {margin-left:auto;color:var(--orange);font-size:15px;}
+.footer-action {min-width:0;}
+.footer-action h3 {font-family:var(--display);font-size:clamp(24px,2.7vw,36px);letter-spacing:-.045em;line-height:1.25;
+  font-weight:850;color:#fff;margin:10px 0 15px;}
+.footer-action h3 em {font-style:normal;color:var(--orange);}
+.footer-action p {color:#aebec9;line-height:1.8;font-size:12px;margin:0 0 25px;max-width:245px;}
+.footer-cta {display:flex;align-items:center;justify-content:space-between;gap:15px;background:var(--orange);color:white !important;
+  padding:16px 18px;max-width:330px;font-size:11px;font-weight:850;letter-spacing:.085em;line-height:1.7;
+  transition:background .2s,transform .25s cubic-bezier(.16,1,.3,1);}
+.footer-cta span {font-size:23px;line-height:1;}
+.footer-cta:hover {background:#d9462b;transform:translateY(-3px);}
+.footer-cta-note {margin-top:13px;display:block;font-size:10px;color:#94aab6;line-height:1.8;letter-spacing:.02em;}
+.footer-bottom {border-top:1px solid rgba(231,237,238,.23);padding-top:24px;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
+.footer-bottom p,.footer-bottom small {margin:0;color:#9cadb9;font-size:10px;line-height:1.85;letter-spacing:.02em;}
+.footer-bottom small {max-width:420px;}
+.footer-back-top {display:inline-flex;align-items:center;gap:13px;font-size:10px;font-weight:850;letter-spacing:.1em;
+  white-space:nowrap;line-height:1.6;color:#f1f3f3 !important;transition:color .2s;}
+.footer-back-top .footer-up-icon {display:grid;place-items:center;width:33px;height:33px;border:1px solid rgba(239,240,235,.4);
+  border-radius:50%;font-size:17px;color:var(--orange);transition:transform .25s;}
+.footer-back-top:hover {color:var(--orange) !important;}
+.footer-back-top:hover .footer-up-icon {transform:translateY(-4px);}
+.footer-cta:focus-visible,.footer-links a:focus-visible,.footer-back-top:focus-visible,.footer-brand:focus-visible {outline:2px solid #fff;outline-offset:4px;}
+@media (max-width:980px) {
+ .footer-grid {grid-template-columns:minmax(0,1.12fr) minmax(170px,.88fr);}
+ .footer-action {grid-column:1/-1;border-top:1px solid rgba(231,237,238,.2);padding-top:23px;}
+ .footer-action h3 {font-size:30px;}
+ .footer-action p {max-width:470px;}
+}
+@media (max-width:650px) {
+ .footer-shell{padding-top:28px;padding-bottom:20px;}
+ .footer-topline{font-size:9px;line-height:1.8;flex-wrap:wrap;padding-bottom:20px;gap:6px 12px;}
+ .footer-grid {grid-template-columns:1fr;gap:30px;padding-block:31px 42px;}
+ .footer-brand img{width:68px;height:68px;}
+ .footer-big-title{margin:28px 0 13px;font-size:clamp(32px,9vw,52px);}
+ .footer-links{border-top:1px solid rgba(231,237,238,.18);padding-top:12px;}
+ .footer-label{margin:5px 0 12px;}
+ .footer-action{grid-column:auto;margin-top:0;}
+ .footer-action h3{font-size:29px;}
+ .footer-bottom{align-items:flex-start;gap:17px 24px;}
+ .footer-back-top{width:100%;justify-content:space-between;border-top:1px solid rgba(231,237,238,.18);padding-top:17px;}
+}
+@media (prefers-reduced-motion:reduce) {
+ .site-footer * {transition:none !important;}
+}
+
+/* Back-to-top is immediate even if html uses smooth scrolling for section links. */
+html.force-instant-top { scroll-behavior: auto !important; }

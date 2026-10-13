@@ -13,13 +13,14 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="motion.css">
   <link rel="stylesheet" href="typography-mix.css">
+  <link rel="stylesheet" href="footer-refresh.css">
   <script defer src="script.js"></script>
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
   <a class="skip-link" href="#main">Bỏ qua điều hướng</a>
   <header class="site-header" id="top">
-    <a href="#top" class="brand" aria-label="Nhóm Vàng Bạc — về đầu trang">
+    <a href="#top" data-scroll-top class="brand" aria-label="Nhóm Vàng Bạc — về đầu trang">
       <span class="brand-mark" aria-hidden="true"><span>V</span><span>B</span></span>
       <span class="brand-copy"><strong>VÀNG BẠC</strong><small>GROUP 05 · SSA101</small></span>
     </a>
@@ -126,6 +127,42 @@
 
     <section id="register" class="register wrap section-pad" aria-labelledby="register-title"><div class="register-backplate" aria-hidden="true"></div><div class="register-card"><div class="section-tag"><span class="tiny-box"></span> 08 / THAM GIA CÙNG CHÚNG MÌNH</div><div class="register-content"><div><h2 id="register-title">HẸN GẶP<br><span>TRONG BUỔI HỌC.</span></h2><p>05 buổi thực hành · Online + Offline · Miễn phí</p><p class="register-status" id="registration-status">Form đăng ký đã mở. Bấm nút bên cạnh để đăng ký tham gia.</p></div><div class="register-actions"><a class="registration-link" id="registration-link" href="https://docs.google.com/forms/d/e/1FAIpQLSdvFnYiceiT-sh13q3ggggmLMSz9ifyf6zQS6-JSGxH60DN2w/viewform" target="_blank" rel="noopener noreferrer">MỞ FORM ĐĂNG KÝ <span aria-hidden="true">↗</span></a><small>Thông tin đăng ký được nhập trực tiếp trên Google Form, không lưu tại website.</small></div></div></div></section>
   </main>
-  <footer class="site-footer full-bleed"><div class="wrap footer-inner"><div><span class="footer-logo-slot" aria-hidden="true"></span><strong>VÀNG BẠC<span>.</span></strong><span>GROUP 05 / SSA101 / FPT UNIVERSITY</span></div><a href="#top">LÊN ĐẦU TRANG ↑</a><small>Trang giới thiệu dự án · Không phải website chính thức của Trường Đại học FPT.</small></div></footer>
+  <footer class="site-footer full-bleed" id="footer" aria-label="Chân trang nhóm Vàng Bạc">
+    <div class="wrap footer-shell">
+      <div class="footer-topline">
+        <span><i class="footer-orange-mark" aria-hidden="true"></i>NHÓM VÀNG BẠC · SSA101</span>
+        <span>FPT UNIVERSITY / 2026</span>
+      </div>
+      <div class="footer-grid">
+        <div class="footer-brand-col">
+          <a class="footer-brand" href="#top" data-scroll-top aria-label="Nhóm Vàng Bạc — về đầu trang">
+            <img src="assets/logo-vang-bac.webp" alt="Logo chính thức Nhóm Vàng Bạc" width="76" height="76" loading="lazy">
+            <span class="footer-brand-name"><strong>VÀNG BẠC<i>.</i></strong><small>GROUP 05 / SSA101</small></span>
+          </a>
+          <h2 class="footer-big-title">TIME<br><span>MANAGEMENT.</span></h2>
+          <p class="footer-lead">Một dự án nhỏ, một thói quen tốt hơn: lên kế hoạch, chọn việc ưu tiên và chủ động với thời gian của mình.</p>
+        </div>
+        <nav class="footer-links" aria-label="Điều hướng chân trang">
+          <span class="footer-label">KHÁM PHÁ DỰ ÁN</span>
+          <a href="#about"><small>01</small> Về chương trình <span aria-hidden="true">↗</span></a>
+          <a href="#roadmap"><small>02</small> Lộ trình 5 buổi <span aria-hidden="true">↗</span></a>
+          <a href="#demo"><small>03</small> Sản phẩm demo <span aria-hidden="true">↗</span></a>
+          <a href="#faq"><small>04</small> Câu hỏi thường gặp <span aria-hidden="true">↗</span></a>
+        </nav>
+        <div class="footer-action">
+          <span class="footer-label">SẴN SÀNG BẮT ĐẦU?</span>
+          <h3>Từ deadline<br>đến <em>kế hoạch.</em></h3>
+          <p>05 buổi thực hành · Online &amp; Offline · Miễn phí cho sinh viên FPT.</p>
+          <a class="footer-cta" data-registration-link href="https://docs.google.com/forms/d/e/1FAIpQLSdvFnYiceiT-sh13q3ggggmLMSz9ifyf6zQS6-JSGxH60DN2w/viewform" target="_blank" rel="noopener noreferrer">ĐĂNG KÝ THAM GIA <span aria-hidden="true">↗</span></a>
+          <small class="footer-cta-note">Điền thông tin trực tiếp trên Google Form của nhóm.</small>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 NHÓM VÀNG BẠC · SSA101</p>
+        <small>Dự án học tập của sinh viên, không phải website chính thức của Trường Đại học FPT.</small>
+        <a href="#top" class="footer-back-top" data-scroll-top>LÊN ĐẦU TRANG <span class="footer-up-icon" aria-hidden="true">↑</span></a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

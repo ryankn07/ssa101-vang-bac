@@ -2,7 +2,7 @@
 // Chỉ điền link sau khi Google Form chính thức đã được tạo và kiểm tra.
 const SITE_CONFIG = {
   registrationUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdvFnYiceiT-sh13q3ggggmLMSz9ifyf6zQS6-JSGxH60DN2w/viewform",
-  logoUrl: "assets/logo-vang-bac.webp", // Đặt logo gốc tại đây. Nếu chưa có, giữ biểu tượng VB.
+  logoUrl: "assets/logo-vang-bac.png", // Đặt logo gốc tại đây. Nếu chưa có, giữ biểu tượng VB.
   youtubeEmbedUrl: ""   // Ví dụ: "https://www.youtube.com/embed/VIDEO_ID"
 };
 
@@ -291,3 +291,15 @@ if (/^https:\/\/www\.youtube\.com\/embed\/[A-Za-z0-9_-]+/.test(SITE_CONFIG.youtu
   };
   preview.src = SITE_CONFIG.logoUrl;
 })();
+
+
+/* Explicit back-to-top behavior. Do not rely on URL hash/anchor offsets: some
+   browsers can land on a nearby section after layout changes or history restoration. */
+document.querySelectorAll('[data-scroll-top]').forEach(link => {
+  link.addEventListener('click', event => {
+    event.preventDefault();
+    document.documentElement.classList.add('force-instant-top');
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    requestAnimationFrame(() => document.documentElement.classList.remove('force-instant-top'));
+  });
+});
