@@ -142,3 +142,20 @@ html.force-instant-top {scroll-behavior:auto !important;}
   .video-pending-mark span {font-size:10px;}
   .video-frame .video-pending-mark + p {font-size:10px;}
 }
+
+/* Mobile layout fix: the desktop align-items:end setting pushed the
+   demo heading and description to the right of the viewport. */
+@media(max-width:800px) {
+  .demo .demo-heading {
+    align-items:flex-start;
+    text-align:left;
+  }
+  .demo .demo-heading > h2,
+  .demo .demo-heading > p {
+    align-self:flex-start;
+    width:100%;
+    max-width:100%;
+    margin-left:0;
+    margin-right:0;
+  }
+}
