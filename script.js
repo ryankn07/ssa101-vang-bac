@@ -2,7 +2,7 @@
 // Chỉ điền link sau khi Google Form chính thức đã được tạo và kiểm tra.
 const SITE_CONFIG = {
   registrationUrl: "https://docs.google.com/forms/d/e/1FAIpQLSdvFnYiceiT-sh13q3ggggmLMSz9ifyf6zQS6-JSGxH60DN2w/viewform",
-  logoUrl: "assets/logo-vang-bac.png", // Đặt logo gốc tại đây. Nếu chưa có, giữ biểu tượng VB.
+  logoUrl: "assets/logo-vang-bac-transparent.svg", // Đặt logo gốc tại đây. Nếu chưa có, giữ biểu tượng VB.
   youtubeEmbedUrl: ""   // Ví dụ: "https://www.youtube.com/embed/VIDEO_ID"
 };
 
