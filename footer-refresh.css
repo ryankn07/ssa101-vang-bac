@@ -1,116 +1,125 @@
-/* Vàng Bạc · SSA101 — Footer refresh and readable type spacing.
-   Deliberately independent from the Motion V4 animation rules. */
-:root { --footer-ink: #0d2030; --footer-text: #e9ebe7; }
+/* SSA101 / Vang Bac — original Google Calendar evidence and restrained footer. */
+/* Demo: large readable original screenshots instead of decorative placeholders. */
+.demo { background:#e9e9e4; }
+.demo-wrap { padding-block:clamp(70px,8vw,110px); }
+.demo-heading { align-items:end; }
+.demo-heading p { max-width:375px; line-height:1.85; }
+.demo-stage {
+  display:flex; flex-direction:column; gap:22px;
+  min-height:0; padding:0; margin:0; background:none;
+  align-items:stretch;
+}
+.demo-stage::before { display:none !important; }
+.demo-case {
+  display:grid;grid-template-columns:minmax(195px,.38fr) minmax(0,1fr);
+  min-width:0; gap:28px; padding:27px; border:1px solid #c6c9c5;
+  background:#f8f6f0; box-shadow:5px 6px 0 rgba(24,45,57,.075);
+  align-items:start;
+}
+.demo-case-copy {display:flex; flex-direction:column;align-items:flex-start;min-height:100%;padding:3px 0 5px;}
+.demo-case-index {font-size:11px;font-weight:850;color:#bd472b;letter-spacing:.13em;line-height:1.6;}
+.demo-case h3 {font-family:var(--display);font-size:clamp(24px,3vw,40px);letter-spacing:-.055em;line-height:1.18;margin:18px 0 18px;}
+.demo-case-copy p {font-size:13px;line-height:1.87;color:#4d5d65;max-width:270px;margin:0 0 24px;}
+.demo-case-source {margin-top:auto;padding-top:18px;border-top:1px solid #d5d4cf;font-size:9px;color:#78838a;font-weight:800;letter-spacing:.12em;line-height:1.8;}
+.demo-case-image {min-width:0;display:block;position:relative;border:1px solid #323b43;overflow:hidden;background:#151515;outline-offset:5px;}
+.demo-case-image img {display:block;width:100%;height:auto;object-fit:contain;}
+.demo-image-action {display:flex;align-items:center;justify-content:space-between;gap:10px;position:absolute;right:12px;bottom:12px;background:rgba(14,31,43,.96);color:white;font-size:10px;font-weight:800;letter-spacing:.09em;padding:12px 15px;box-shadow:0 2px 12px rgba(0,0,0,.2);}
+.demo-image-action span {font-size:15px;color:#ff9275;line-height:1;}
+.demo-case-image:hover .demo-image-action {background:#ee5d3e;}
+.demo-case-image:hover .demo-image-action span {color:white;}
+.demo-case-image:focus-visible {outline:3px solid #ee5d3e;}
+.demo-summary {display:grid;grid-template-columns:minmax(195px,.38fr) minmax(0,1fr);gap:28px;align-items:baseline;border-top:1px solid #bcc0be;padding:28px 27px 0;margin-top:14px;}
+.demo-summary strong {font-size:10px;font-weight:850;letter-spacing:.15em;color:#b8482e;}
+.demo-summary p {font-family:var(--sans);font-size:14px;line-height:1.85;color:#263c49;margin:0;max-width:800px;}
+.demo-caveat {font-size:11px;line-height:1.7;color:#79848a;margin:19px 27px 0;max-width:950px;}
+/* On phones, keep the calendar evidence at a readable size. Horizontal pan is
+   a better fallback than shrinking tiny Google Calendar event labels to 300px. */
+.demo-mobile-hint {display:none;}
+/* Footer: identity, real navigation and registration only. */
+.site-footer {background:#122535;color:#d3dce0;isolation:isolate;position:relative;overflow:hidden;}
+.site-footer::before {display:none;}
+.site-footer a {color:inherit;text-decoration:none;}
+.footer-shell {padding-top:54px;padding-bottom:26px;}
+.footer-main {display:grid;grid-template-columns:minmax(0,1.35fr) minmax(165px,.7fr) minmax(210px,.8fr);gap:clamp(35px,5vw,80px);padding-bottom:60px;}
+.footer-identity, .footer-nav, .footer-join {min-width:0;}
+.footer-brand {display:flex;align-items:center;gap:16px;max-width:max-content;}
+.footer-brand img {width:64px;height:64px;display:block;object-fit:contain;flex-shrink:0;}
+.footer-brand>span {display:flex;flex-direction:column;gap:5px;}
+.footer-brand strong {font-family:var(--display);font-size:24px;color:white;line-height:1.32;letter-spacing:-.035em;}
+.footer-brand small {font-size:10px;font-weight:650;line-height:1.7;letter-spacing:.1em;color:#aab9c4;}
+.footer-identity p {margin:22px 0 0;max-width:355px;font-size:13px;color:#b8c8d1;line-height:1.9;}
+.footer-label {display:block;color:#9aafb9;font-weight:750;font-size:10px;letter-spacing:.12em;line-height:1.8;margin:4px 0 19px;}
+.footer-nav {display:flex;flex-direction:column;align-items:flex-start;gap:14px;}
+.footer-nav .footer-label {margin-bottom:5px;}
+.footer-nav a {display:block;line-height:1.65;font-size:13px;transition:color .15s;}
+.footer-nav a:hover {color:#f58c72;}
+.footer-join p {font-size:13px;line-height:1.8;color:#b8c8d1;margin:0 0 24px;}
+.footer-cta {display:inline-flex;align-items:center;justify-content:space-between;gap:27px;padding:13px 16px;border:1px solid #b7c3ca;color:white!important;font-size:12px;font-weight:750;line-height:1.75;transition:background .2s,border-color .2s;}
+.footer-cta span {font-size:17px;color:#f58c72;}
+.footer-cta:hover {background:#223e50;border-color:white;}
+.footer-bottom {border-top:1px solid rgba(255,255,255,.22);padding-top:22px;display:flex;justify-content:space-between;align-items:center;gap:24px;}
+.footer-bottom small {color:#9bafb9;line-height:1.85;font-size:11px;letter-spacing:0;max-width:730px;}
+.footer-back-top {display:inline-flex;gap:11px;white-space:nowrap;align-items:center;font-size:11px;font-weight:750;letter-spacing:.07em;line-height:1.8;color:white!important;}
+.footer-back-top span {font-size:21px;color:#f58c72;}
+.footer-brand:focus-visible,.footer-nav a:focus-visible,.footer-cta:focus-visible,.footer-back-top:focus-visible {outline:2px solid #ff957a;outline-offset:4px;}
+@media(max-width:900px) {
+ .demo-case,.demo-summary {grid-template-columns:minmax(175px,.35fr) minmax(0,1fr);gap:20px;}
+ .demo-case {padding:20px;}
+ .footer-main {grid-template-columns:minmax(0,1fr) minmax(0,.75fr);gap:32px;}
+ .footer-join {grid-column:1/-1;padding-top:24px;border-top:1px solid rgba(255,255,255,.15);}
+}
+@media(max-width:640px) {
+ .demo-heading {gap:18px;}
+ .demo-stage {gap:20px;}
+ .demo-case,.demo-summary {grid-template-columns:minmax(0,1fr);gap:16px;}
+ .demo-case {padding:16px;}
+ .demo-case h3 {margin:12px 0;}
+ .demo-case-copy p {max-width:none;margin-bottom:9px;}
+ .demo-case-source {margin-top:6px;padding-top:0;border-top:0;}
+ .demo-image-action {right:7px;bottom:7px;font-size:9px;padding:9px 11px;}
+ .demo-summary {padding:22px 3px 0;margin-top:10px;gap:8px;}
+ .demo-caveat {margin:17px 3px 0;}
+ .footer-shell {padding-top:37px;padding-bottom:23px;}
+ .footer-main {grid-template-columns:1fr;gap:32px;padding-bottom:34px;}
+ .footer-nav,.footer-join {grid-column:auto;}
+ .footer-nav {gap:12px;}
+ .footer-join {padding-top:22px;}
+ .footer-bottom {align-items:flex-start;flex-direction:column;gap:20px;}
+}
+@media(prefers-reduced-motion:reduce){.footer-cta,.footer-nav a{transition:none;}}
+/* The sticky header uses a scroll offset for sections; the top CTA bypasses it. */
+html.force-instant-top {scroll-behavior:auto !important;}
+/* Maintain the requested extra breathing room across headings and prose. */
+.hero-intro h2 {line-height:1.17;}
+.section-title-row h2,.video-layout h2 {line-height:1.13;}
+.outcomes-title h2 {line-height:1.1;}
+.register h2 {line-height:1.095;}
+.faq-lead h2 {line-height:1;}
+.hero-intro p,.section-title-row p,.problem p,.outcome p,.session-description p,.video-layout p,.faq-questions p,.register p {line-height:1.85;}
 
-/* Add breathing room without changing the site's visual hierarchy. */
-.hero-intro h2 { line-height: 1.17; }
-.section-title-row h2, .video-layout h2 { line-height: 1.13; }
-.outcomes-title h2 { line-height: 1.1; }
-.register h2 { line-height: 1.095; }
-.faq-lead h2 { line-height: 1; }
-.hero-intro p, .section-title-row p, .problem p,
-.outcome p, .session-description p, .demo-sheet p,
-.video-layout p, .faq-questions p, .register p { line-height: 1.86; }
-
-.site-footer {
-  position:relative;
-  isolation:isolate;
-  overflow:hidden;
-  background:var(--footer-ink);
-  color:var(--footer-text);
+/* Mobile-first final pass: finger-friendly links, legible schedule screenshots. */
+@media(max-width:640px) {
+  .demo-mobile-hint {display:block;font-size:11px;line-height:1.55;color:#667780;margin:4px 0 2px;}
+  .demo-case-image {overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-x pinch-zoom;scrollbar-width:thin;scrollbar-color:#86949c #e1e4e2;}
+  .demo-case-image img {width:800px;max-width:none;height:auto;}
+  .demo-image-action {display:none;}
+  .footer-shell {padding-top:34px;}
+  .footer-main {gap:26px;padding-bottom:30px;}
+  .footer-brand img {width:58px;height:58px;}
+  .footer-identity p {font-size:14px;line-height:1.86;margin-top:16px;}
+  .footer-nav {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px;}
+  .footer-nav .footer-label {grid-column:1/-1;margin:0 0 8px;}
+  .footer-nav a {min-height:45px;display:flex;align-items:center;font-size:13px;line-height:1.55;padding:6px 0;}
+  .footer-join {padding-top:20px;}
+  .footer-join .footer-label {margin-bottom:9px;}
+  .footer-join p {font-size:13px;margin-bottom:17px;}
+  .footer-cta {min-height:50px;display:flex;justify-content:space-between;width:100%;font-size:13px;}
+  .footer-back-top {min-height:44px;}
+  .site-header .nav-cta {min-height:44px;display:inline-flex;align-items:center;}
 }
-.site-footer::before {
-  content:""; position:absolute; top:-150px; right:-260px;
-  width:700px; height:700px; pointer-events:none; border-radius:50%;
-  border:1px solid rgba(255,255,255,.075);
-  box-shadow:0 0 0 90px rgba(255,255,255,.014),0 0 0 190px rgba(255,255,255,.012);
-  z-index:-1;
+@media(max-width:359px) {
+  .footer-brand strong {font-size:22px;}
+  .footer-nav {column-gap:8px;}
+  .footer-nav a {font-size:12px;}
+  .demo-case-image img {width:700px;}
 }
-.site-footer a { color:inherit; }
-.footer-shell { padding-top:44px; padding-bottom:26px; }
-.footer-topline {
-  display:flex;justify-content:space-between;align-items:center;gap:20px;
-  border-bottom:1px solid rgba(231,237,238,.23);padding-bottom:29px;
-  font-size:10px;font-weight:800;letter-spacing:.16em;color:#b3c3ce;
-}
-.footer-topline .footer-orange-mark { width:9px;height:9px;background:var(--orange);display:inline-block;margin-right:10px; }
-.footer-grid {
-  display:grid;grid-template-columns:minmax(0,1.45fr) minmax(180px,.83fr) minmax(220px,.94fr);
-  gap:clamp(24px,4vw,66px); padding-block:54px 74px;
-}
-.footer-brand-col {min-width:0;}
-.footer-brand {
-  display:inline-flex;align-items:center;gap:18px; min-height:80px;
-}
-.footer-brand img {
-  width:76px;height:76px;object-fit:contain;display:block;flex-shrink:0;
-  transition:transform .45s cubic-bezier(.16,1,.3,1);
-}
-.footer-brand:hover img { transform:translateY(-3px) scale(1.04); }
-.footer-brand-name {display:flex;flex-direction:column;align-items:flex-start;gap:6px;}
-.footer-brand-name strong {
-  font-family:var(--display);font-size:clamp(19px,2.05vw,27px);font-weight:900;
-  letter-spacing:-.015em;line-height:1.3;color:white;
-}
-.footer-brand-name strong i {font-style:normal;color:var(--orange);}
-.footer-brand-name small {font-size:9px;font-weight:700;letter-spacing:.19em;color:#9faebb;line-height:1.75;}
-.footer-big-title { margin:42px 0 20px; font-family:var(--display);font-weight:900;
-  font-size:clamp(34px,4.2vw,58px); line-height:1.14;letter-spacing:-.055em;color:#fff;
-}
-.footer-big-title span {color:var(--orange);}
-.footer-lead {max-width:360px;color:#b4c3cc;font-size:13px;line-height:1.9;margin-bottom:0;}
-.footer-label {font-size:10px;letter-spacing:.22em;font-weight:800;color:#91a7b4;margin:9px 0 24px;display:block;}
-.footer-links {display:flex;flex-direction:column;min-width:0;}
-.footer-links a {border-bottom:1px solid rgba(219,229,233,.18);padding:14px 0;display:flex;align-items:center;gap:11px;
-  font-size:12px;font-weight:650;letter-spacing:.025em;line-height:1.75;transition:color .2s,transform .2s;}
-.footer-links a:first-of-type {border-top:1px solid rgba(219,229,233,.18);}
-.footer-links a:hover {color:#fff;transform:translateX(4px);}
-.footer-links a small {font-size:9px;color:var(--orange);font-weight:850;letter-spacing:.08em;}
-.footer-links a span {margin-left:auto;color:var(--orange);font-size:15px;}
-.footer-action {min-width:0;}
-.footer-action h3 {font-family:var(--display);font-size:clamp(24px,2.7vw,36px);letter-spacing:-.045em;line-height:1.25;
-  font-weight:850;color:#fff;margin:10px 0 15px;}
-.footer-action h3 em {font-style:normal;color:var(--orange);}
-.footer-action p {color:#aebec9;line-height:1.8;font-size:12px;margin:0 0 25px;max-width:245px;}
-.footer-cta {display:flex;align-items:center;justify-content:space-between;gap:15px;background:var(--orange);color:white !important;
-  padding:16px 18px;max-width:330px;font-size:11px;font-weight:850;letter-spacing:.085em;line-height:1.7;
-  transition:background .2s,transform .25s cubic-bezier(.16,1,.3,1);}
-.footer-cta span {font-size:23px;line-height:1;}
-.footer-cta:hover {background:#d9462b;transform:translateY(-3px);}
-.footer-cta-note {margin-top:13px;display:block;font-size:10px;color:#94aab6;line-height:1.8;letter-spacing:.02em;}
-.footer-bottom {border-top:1px solid rgba(231,237,238,.23);padding-top:24px;
-  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;}
-.footer-bottom p,.footer-bottom small {margin:0;color:#9cadb9;font-size:10px;line-height:1.85;letter-spacing:.02em;}
-.footer-bottom small {max-width:420px;}
-.footer-back-top {display:inline-flex;align-items:center;gap:13px;font-size:10px;font-weight:850;letter-spacing:.1em;
-  white-space:nowrap;line-height:1.6;color:#f1f3f3 !important;transition:color .2s;}
-.footer-back-top .footer-up-icon {display:grid;place-items:center;width:33px;height:33px;border:1px solid rgba(239,240,235,.4);
-  border-radius:50%;font-size:17px;color:var(--orange);transition:transform .25s;}
-.footer-back-top:hover {color:var(--orange) !important;}
-.footer-back-top:hover .footer-up-icon {transform:translateY(-4px);}
-.footer-cta:focus-visible,.footer-links a:focus-visible,.footer-back-top:focus-visible,.footer-brand:focus-visible {outline:2px solid #fff;outline-offset:4px;}
-@media (max-width:980px) {
- .footer-grid {grid-template-columns:minmax(0,1.12fr) minmax(170px,.88fr);}
- .footer-action {grid-column:1/-1;border-top:1px solid rgba(231,237,238,.2);padding-top:23px;}
- .footer-action h3 {font-size:30px;}
- .footer-action p {max-width:470px;}
-}
-@media (max-width:650px) {
- .footer-shell{padding-top:28px;padding-bottom:20px;}
- .footer-topline{font-size:9px;line-height:1.8;flex-wrap:wrap;padding-bottom:20px;gap:6px 12px;}
- .footer-grid {grid-template-columns:1fr;gap:30px;padding-block:31px 42px;}
- .footer-brand img{width:68px;height:68px;}
- .footer-big-title{margin:28px 0 13px;font-size:clamp(32px,9vw,52px);}
- .footer-links{border-top:1px solid rgba(231,237,238,.18);padding-top:12px;}
- .footer-label{margin:5px 0 12px;}
- .footer-action{grid-column:auto;margin-top:0;}
- .footer-action h3{font-size:29px;}
- .footer-bottom{align-items:flex-start;gap:17px 24px;}
- .footer-back-top{width:100%;justify-content:space-between;border-top:1px solid rgba(231,237,238,.18);padding-top:17px;}
-}
-@media (prefers-reduced-motion:reduce) {
- .site-footer * {transition:none !important;}
-}
-
-/* Back-to-top is immediate even if html uses smooth scrolling for section links. */
-html.force-instant-top { scroll-behavior: auto !important; }

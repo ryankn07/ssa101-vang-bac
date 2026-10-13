@@ -272,11 +272,13 @@ if (/^https:\/\/www\.youtube\.com\/embed\/[A-Za-z0-9_-]+/.test(SITE_CONFIG.youtu
   preview.onload = () => {
     const mark = document.querySelector('.brand-mark');
     if (!mark) return;
-    const logo = document.createElement('img');
-    logo.src = SITE_CONFIG.logoUrl;
-    logo.alt = '';
-    logo.className = 'official-logo';
-    mark.append(logo);
+    if (!mark.querySelector('.official-logo')) {
+      const logo = document.createElement('img');
+      logo.src = SITE_CONFIG.logoUrl;
+      logo.alt = '';
+      logo.className = 'official-logo';
+      mark.append(logo);
+    }
     mark.classList.add('has-logo');
     const footerSlot = document.querySelector('.footer-logo-slot');
     if (footerSlot) {
