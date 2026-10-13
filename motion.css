@@ -1,0 +1,294 @@
+/*
+ * VÀNG BẠC / SSA101 — Motion V4
+ * No animation framework, no video texture, no scroll-jacking.
+ * Motion is intentionally limited to opacity + transform on composited layers.
+ */
+:root {
+  --ease-out-expo: cubic-bezier(.19, 1, .22, 1);
+  --ease-soft: cubic-bezier(.22, .8, .22, 1);
+  --duration-enter: 860ms;
+}
+
+/* Small, informative reading indicator, rather than a decorative loader. */
+.reading-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  height: 3px;
+  pointer-events: none;
+  z-index: 1001;
+}
+.reading-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  will-change: transform;
+}
+
+/* Keep the primary CTA available while scrolling without changing layout. */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgb(241, 238, 230);
+  /* An opaque header avoids costly full-width backdrop sampling while scrolling. */
+  transition: background-color 220ms ease;
+}
+.site-header.is-scrolled {
+  box-shadow: 0 9px 26px rgba(16, 34, 46, .065);
+  background: rgba(241, 238, 230, .97);
+}
+.desktop-nav a { position: relative; transition: color 240ms ease; }
+.desktop-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -9px;
+  height: 2px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 450ms var(--ease-out-expo);
+}
+.desktop-nav a:hover::after,
+.desktop-nav a:focus-visible::after,
+.desktop-nav a.is-current::after { transform: scaleX(1); }
+
+/* Entrance animations run only if JS + IntersectionObserver are actually active.
+   The observer resets after an element leaves, so re-entry plays again. */
+@media (prefers-reduced-motion: no-preference) {
+  .motion-ready .reveal {
+    opacity: 0;
+    transform: translate3d(0, 27px, 0);
+    transition:
+      opacity var(--duration-enter) var(--ease-soft),
+      transform var(--duration-enter) var(--ease-out-expo);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  .motion-ready .reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  .motion-ready .hero-title-stack.reveal {
+    transform: translate3d(0, 44px, 0);
+  }
+  .motion-ready .hero-title-stack.reveal.is-visible {
+    transform: translate3d(0, 0, 0);
+  }
+  .motion-ready .hero-title-stack.reveal.is-visible .management {
+    animation: headline-settle 1050ms var(--ease-out-expo) both;
+  }
+  .motion-ready .hero-art.reveal.is-visible .planner-paper {
+    animation: paper-settle 980ms 180ms var(--ease-out-expo) both;
+  }
+  /* Reveal paper panels in an orderly offset sequence, without replacing
+     their original layout rotations. */
+  .motion-ready .problem-grid.reveal.is-visible .problem,
+  .motion-ready .outcomes-grid.reveal.is-visible .outcome {
+    animation: card-clear 670ms var(--ease-soft) both;
+  }
+  .problem-grid .problem:nth-child(2),
+  .outcomes-grid .outcome:nth-child(2) { animation-delay: 110ms !important; }
+  .problem-grid .problem:nth-child(3),
+  .outcomes-grid .outcome:nth-child(3) { animation-delay: 215ms !important; }
+
+  @keyframes headline-settle {
+    from { transform: rotate(-3deg) translate3d(0, 22px, 0); opacity: .62; }
+    to { transform: rotate(-1.6deg) translate3d(0, 0, 0); opacity: 1; }
+  }
+  @keyframes paper-settle {
+    from { transform: rotate(6deg) translate3d(0, 18px, 0); }
+    to { transform: rotate(3.5deg) translate3d(0, 0, 0); }
+  }
+  @keyframes card-clear {
+    from { opacity: 0; transform: translate3d(0, 13px, 0); }
+    to { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+  @keyframes faq-answer {
+    from { opacity: 0; transform: translateY(-7px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .faq-questions details[open] p { animation: faq-answer 380ms var(--ease-soft); }
+}
+
+/* Motion that responds to actual interaction. */
+.hero-backprint {
+  transform: translate3d(0, var(--hero-shift, 0px), 0);
+}
+.outcomes::after {
+  transform: translate3d(0, var(--outcomes-shift, 0px), 0);
+}
+.demo-stage::before {
+  transform: rotate(-2deg) scale(.93,.88) translate3d(0, var(--demo-shift, 0px), 0);
+}
+.register-backplate {
+  transform: rotate(-2deg) translate3d(0, var(--register-shift, 0px), 0);
+}
+@media (max-width: 510px) {
+  .demo-stage::before {
+    transform: rotate(-2deg) scale(.94,.95) translate3d(0, var(--demo-shift, 0px), 0);
+  }
+}
+
+.hero-art .art-orange-back {
+  transform: rotate(-9deg) translate3d(var(--art-x, 0px), calc(var(--art-y, 0px) + var(--art-scroll-shift, 0px)), 0);
+  transition: transform 700ms var(--ease-soft);
+}
+.hero-art .planner-paper {
+  transition: transform 750ms var(--ease-soft);
+}
+.hero-art:hover .planner-paper {
+  box-shadow: 18px 22px 0 rgba(13, 33, 47, .20);
+}
+.planner-calendar {
+  transition: opacity 230ms ease, transform 390ms var(--ease-soft);
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+.planner-calendar.is-exiting {
+  opacity: 0;
+  transform: translate3d(0, -9px, 0);
+}
+.planner-calendar.is-entering {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+}
+.toggle-button {
+  transition: color 250ms ease, background-color 250ms ease;
+}
+.toggle-button:hover:not(.is-active) { background: #e6e7e2; }
+.toggle-button:focus-visible,
+.text-link:focus-visible,
+.registration-link:focus-visible,
+.nav-cta:focus-visible,
+.faq-questions summary:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 5px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .planner-calendar .day-block.orange,
+  .planner-calendar .day-block.navy,
+  .planner-calendar .day-block.gray,
+  .planner-calendar .month-cell.selected,
+  .planner-calendar .month-cell.planned {
+    animation: block-enter 420ms var(--ease-soft) both;
+  }
+  .planner-calendar .week-day:nth-child(2n) .day-block,
+  .planner-calendar .month-cell:nth-child(3n) { animation-delay: 65ms; }
+  .planner-calendar .week-day:nth-child(3n) .day-block,
+  .planner-calendar .month-cell:nth-child(4n) { animation-delay: 120ms; }
+  @keyframes block-enter {
+    from { opacity: .2; transform: scale(.86); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .text-link span,
+  .registration-link span,
+  .nav-cta span,
+  .session-symbol,
+  .footer-inner a { transition: transform 420ms var(--ease-out-expo), color 240ms ease; }
+  .text-link:hover span,
+  .registration-link:not(.is-unavailable):hover span,
+  .nav-cta:hover span { transform: translate3d(4px,-4px,0); }
+  .session-row:hover .session-symbol { transform: translate3d(5px,-4px,0); }
+  .registration-link:not(.is-unavailable) { transition: background-color 250ms ease, transform 480ms var(--ease-out-expo); }
+  .registration-link:not(.is-unavailable):hover { transform: translateY(-3px); background-color: var(--orange-dark); }
+  .video-frame { transition: transform 480ms var(--ease-out-expo); }
+  .video-frame:hover { transform: translate3d(0, -3px, 0); }
+}
+
+@media (max-width: 800px) {
+  .motion-ready .reveal { --duration-enter: 720ms; }
+  .reading-progress { height: 2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .reveal, .motion-ready .reveal.is-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .reading-progress span, .planner-calendar, .planner-calendar.is-exiting,
+  .planner-calendar.is-entering, .hero-art .art-orange-back { transition: none !important; }
+  .planner-calendar.is-exiting, .planner-calendar.is-entering { opacity: 1; transform: none; }
+  .planner-calendar * { animation: none !important; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-ready .session-row.reveal.is-visible:hover {
+    transform: translate3d(5px, 0, 0);
+    transition-duration: 260ms;
+  }
+}
+
+/* Ambient layer — tiny slow movements that don't compete with content.
+   Running only when the hero is in view; paused in hidden tabs. */
+@media (prefers-reduced-motion: no-preference) {
+  .motion-ready .art-top-note {
+    animation: ambient-note 8.5s ease-in-out infinite alternate;
+  }
+  .motion-ready .art-caption {
+    animation: ambient-caption 10s ease-in-out infinite alternate;
+  }
+  .motion-ready .micro-stamp {
+    animation: ambient-stamp 13s ease-in-out infinite alternate;
+  }
+  .ambient-paused .art-top-note,
+  .ambient-paused .art-caption,
+  .ambient-paused .micro-stamp {
+    animation-play-state: paused !important;
+  }
+  @keyframes ambient-note {
+    from { transform: rotate(-6deg) translate3d(0,0,0); }
+    to { transform: rotate(-5.5deg) translate3d(0,-5px,0); }
+  }
+  @keyframes ambient-caption {
+    from { transform: rotate(-5deg) translate3d(0,0,0); }
+    to { transform: rotate(-4.2deg) translate3d(0,-4px,0); }
+  }
+  @keyframes ambient-stamp {
+    from { transform: rotate(12deg) translate3d(0,0,0); }
+    to { transform: rotate(15deg) translate3d(0,-3px,0); }
+  }
+}
+
+/* Hover/tap feedback stays lightweight: simple fills and small translations. */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .problem { transition: transform 440ms var(--ease-out-expo); }
+  .problem-main:hover { transform: translate3d(0,-17px,0); }
+  .problem-upper:hover { transform: translate3d(0,5px,0); }
+  .problem-lower:hover { transform: translate3d(0,-12px,0); }
+  .outcome { transition: border-color 320ms ease; }
+  .outcome h3, .outcome p { transition: transform 520ms var(--ease-out-expo); }
+  .outcome:hover { border-top-color: var(--orange); }
+  .outcome:hover h3, .outcome:hover p { transform: translate3d(8px, 0, 0); }
+  .demo-sheet { transition: transform 650ms var(--ease-out-expo); }
+  .demo-left:hover { transform: rotate(-1deg) translate3d(0,11px,0); }
+  .demo-right:hover { transform: rotate(1deg) translate3d(0,-5px,0); }
+  .planner-toggle button:active, .registration-link:active { transform: scale(.975); }
+}
+@media (max-width: 800px) {
+  .problem-main:hover, .problem-upper:hover, .problem-lower:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready .art-top-note, .motion-ready .art-caption, .motion-ready .micro-stamp { animation: none !important; }
+  .hero-backprint, .outcomes::after, .register-backplate, .demo-stage::before { transform: none !important; }
+  .hero-art .art-orange-back { transform: rotate(-9deg) !important; }
+  .demo-stage::before { transform: rotate(-2deg) scale(.93,.88) !important; }
+  .register-backplate { transform: rotate(-2deg) !important; }
+  .motion-ready .reveal { --reveal-delay: 0ms; }
+}
+
+/* Official identity: the real supplied logo replaces the fallback VB mark when available.
+   No recoloring, rotation, masks or text effects are ever applied to the asset. */
+.brand-mark.has-logo { background:transparent; letter-spacing:normal; width:46px; height:46px; }
+.brand-mark.has-logo > span { display:none; }
+.brand-mark .official-logo { display:block; width:100%; height:100%; object-fit:contain; object-position:center; animation:logo-arrive .55s ease-out both; }
+.footer-logo-slot:empty { display:none; }
+.footer-logo-slot img { display:block; width:40px; height:40px; object-fit:contain; }
+.footer-inner > div { gap:13px; }
+@keyframes logo-arrive { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+@media (prefers-reduced-motion: reduce) { .brand-mark .official-logo { animation:none; } }
+@media(max-width:510px) { .brand-mark.has-logo { width:38px; height:38px; } .footer-logo-slot img { width:32px; height:32px; } }
+

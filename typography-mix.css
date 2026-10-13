@@ -1,0 +1,65 @@
+/* VANG BAC / SSA101 — TYPE SYSTEM
+   Headlines & interface: Be Vietnam Pro (Vietnamese-first sans serif)
+   Reading/body content: STIX Two Text (editorial serif).
+   Loaded via Google Fonts; fonts are not bundled. All motion remains intact. */
+:root {
+  --sans: 'STIX Two Text', 'Noto Serif', Georgia, serif;
+  --display: 'Be Vietnam Pro', 'Arial', sans-serif;
+}
+html, body { font-family: var(--sans); }
+body { font-optical-sizing: auto; }
+/* Interactive elements need narrow, high-contrast sans text. */
+button, input, textarea, select, .brand, .desktop-nav, .nav-cta,
+.text-link, .hero-topline, .eyebrow, .section-tag, .hero-ticker,
+.planner-toggle, .planner-footnote, .planner-status, .planner-header small,
+.art-top-note, .art-caption, .problem-id, .problem-arrow,
+.outcome-index, .session-num, .session-format, .session-symbol,
+.demo-overline, .demo-tag, .video-frame, .faq-questions summary span,
+.register-actions, .site-footer, .tiny-box, .micro-stamp {
+  font-family: var(--display);
+}
+/* Clear hierarchy: all major and card headings are Be Vietnam Pro. */
+h1, h2, h3, h4, h5, h6, .planner-header strong {
+  font-family: var(--display);
+  font-synthesis: none;
+}
+h1, .hero-backprint { font-weight: 900; }
+h2, h3, .planner-header strong { font-weight: 700; }
+.hero h1 { letter-spacing: -.072em; line-height: .94; }
+.hero h1 .management {
+  font-family: var(--display);
+  font-weight: 900;
+  font-size: .67em;
+  letter-spacing: -.082em;
+  line-height: 1.12;
+}
+.hero-intro h2, .section-title-row h2, .outcomes-title h2,
+.video-layout h2, .faq-lead h2, .register h2 {
+  letter-spacing: -.052em;
+}
+.problem h3, .outcome h3, .session-description h3 {
+  letter-spacing: -.04em;
+}
+.session-num, .outcome-index { font-weight: 800; letter-spacing: -.045em; }
+.planner-header strong, .demo-sheet h3 { letter-spacing: -.028em; }
+/* Keep body/long paragraphs in the serif family; avoid condensed display rhythm. */
+p, .session-description p, .faq-questions p, .demo-caveat,
+.problem p, .outcome p, .section-title-row p, .hero-intro p,
+.video-layout p, .demo-sheet p, .register-content p {
+  font-family: var(--sans);
+  letter-spacing: 0;
+}
+/* Micro-labels: intentional tracking and readable navigation. */
+.hero-topline, .eyebrow, .section-tag, .session-format, .problem-id,
+.planner-footnote, .hero-ticker span { letter-spacing: .08em; }
+.brand-copy strong { letter-spacing: .13em; }
+@media (max-width: 800px) {
+  .hero h1 { font-size: clamp(59px, 13.2vw, 110px); }
+  .hero h1 .management { font-size: .67em; }
+}
+@media (max-width: 510px) {
+  .hero h1 { font-size: clamp(50px, 14.5vw, 74px); }
+  .hero h1 .management { font-size: .62em; letter-spacing: -.079em; }
+  .hero-intro h2 { font-size: clamp(32px, 9.5vw, 42px); }
+  .hero-ticker span { letter-spacing: .025em; }
+}
