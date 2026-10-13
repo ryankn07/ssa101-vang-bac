@@ -123,3 +123,22 @@ html.force-instant-top {scroll-behavior:auto !important;}
   .footer-nav a {font-size:12px;}
   .demo-case-image img {width:700px;}
 }
+
+/* Placeholder is an informational panel, never a non-functional play control. */
+.video-pending-mark {
+  display:flex;align-items:baseline;gap:10px;
+  font-family:var(--display);font-size:clamp(50px,7vw,86px);
+  line-height:1;font-weight:850;letter-spacing:-.075em;color:#f4eee5;
+}
+.video-pending-mark span {
+  font-family:var(--display);font-size:clamp(11px,1.4vw,15px);
+  letter-spacing:.12em;font-weight:700;color:#fa8a6d;
+}
+.video-frame .video-pending-mark + p {
+  max-width:90%;text-align:center;line-height:1.65;letter-spacing:.085em;
+}
+@media(max-width:640px) {
+  .video-pending-mark {font-size:clamp(44px,12vw,70px);}
+  .video-pending-mark span {font-size:10px;}
+  .video-frame .video-pending-mark + p {font-size:10px;}
+}
