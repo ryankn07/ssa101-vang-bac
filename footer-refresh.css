@@ -396,3 +396,9 @@ html.force-instant-top {scroll-behavior:auto !important;}
 .vb-switch-hint{letter-spacing:.04em}
 .vb-switch-counter{min-width:160px;font-size:11px}
 }
+
+/* Tight spacing after removing redundant demo calendar notes. */
+.vb-calendar-slide .vb-case-label { padding-bottom:12px; }
+.vb-calendar-slide .evidence-metrics { margin-bottom:10px; }
+.vb-calendar-slide .vb-personal-calendar { margin-top:8px; }
+.vb-switch-heading { justify-content:flex-start; }
