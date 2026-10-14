@@ -1,4 +1,4 @@
-/* Vàng Bạc - two independent calendars in one swipeable panel. */
+/* Vàng Bạc - two Vang Bac team-member calendars in one swipeable panel. */
 (() => {
   "use strict";
   const root=document.getElementById("vb-calendar-switcher");
@@ -11,7 +11,7 @@
   const counter=document.getElementById("vb-switch-counter");
   if(panels.length!==2||tabs.length!==2)return;
   let active=0,scrollFrame=0;
-  const labels=["LỊCH CỦA TÔI","LỊCH THÀNH VIÊN"];
+  const labels=["THÀNH VIÊN 01","THÀNH VIÊN 02"];
   function height(){
     const h=Math.ceil(panels[active].scrollHeight);
     if(h>0)viewport.style.height=h+"px";
