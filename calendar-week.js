@@ -11,7 +11,7 @@
   const c=(tag,cls,text) => {let el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=text;return el};
   const time=x=>String(Math.floor(x/60)).padStart(2,"0")+":"+String(x%60).padStart(2,"0");
   const cat=n=>/Time Audit/i.test(n)?"audit":/trường/i.test(n)?"school":/bài tập|ôn bài|ôn tập/i.test(n)?"assign":/tự học|ngoại ngữ/i.test(n)?"self":/đàn|đọc sách/i.test(n)?"hobby":/thể dục/i.test(n)?"sport":"rest";
-  const wrapper=c("div","vb-calendar-scroll");wrapper.id="vb-calendar-scroll";wrapper.tabIndex=0;wrapper.setAttribute("aria-label","Lịch tuần từ ngày 5 đến 11 tháng 10, vuốt ngang để xem từng ngày");
+  const wrapper=c("div","vb-calendar-scroll");wrapper.id="vb-calendar-scroll";wrapper.tabIndex=0;wrapper.setAttribute("aria-label","Lịch tuần từ ngày 5 đến 11 tháng 10, chọn từng ngày bằng các nút ngay phía trên để xem trên điện thoại");
   const grid=c("div","vb-calendar-grid");
   const corner=c("div","vb-calendar-corner","GMT+7");grid.append(corner);
   for(let d=0;d<7;d++) {
@@ -43,10 +43,15 @@
   }
   wrapper.append(grid);host.replaceChildren(wrapper);
   const buttons=document.querySelectorAll("[data-vb-day]");
-  buttons.forEach(b=>b.addEventListener("click",()=>{
-    const d=Number(b.dataset.vbDay),lane=grid.querySelector('.vb-calendar-dayhead[data-day="'+d+'"]');
-    if(!lane)return;
-    wrapper.scrollTo({left:Math.max(0,lane.offsetLeft-52),behavior:"smooth"});
-    buttons.forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
-  }));
+  function showDay(d){
+    if(!Number.isInteger(d)||d<0||d>6)return;
+    grid.querySelectorAll("[data-day]").forEach(el=>el.classList.toggle("vb-day-active",Number(el.dataset.day)===d));
+    buttons.forEach(b=>b.setAttribute("aria-pressed",String(Number(b.dataset.vbDay)===d)));
+    if(!window.matchMedia("(max-width:640px)").matches){
+      const header=grid.querySelector('.vb-calendar-dayhead[data-day="'+d+'"]');
+      if(header)wrapper.scrollTo({left:Math.max(0,header.offsetLeft-52),behavior:"smooth"});
+    }
+  }
+  buttons.forEach(b=>b.addEventListener("click",()=>showDay(Number(b.dataset.vbDay))));
+  showDay(0);
 })();
