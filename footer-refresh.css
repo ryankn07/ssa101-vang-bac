@@ -430,3 +430,10 @@ html.force-instant-top {scroll-behavior:auto !important;}
 .vb-execution-grid h4{font-size:18px}
 .vb-execution-grid p{font-size:14px}
 }
+
+/* SSA101 calendar jump + pending introduction video */
+.vb-calendar-switcher,.vb-slide-viewport{overflow-anchor:none}
+.video-section-pending{padding-block:clamp(48px,6vw,76px)}
+.video-section-pending .video-layout{display:block;max-width:770px;margin-top:22px}
+.video-section-pending .video-layout h2{margin:0}
+@media(max-width:640px){.video-section-pending{padding-block:45px}.video-section-pending .video-layout{margin-top:16px}}
