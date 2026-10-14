@@ -301,3 +301,58 @@ html.force-instant-top {scroll-behavior:auto !important;}
   .evidence-frame {box-shadow:5px 7px 0 var(--orange)}
   .evidence-open,.evidence-video a {min-height:35px}
 }
+
+/* PERSONAL GOOGLE CALENDAR GRID 2026 — read-only historical snapshot. */
+.vb-case-label {border-top:1px solid #bfc6c3;padding:30px 0 20px;margin-top:16px}
+.vb-case-label > span {font:800 11px/1.6 var(--display);color:#c34a32;letter-spacing:.12em}
+.vb-case-label h3 {font:800 clamp(26px,3.2vw,42px)/1.2 var(--display);letter-spacing:-.055em;margin:10px 0;color:var(--ink)}
+.vb-case-label p {font:400 15px/1.75 var(--sans);color:#4d6068;max-width:840px;margin:0}
+.vb-member-label {margin-top:43px;border-top:2px solid #c4c8c4}
+.vb-personal-calendar {margin:24px 0 35px;min-width:0}
+.vb-calendar-intro {display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin:0 0 18px}
+.vb-calendar-intro h3 {font:800 clamp(22px,2.7vw,32px)/1.2 var(--display);letter-spacing:-.055em;margin:7px 0 10px;color:var(--ink)}
+.vb-calendar-intro p {font:400 14px/1.7 var(--sans);color:#4e6069;max-width:625px;margin:0}
+.vb-calendar-legend {display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px;max-width:390px}
+.vb-calendar-legend span {font:700 10px/1.4 var(--display);padding:5px 8px;border-radius:2px;border:1px solid transparent;white-space:nowrap}
+.vb-calendar-legend .cat-school,.vb-calendar-event.cat-school {background:#ee8b6e;color:#43190f}
+.vb-calendar-legend .cat-self,.vb-calendar-event.cat-self {background:#80b9d0;color:#0b3444}
+.vb-calendar-legend .cat-assign,.vb-calendar-event.cat-assign {background:#a0a5da;color:#24264e}
+.vb-calendar-legend .cat-hobby,.vb-calendar-event.cat-hobby {background:#bf9cce;color:#452651}
+.vb-calendar-legend .cat-sport,.vb-calendar-event.cat-sport {background:#93c8aa;color:#224b34}
+.vb-calendar-legend .cat-rest,.vb-calendar-event.cat-rest {background:#d7d7cb;color:#435050}
+.vb-calendar-legend .cat-audit,.vb-calendar-event.cat-audit {background:#f1c16c;color:#51310c}
+.vb-day-nav {display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.vb-day-nav button {font:800 11px/1.3 var(--display);color:var(--ink);background:#f6f5ef;border:1px solid #bfc6c3;border-radius:0;padding:10px 12px;cursor:pointer;min-height:39px}
+.vb-day-nav button[aria-pressed="true"],.vb-day-nav button:hover {background:var(--ink);color:white}
+.vb-week-calendar {min-width:0;max-width:100%;border:1px solid #b2bdc0;background:#f7f6f0}
+.vb-calendar-scroll {width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#5a7980 #f3f3e9}
+.vb-calendar-scroll:focus-visible {outline:3px solid var(--orange)}
+.vb-calendar-grid {display:grid;grid-template-columns:52px repeat(7,minmax(146px,1fr));min-width:1110px;position:relative}
+.vb-calendar-corner,.vb-calendar-dayhead {height:53px;border-bottom:1px solid #aeb9ba;position:sticky;top:0;z-index:5;background:#f0eee5}
+.vb-calendar-corner {grid-column:1;grid-row:1;left:0;z-index:8;display:grid;place-items:center;font:700 10px/1 var(--display);color:#5a6972}
+.vb-calendar-dayhead {grid-row:1;padding:8px 10px;text-align:center;border-left:1px solid #d8dcd9;font-family:var(--display);color:var(--ink)}
+.vb-calendar-dayhead b {display:block;font-size:12px;letter-spacing:.05em}
+.vb-calendar-dayhead span {display:block;font-size:11px;font-weight:600;margin-top:2px;color:#64757c}
+.vb-time-rail {position:sticky;left:0;z-index:4;grid-column:1;grid-row:2;overflow:visible;background:#f0eee5;border-right:1px solid #c0c7c5}
+.vb-time-tick {position:absolute;left:0;right:0;font:700 10px/1 var(--display);text-align:center;color:#4d626b;transform:translateY(-40%);background:#f0eee5}
+.vb-calendar-lane {position:relative;grid-row:2;min-width:0;border-right:1px solid #ced4d2;background:repeating-linear-gradient(to bottom,transparent 0,transparent 53px,#d5dad8 53px,#d5dad8 54px),#fbfaf6}
+.vb-calendar-event {position:absolute;left:3px;right:3px;border-left:3px solid rgba(6,27,38,.25);border-radius:2px;overflow:hidden;padding:5px 6px;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.vb-calendar-event strong {display:block;font:700 10px/1.35 var(--display);overflow-wrap:anywhere;max-height:4.1em;overflow:hidden}
+.vb-calendar-event small {display:block;font:600 9px/1.5 var(--display);opacity:.85;margin-top:2px}
+.vb-personal-calendar > .evidence-note {margin:13px 0 0;max-width:100%}
+@media(max-width:850px){
+  .vb-calendar-intro {flex-direction:column;gap:14px}
+  .vb-calendar-legend {justify-content:flex-start;max-width:none}
+}
+@media(max-width:510px){
+ .vb-case-label {padding:25px 0 17px}
+ .vb-case-label h3 {font-size:28px}
+ .vb-case-label p,.vb-calendar-intro p {font-size:15px}
+ .vb-member-label {margin-top:32px}
+ .vb-calendar-grid {grid-template-columns:52px repeat(7,155px);min-width:1137px}
+ .vb-day-nav {display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
+ .vb-day-nav button {font-size:11px;padding:9px 5px}
+ .vb-calendar-event strong {font-size:11px}
+ .vb-calendar-event small {font-size:10px}
+ .vb-calendar-legend span {font-size:11px}
+}
