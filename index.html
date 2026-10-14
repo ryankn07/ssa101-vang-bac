@@ -12,6 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="assets/demo-before.webp">
+  <link rel="preload" as="image" href="assets/demo-after.webp">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="motion.css">
   <link rel="stylesheet" href="typography-mix.css">
@@ -130,7 +132,7 @@
 </div>
 <p class="evidence-note">Dữ liệu đọc từ Google Calendar cá nhân, tuần 05–11/10/2026 (GMT+7). Đây là <b>số khung được lên lịch</b>, không xác nhận số hoạt động đã hoàn thành.</p>
 <section class="vb-personal-calendar" aria-label="Lịch tuần cá nhân đã được ẩn danh">
-  <div class="vb-calendar-intro"><div><span class="demo-case-index">7 NGÀY / GOOGLE CALENDAR</span><h3>Lịch của mình, không phải ảnh minh họa.</h3><p>Toàn bộ các khung học tập và sinh hoạt trong tuần được tái hiện từ sự kiện có thật trong Google Calendar. Vuốt ngang để đọc từng ngày; bấm chọn thứ để chuyển nhanh.</p></div>
+  <div class="vb-calendar-intro"><div><span class="demo-case-index">7 NGÀY / GOOGLE CALENDAR</span><h3>Lịch của mình, không phải ảnh minh họa.</h3><p>Các khung học tập và sinh hoạt được tái hiện từ Google Calendar. Chọn thứ để xem chi tiết; vuốt ngang trên khung để chuyển sang lịch thành viên.</p></div>
   <div class="vb-calendar-legend"><span class="cat-school">Học trên trường</span><span class="cat-self">Tự học</span><span class="cat-assign">Bài tập</span><span class="cat-hobby">Sở thích</span><span class="cat-sport">Vận động</span><span class="cat-rest">Sinh hoạt</span><span class="cat-audit">Time Audit</span></div></div>
   <div class="vb-day-nav" aria-label="Chọn ngày trong lịch">
     <button type="button" data-vb-day="0" aria-pressed="true">T2 · 05</button><button type="button" data-vb-day="1" aria-pressed="false">T3 · 06</button><button type="button" data-vb-day="2" aria-pressed="false">T4 · 07</button><button type="button" data-vb-day="3" aria-pressed="false">T5 · 08</button><button type="button" data-vb-day="4" aria-pressed="false">T6 · 09</button><button type="button" data-vb-day="5" aria-pressed="false">T7 · 10</button><button type="button" data-vb-day="6" aria-pressed="false">CN · 11</button>
@@ -156,10 +158,10 @@
               <h3>Trước khi<br>sắp xếp.</h3>
               <p>Lịch đã ghi nhận các hoạt động chính như học trên trường, tập luyện và tự học, nhưng nhiều khoảng thời gian sinh hoạt vẫn chưa được lên kế hoạch.</p>
               <span class="demo-case-source">ẢNH CHỤP GOOGLE CALENDAR</span>
-              <span class="demo-mobile-hint">Vuốt ngang để đọc lịch · Chạm vào ảnh để xem đầy đủ</span>
+              <span class="demo-mobile-hint">Chạm để xem ảnh lịch đầy đủ</span>
             </div>
             <a class="demo-case-image" href="assets/demo-before.webp" target="_blank" rel="noopener" aria-label="Mở toàn bộ ảnh lịch tuần trước khi sắp xếp">
-              <img src="assets/demo-before.webp" width="1257" height="546" loading="lazy" decoding="async" alt="Lịch Google Calendar ban đầu: các buổi học tại trường, tập gym và học buổi tối, còn nhiều khoảng thời gian chưa phân bổ.">
+              <img src="assets/demo-before.webp" width="1257" height="546" loading="eager" decoding="async" alt="Lịch Google Calendar ban đầu: các buổi học tại trường, tập gym và học buổi tối, còn nhiều khoảng thời gian chưa phân bổ.">
               <span class="demo-image-action">XEM LỊCH ĐẦY ĐỦ <span aria-hidden="true">↗</span></span>
             </a>
           </article>
@@ -171,7 +173,7 @@
               <span class="demo-case-source">ẢNH CHỤP GOOGLE CALENDAR</span>
             </div>
             <a class="demo-case-image" href="assets/demo-after.webp" target="_blank" rel="noopener" aria-label="Mở toàn bộ ảnh lịch tuần sau khi lập kế hoạch">
-              <img src="assets/demo-after.webp" width="1250" height="590" loading="lazy" decoding="async" alt="Lịch Google Calendar sau khi lập kế hoạch: chi tiết các khung giờ học tập, sinh hoạt, luyện tập, nghỉ ngơi và tự học trong tuần.">
+              <img src="assets/demo-after.webp" width="1250" height="590" loading="eager" decoding="async" alt="Lịch Google Calendar sau khi lập kế hoạch: chi tiết các khung giờ học tập, sinh hoạt, luyện tập, nghỉ ngơi và tự học trong tuần.">
               <span class="demo-image-action">XEM LỊCH ĐẦY ĐỦ <span aria-hidden="true">↗</span></span>
             </a>
           </article>
