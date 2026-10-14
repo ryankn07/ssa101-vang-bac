@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="typography-mix.css">
   <link rel="stylesheet" href="footer-refresh.css">
   <script defer src="script.js"></script>
+  <script defer src="calendar-week.js"></script>
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
@@ -106,21 +107,33 @@
         <div class="section-tag"><span class="tiny-box"></span> 05 / SẢN PHẨM DEMO THỰC TẾ</div>
         <div class="section-title-row demo-heading">
           <h2 id="demo-title">NÓI ÍT.<br><span>CHO XEM NHIỀU.</span></h2>
-          <p>Trường hợp thực hành của một thành viên Vàng Bạc: dữ liệu lịch Google Calendar tuần 05–11/10/2026 và ảnh so sánh kế hoạch Before / After. Hai nguồn tư liệu được đối chiếu riêng, không mặc định là cùng một tuần.</p>
+          <p>Hai trường hợp thực tế, trình bày riêng biệt: lịch Google Calendar tuần 05–11/10 của một thành viên và bộ ảnh Before / After của một thành viên khác. Mỗi lịch có nguồn dữ liệu riêng.</p>
         </div>
+        <div class="vb-case-label"><span>01 / LỊCH CỦA BẠN</span><h3>Lịch Google Calendar thực tế</h3><p>05–11 tháng 10, 2026 · 7 ngày · một tài khoản cá nhân (đã lược bỏ thông tin định danh)</p></div>
         <div class="evidence-metrics" aria-label="Thống kê lịch tuần 05 đến 11 tháng 10">
-  <article><strong>55</strong><span>Khung hoạt động trong lịch</span></article>
+  <article><strong>57</strong><span>Khung hoạt động trong lịch</span></article>
   <article><strong>05</strong><span>Ngày học tại trường</span></article>
   <article><strong>07</strong><span>Buổi tập đàn được lên lịch</span></article>
   <article><strong>01</strong><span>Buổi Time Audit</span></article>
 </div>
 <p class="evidence-note">Dữ liệu đọc từ Google Calendar cá nhân, tuần 05–11/10/2026 (GMT+7). Đây là <b>số khung được lên lịch</b>, không xác nhận số hoạt động đã hoàn thành.</p>
-<div class="evidence-process" aria-label="Quy trình thực hành từ lịch của thành viên">
+<section class="vb-personal-calendar" aria-label="Lịch tuần cá nhân đã được ẩn danh">
+  <div class="vb-calendar-intro"><div><span class="demo-case-index">7 NGÀY / GOOGLE CALENDAR</span><h3>Lịch của mình, không phải ảnh minh họa.</h3><p>Toàn bộ các khung học tập và sinh hoạt trong tuần được tái hiện từ sự kiện có thật trong Google Calendar. Vuốt ngang để đọc từng ngày; bấm chọn thứ để chuyển nhanh.</p></div>
+  <div class="vb-calendar-legend"><span class="cat-school">Học trên trường</span><span class="cat-self">Tự học</span><span class="cat-assign">Bài tập</span><span class="cat-hobby">Sở thích</span><span class="cat-sport">Vận động</span><span class="cat-rest">Sinh hoạt</span><span class="cat-audit">Time Audit</span></div></div>
+  <div class="vb-day-nav" aria-label="Chọn ngày trong lịch">
+    <button type="button" data-vb-day="0" aria-pressed="true">T2 · 05</button><button type="button" data-vb-day="1" aria-pressed="false">T3 · 06</button><button type="button" data-vb-day="2" aria-pressed="false">T4 · 07</button><button type="button" data-vb-day="3" aria-pressed="false">T5 · 08</button><button type="button" data-vb-day="4" aria-pressed="false">T6 · 09</button><button type="button" data-vb-day="5" aria-pressed="false">T7 · 10</button><button type="button" data-vb-day="6" aria-pressed="false">CN · 11</button>
+  </div>
+  <div id="vb-week-calendar" class="vb-week-calendar"><p>Đang tải lịch tuần…</p></div>
+  <p class="evidence-note">Dữ liệu chụp tại thời điểm cập nhật website; đây không phải kết nối công khai trực tiếp tới tài khoản Google. Các sự kiện mới hoặc thay đổi về sau sẽ không tự đồng bộ. Lịch chỉ thể hiện thời gian <strong>đã lên kế hoạch</strong>, không phải xác nhận hoàn thành.</p>
+</section>
+
+        <div class="evidence-process" aria-label="Quy trình thực hành từ lịch của thành viên">
 <article><span>01 / TIME AUDIT</span><h3>Nhìn lại thời gian</h3><p>08/10 · 21:30–22:15: thành viên dành một khung riêng cho Time Audit.</p></article>
 <article><span>02 / ƯU TIÊN</span><h3>Đặt việc quan trọng vào lịch</h3><p>09/10 · 19:15–21:45: khung “Làm bài tập ưu tiên &amp; ôn bài”.</p></article>
 <article><span>03 / TIME BLOCKING</span><h3>Sắp xếp học tập và sinh hoạt</h3><p>5 ngày học trên trường, xen kẽ tự học, tập đàn, bài tập, nghỉ ngơi và sinh hoạt.</p></article>
 <article><span>04 / ĐIỀU CHỈNH</span><h3>Lịch có thể linh hoạt</h3><p>Ngày 09/10, khung tự học kết thúc lúc 17:45 để chuyển sang sinh hoạt và bài tập ưu tiên.</p></article>
 </div>
+        <div class="vb-case-label vb-member-label"><span>02 / LỊCH CỦA THÀNH VIÊN NHÓM</span><h3>Before / After – một trường hợp khác</h3><p>Hai ảnh chụp Google Calendar do nhóm cung cấp, so sánh cách phân bổ thời gian trước và sau khi lập kế hoạch. <strong>Không phải lịch của người ở phần 01.</strong></p></div>
         <div class="demo-stage" aria-label="So sánh lịch tuần trước và sau khi lập kế hoạch">
           <article class="demo-case">
             <div class="demo-case-copy">
@@ -150,9 +163,9 @@
         </div>
         <div class="demo-summary">
           <strong>ĐIỂM THAY ĐỔI</strong>
-          <p>Từ lịch ghi nhận các hoạt động chính sang lịch tuần có phân bổ khung giờ cụ thể cho cả học tập lẫn sinh hoạt cá nhân.</p>
+          <p>Trong trường hợp của thành viên thứ hai, lịch Before ghi những hoạt động chính, còn lịch After có thêm các khung giờ sinh hoạt và tự học cụ thể.</p>
         </div>
-        <p class="demo-caveat">Các ảnh và lịch chứng minh cách lên kế hoạch; không phải số liệu theo dõi năng suất. Nhóm chưa có xác nhận tỷ lệ hoàn thành hoạt động.</p>
+        <p class="demo-caveat">Hai trường hợp độc lập: (1) lịch cá nhân từ Google Calendar và (2) hai ảnh Before/After của thành viên nhóm. Chúng cho thấy kết quả lập kế hoạch, chưa chứng minh tỷ lệ hoàn thành hay năng suất tăng.</p>
         <div class="evidence-video"><div><span class="demo-case-index">VIDEO SẢN PHẨM DEMO · 112 GIÂY</span><h3>THỰC HÀNH KỸ NĂNG.</h3><p>Video thực hành do nhóm cung cấp; tách biệt với video giới thiệu dự án.</p><a href="https://drive.google.com/file/d/18DtUMajEsEXM_nU4sGO60Z_KDAG3ds0j/view" target="_blank" rel="noopener noreferrer">Xem trên Google Drive ↗</a></div><div class="evidence-frame"><iframe loading="lazy" title="Video thực hành kỹ năng Time Management của nhóm Vàng Bạc" src="https://drive.google.com/file/d/18DtUMajEsEXM_nU4sGO60Z_KDAG3ds0j/preview" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div></div>
       </div>
     </section>
