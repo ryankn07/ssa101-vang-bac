@@ -33,10 +33,29 @@
     if(counter)counter.textContent=String(i+1).padStart(2,"0")+" / 02 · "+labels[i];
     requestAnimationFrame(height);
   }
-  function go(i,behavior="smooth"){
+  // Changing a tall calendar into a shorter one changes document height.
+  // Return to the calendar controls BEFORE collapsing the old slide; otherwise
+  // a click from the bottom lands at the unrelated video section below.
+  let switching=false;
+  function topOfCalendar(){
+    const header=document.querySelector(".site-header");
+    const offset=(header?header.getBoundingClientRect().height:0)+14;
+    return Math.max(0,Math.round(root.getBoundingClientRect().top+window.scrollY-offset));
+  }
+  function go(i){
     i=Math.max(0,Math.min(panels.length-1,i));
+    if(i===active)return;
+    const targetY=topOfCalendar();
+    switching=true;
+    window.scrollTo({top:targetY,left:0,behavior:"instant"});
+    viewport.scrollTo({left:i*viewport.clientWidth,behavior:"instant"});
     state(i);
-    viewport.scrollTo({left:i*viewport.clientWidth,behavior});
+    height();
+    requestAnimationFrame(()=>{
+      // Re-assert the viewport position after the slide has changed height.
+      window.scrollTo({top:targetY,left:0,behavior:"instant"});
+      switching=false;
+    });
   }
   tabs.forEach((t,i)=>{
     t.addEventListener("click",()=>go(i));
@@ -53,6 +72,7 @@
     if(scrollFrame)return;
     scrollFrame=requestAnimationFrame(()=>{
       scrollFrame=0;
+      if(switching)return;
       const w=viewport.clientWidth;
       if(w>0){const candidate=Math.max(0,Math.min(1,Math.round(viewport.scrollLeft/w)));if(candidate!==active)state(candidate);}
     });
