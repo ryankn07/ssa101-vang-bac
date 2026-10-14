@@ -10,11 +10,23 @@
   const next=root.querySelector("[data-vb-next]");
   const counter=document.getElementById("vb-switch-counter");
   if(panels.length!==2||tabs.length!==2)return;
-  let active=0,scrollFrame=0;
+  let active=0,scrollFrame=0,heightFrame=0,lastHeight=0;
   const labels=["THÀNH VIÊN 01","THÀNH VIÊN 02"];
+  // Layout-neutral optimization: write the same height only when it changes.
+  // Repeated identical writes can retrigger ResizeObserver and force layout work.
   function height(){
     const h=Math.ceil(panels[active].scrollHeight);
-    if(h>0)viewport.style.height=h+"px";
+    if(h>0 && h!==lastHeight){
+      viewport.style.height=h+"px";
+      lastHeight=h;
+    }
+  }
+  function requestHeight(){
+    if(heightFrame)return;
+    heightFrame=requestAnimationFrame(()=>{
+      heightFrame=0;
+      height();
+    });
   }
   function state(i){
     i=Math.max(0,Math.min(panels.length-1,i));
@@ -31,7 +43,7 @@
     if(prev)prev.disabled=i===0;
     if(next)next.disabled=i===panels.length-1;
     if(counter)counter.textContent=String(i+1).padStart(2,"0")+" / 02 · "+labels[i];
-    requestAnimationFrame(height);
+    requestHeight();
   }
   // Changing a tall calendar into a shorter one changes document height.
   // Return to the calendar controls BEFORE collapsing the old slide; otherwise
@@ -79,13 +91,13 @@
   },{passive:true});
   window.addEventListener("resize",()=>{
     viewport.scrollLeft=active*viewport.clientWidth;
-    requestAnimationFrame(height);
+    requestHeight();
   },{passive:true});
   if("ResizeObserver" in window){
-    const observer=new ResizeObserver(()=>requestAnimationFrame(height));
+    const observer=new ResizeObserver(()=>requestHeight());
     panels.forEach(panel=>observer.observe(panel));
   }
-  panels.forEach(panel=>panel.querySelectorAll("img").forEach(img=>img.addEventListener("load",height,{once:true})));
+  panels.forEach(panel=>panel.querySelectorAll("img").forEach(img=>img.addEventListener("load",requestHeight,{once:true})));
   state(0);
   viewport.scrollLeft=0;
   window.addEventListener("load",height,{once:true});
