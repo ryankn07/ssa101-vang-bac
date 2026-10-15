@@ -16,9 +16,11 @@
   <link rel="stylesheet" href="motion.css?v=20261015-premium01">
   <link rel="stylesheet" href="typography-mix.css">
   <link rel="stylesheet" href="footer-refresh.css?v=20261015-premium03">
+  <link rel="stylesheet" href="navigation-v5.css?v=20261015">
   <script defer src="script.js?v=20261015-perf04"></script>
   <script defer src="calendar-week.js?v=20261014-week12"></script>
   <script defer src="calendar-switch.js?v=20261014-perf1"></script>
+  <script defer src="navigation-v5.js?v=20261015"></script>
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
@@ -30,6 +32,19 @@
     </a>
     <nav class="desktop-nav" aria-label="Điều hướng chính">
       <a href="#about">Về chương trình</a><a href="#roadmap">Lộ trình</a><a href="#demo">Sản phẩm demo</a><a href="#faq">Hỏi đáp</a>
+    </nav>
+    <button class="mobile-nav-toggle" type="button" aria-label="Mở menu điều hướng" aria-expanded="false" aria-controls="mobile-navigation">
+      <span class="mobile-nav-toggle-lines" aria-hidden="true"><i></i><i></i></span>
+      <span class="mobile-nav-toggle-text" aria-hidden="true">MENU</span>
+    </button>
+    <nav class="mobile-navigation" id="mobile-navigation" aria-label="Điều hướng chính trên điện thoại" hidden>
+      <div class="mobile-navigation-head"><span>KHÁM PHÁ / 2026</span><span>SSA101 · GROUP 05</span></div>
+      <a href="#about"><span>01</span><b>Về chương trình</b><span aria-hidden="true">↗</span></a>
+      <a href="#roadmap"><span>02</span><b>Hành trình 5 buổi</b><span aria-hidden="true">↗</span></a>
+      <a href="#demo"><span>03</span><b>Sản phẩm demo</b><span aria-hidden="true">↗</span></a>
+      <a href="#faq"><span>04</span><b>Hỏi đáp</b><span aria-hidden="true">↗</span></a>
+      <a href="#register"><span>05</span><b>Tham gia chương trình</b><span aria-hidden="true">↗</span></a>
+      <div class="mobile-navigation-foot">TIME MANAGEMENT · VÀNG BẠC</div>
     </nav>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSdvFnYiceiT-sh13q3ggggmLMSz9ifyf6zQS6-JSGxH60DN2w/viewform" target="_blank" rel="noopener noreferrer" data-registration-link class="nav-cta">THAM GIA <span aria-hidden="true">↗</span></a>
   </header>
