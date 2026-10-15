@@ -203,6 +203,12 @@ window.addEventListener("scroll", scheduleScrollUpdate, { passive: true });
 window.addEventListener("resize", scheduleMeasure, { passive: true });
 window.addEventListener("load", scheduleMeasure, { once: true });
 document.fonts?.ready.then(scheduleMeasure);
+// The two member calendars have different heights. Re-measure page progress
+// only after the visible calendar changes size, not on every scroll event.
+const calendarViewport = document.getElementById("vb-slide-viewport");
+if (calendarViewport && "ResizeObserver" in window) {
+  new ResizeObserver(scheduleMeasure).observe(calendarViewport);
+}
 scheduleMeasure();
 
 /* Pointer parallax: one geometry read on entry, one composited write per frame. */
