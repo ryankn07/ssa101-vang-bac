@@ -71,7 +71,7 @@ setView("week", true);
 
 /*
  * V4 / Five coordinated motion layers:
- * 01 entrance; 02 repeatable scroll reveals; 03 scroll-linked parallax;
+ * 01 entrance; 02 one-time scroll reveals; 03 scroll-linked parallax;
  * 04 unobtrusive ambient movement; 05 hover/click interactions.
  * One IntersectionObserver for reveal, one rAF for scroll-position work.
  */
@@ -101,12 +101,14 @@ function initMotion() {
   document.querySelectorAll(".session-row")
     .forEach((el, i) => el.style.setProperty("--reveal-delay", `${(i % 3) * 60}ms`));
 
-  // Removing is-visible after a target completely leaves the viewport means
-  // the same entrance animation plays again from either scroll direction.
-  // A negative bottom margin anticipates the next reveal without a flickery threshold.
+  // Reveal each section once. Replaying on every scroll-back caused distracting
+  // fade-outs and unnecessary observer work on long calendar case studies.
+  // The negative bottom margin anticipates the next section's entrance.
   revealObserver = new IntersectionObserver(entries => {
     for (const entry of entries) {
-      entry.target.classList.toggle("is-visible", entry.isIntersecting);
+      if (!entry.isIntersecting) continue;
+      entry.target.classList.add("is-visible");
+      revealObserver.unobserve(entry.target);
     }
   }, { threshold: 0, rootMargin: "0px 0px -7% 0px" });
   revealElements.forEach(el => revealObserver.observe(el));
