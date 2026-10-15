@@ -65,8 +65,10 @@ for (const width of sizes) {
     }
 
     await page.locator('.toggle-button[data-view="month"]').click();
+    await page.locator("#calendar-content .month-calendar").waitFor({ state: "attached", timeout: 5000 });
     check("monthCalendarWorks", await page.locator("#calendar-content .month-calendar").count() === 1);
     await page.locator('.toggle-button[data-view="week"]').click();
+    await page.locator("#calendar-content .weekly-calendar").waitFor({ state: "attached", timeout: 5000 });
     check("weekCalendarWorks", await page.locator("#calendar-content .weekly-calendar").count() === 1);
 
     await page.locator('[data-vb-open-slide="0"]').click();
