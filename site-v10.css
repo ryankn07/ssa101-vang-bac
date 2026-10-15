@@ -1964,3 +1964,32 @@ html.force-instant-top {scroll-behavior:auto !important;}
   .vb-video-utility-link, .vb-video-close { transition: none !important; }
 }
 
+
+/* SSA101 / V11 — mobile composition budget.
+ * Static decoration is simplified on touch-sized layouts to reduce repeated paint
+ * and continuous compositor animations; all actionable controls remain intact. */
+@media (max-width: 800px) {
+  /* The global fixed paper-grid overlay and giant backdrop are decorative only. */
+  body::before, .hero-backprint { display: none; }
+  /* Remove concentric translucent rings; keep the real planner mockup. */
+  .hero-art::after { display: none; }
+  /* Continuous ambient floating is a battery cost with little value on touch. */
+  .motion-ready .art-top-note,
+  .motion-ready .art-caption,
+  .motion-ready .micro-stamp,
+  .motion-ready .hero-edition-led {
+    animation: none !important;
+  }
+}
+@media (max-width: 430px) {
+  /* Small displays prioritize readable content over decorative backdrop. */
+  .hero-art::before { background-size: 52px 52px, 52px 52px, 100% 100%; }
+  /* Avoid side-shadow clipping and preserve tap targets near narrow edges. */
+  .vb-demo-rail a { min-width: 0; }
+  .vb-calendar-switcher { min-width: 0; }
+  .vb-day-nav button { min-width: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-art::after { display: none; }
+}
+
