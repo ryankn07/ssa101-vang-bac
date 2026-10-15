@@ -492,3 +492,95 @@ html.force-instant-top {scroll-behavior:auto !important;}
   .evidence-video-copy a,
   .evidence-open { transition: none; }
 }
+
+
+/* SSA101 / PRODUCT POLISH 03 — editorial typography and CTA finishing */
+/* Balanced editorial headings, without changing the font scale or grid. */
+.section-title-row h2,
+.outcomes-title h2,
+.video-layout h2,
+.register h2,
+.faq-lead h2,
+.vb-case-label h3,
+.vb-execution h3 {
+  text-wrap: balance;
+  font-kerning: normal;
+}
+.hero-intro p,
+.section-title-row p,
+.outcomes-title p,
+.problem p,
+.outcome p,
+.session-description p,
+.video-layout p,
+.faq-questions p,
+.register-content p,
+.footer-identity p,
+.footer-join p {
+  text-wrap: pretty;
+}
+/* Clear, consistent labels and usable text contrast. */
+.section-tag,
+.eyebrow,
+.demo-case-index,
+.vb-execution-kicker {
+  font-family: var(--display);
+  font-weight: 800;
+}
+.footer-label { color: #b8c6d0; }
+.footer-identity p,
+.footer-join p { color: #d0d9df; }
+.footer-bottom small { color: #b2c0ca; }
+
+/* A tactile product CTA, still the exact same element and dimensions. */
+.registration-link:not(.is-unavailable) {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(112deg, #ef5739 0%, #f26a4b 60%, #e45135 100%);
+  box-shadow: 0 8px 23px rgba(171, 66, 40, .16);
+  transition: transform 330ms var(--ease-out-expo),
+              box-shadow 330ms var(--ease-out-expo),
+              background-color 200ms ease;
+}
+.registration-link:not(.is-unavailable) span {
+  transition: transform 330ms var(--ease-out-expo);
+}
+.registration-link:not(.is-unavailable):focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
+}
+.footer-cta {
+  background: linear-gradient(120deg, rgba(255,255,255,.065), rgba(255,255,255,.018));
+  transition: background-color 230ms ease, border-color 230ms ease, box-shadow 230ms ease;
+}
+.footer-nav a {
+  background-image: linear-gradient(#f58c72, #f58c72);
+  background-position: 0 100%;
+  background-size: 0 1px;
+  background-repeat: no-repeat;
+  transition: color 220ms ease, background-size 330ms var(--ease-out-expo);
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .registration-link:not(.is-unavailable):hover {
+    transform: translateY(-2px);
+    background: linear-gradient(112deg, #e84e31, #f16444 60%, #d94c31);
+    box-shadow: 0 13px 28px rgba(171, 66, 40, .22);
+  }
+  .registration-link:not(.is-unavailable):hover span {
+    transform: translate3d(3px, -3px, 0);
+  }
+  .footer-cta:hover {
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.28);
+  }
+  .footer-nav a:hover {
+    background-size: 100% 1px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .registration-link:not(.is-unavailable),
+  .registration-link:not(.is-unavailable) span,
+  .footer-cta,
+  .footer-nav a {
+    transition: none;
+  }
+}
