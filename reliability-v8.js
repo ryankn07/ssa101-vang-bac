@@ -1,29 +1,61 @@
-/* SSA101 / V8: opt-in Drive embeds and responsive before/after comparison. */
+/* SSA101 / V9 — video resilience: loading is opt-in; Drive fallback never disappears. */
 (() => {
   "use strict";
-
-  // A third-party Google Drive embed is downloaded only after user intent.
-  // Keep the existing external Drive links available if embedding is blocked.
   document.querySelectorAll("[data-vb-video-shell]").forEach(shell => {
     const gate = shell.querySelector(".vb-video-gate");
-    const start = shell.querySelector(".vb-video-start");
-    if (!gate || !start) return;
+    const start = gate?.querySelector(".vb-video-start");
+    const originalLink = gate?.querySelector(".vb-video-drive-link");
+    if (!gate || !start || !originalLink) return;
 
-    start.addEventListener("click", () => {
-      if (shell.classList.contains("vb-video-active")) return;
-      const src = gate.getAttribute("data-vb-embed-url") || "";
-      if (!/^https:\/\/drive\.google\.com\/file\/d\/[A-Za-z0-9_-]+\/preview$/.test(src)) return;
+    const source = gate.getAttribute("data-vb-embed-url") || "";
+    if (!/^https:\/\/drive\.google\.com\/file\/d\/[A-Za-z0-9_-]+\/preview$/.test(source)) return;
 
-      const iframe = document.createElement("iframe");
-      iframe.setAttribute("title", gate.getAttribute("data-vb-title") || "Video Time Management");
-      iframe.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
-      iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
-      iframe.setAttribute("allowfullscreen", "");
-      iframe.src = src;
+    // Controls remain above the iframe, even when the third-party player fails.
+    const actions = document.createElement("div");
+    actions.className = "vb-video-utility";
+    actions.hidden = true;
+    actions.setAttribute("aria-label", "Tùy chọn trình phát video");
+    const drive = document.createElement("a");
+    drive.className = "vb-video-utility-link";
+    drive.href = originalLink.href;
+    drive.target = "_blank";
+    drive.rel = "noopener noreferrer";
+    drive.textContent = "MỞ TRÊN DRIVE ↗";
+    const close = document.createElement("button");
+    close.type = "button";
+    close.className = "vb-video-close";
+    close.textContent = "ĐÓNG ×";
+    close.setAttribute("aria-label", "Đóng trình phát, quay lại ảnh bìa video");
+    actions.append(drive, close);
+    shell.append(actions);
+
+    let frame = null;
+    function stop() {
+      frame?.remove();
+      frame = null;
+      shell.classList.remove("vb-video-active");
+      actions.hidden = true;
+      gate.hidden = false;
+      start.focus({ preventScroll: true });
+    }
+    function play() {
+      if (frame) return;
+      frame = document.createElement("iframe");
+      frame.title = gate.getAttribute("data-vb-title") || "Video Time Management";
+      frame.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
+      frame.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
+      frame.setAttribute("allowfullscreen", "");
+      frame.loading = "eager";
+      frame.src = source;
       gate.hidden = true;
       shell.classList.add("vb-video-active");
-      shell.append(iframe);
-    }, { once: true });
+      actions.hidden = false;
+      shell.append(frame);
+      // Once the cover disappears, move keyboard focus to a visible control.
+      close.focus({ preventScroll: true });
+    }
+    start.addEventListener("click", play);
+    close.addEventListener("click", stop);
   });
 
   const compare = document.querySelector(".vb-calendar-slide .demo-stage");
