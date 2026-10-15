@@ -154,3 +154,71 @@
 @media (prefers-reduced-motion: reduce) {
   .vb-video-start, .vb-compare-controls button { transition: none; }
 }
+
+/* SSA101 / V9 — Small-screen usability and always-visible media recovery. */
+.vb-video-utility {
+  position: absolute;
+  z-index: 5;
+  right: 12px;
+  top: 12px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 6px;
+  max-width: calc(100% - 24px);
+  font-family: var(--display);
+}
+.vb-video-utility[hidden] { display: none !important; }
+.vb-video-utility-link,
+.vb-video-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 8px 11px;
+  background: rgba(19, 43, 55, .98);
+  border: 1px solid rgba(246, 248, 247, .74);
+  color: #fffdf9;
+  font: 800 10px/1.5 var(--display);
+  letter-spacing: .02em;
+  text-decoration: none;
+  box-shadow: 0 3px 9px rgba(0,0,0,.3);
+  cursor: pointer;
+}
+.vb-video-utility-link { border-color: #f18d70; background: #203c4b; }
+.vb-video-utility-link:hover,
+.vb-video-close:hover { background: #db6246; color: #fff; }
+.vb-video-utility-link:focus-visible,
+.vb-video-close:focus-visible { outline: 3px solid #ff9c80; outline-offset: 3px; }
+@media (max-width: 800px) {
+  /* Navigation stays usable regardless of previous editorial media rules. */
+  .site-header .desktop-nav { display: none; }
+  .site-header .mobile-nav-toggle { display: inline-flex; }
+  .site-header .brand { flex: 0 1 auto; min-width: 0; }
+  .site-header .brand-copy { min-width: 0; }
+}
+@media (max-width: 430px) {
+  .site-header { padding-inline: 12px; gap: 8px; }
+  .site-header .brand { gap: 8px; }
+  .site-header .brand-mark.has-logo { width: 36px; height: 36px; flex: 0 0 36px; }
+  .site-header .brand-mark.has-logo .official-logo { width: 100%; height: 100%; object-fit: contain; }
+  .site-header .brand-copy strong { font-size: 12px; line-height: 1.3; letter-spacing: .07em; }
+  .site-header .brand-copy small { font-size: 9px; letter-spacing: .05em; }
+  .site-header .nav-cta { font-size: 10px; flex-shrink: 0; padding-block: 11px; }
+  .site-header .nav-cta span { margin-left: 3px; }
+  .site-header .mobile-nav-toggle { flex: 0 0 42px; height: 42px; }
+  .vb-video-utility { right: 7px; top: 7px; gap: 4px; max-width: calc(100% - 14px); }
+  .vb-video-utility-link, .vb-video-close {
+    min-height: 33px; padding: 7px 8px; font-size: 9px;
+  }
+  .vb-compare-controls button { min-height: 48px; }
+}
+@media (max-width: 360px) {
+  .site-header .nav-cta span { display: none; }
+  .site-header .brand-copy small { font-size: 8px; }
+  .site-header .mobile-nav-toggle { flex-basis: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vb-video-utility-link, .vb-video-close { transition: none !important; }
+}
