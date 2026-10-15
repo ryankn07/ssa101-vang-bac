@@ -1,0 +1,156 @@
+/* SSA101 · Vàng Bạc / V8 Reliability & Mobile Comparison
+   No external assets or additional third-party libraries. */
+.vb-video-shell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #142c3a;
+}
+.vb-video-gate {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: clamp(10px, 1.5vw, 18px);
+  padding: clamp(19px, 3vw, 38px);
+  overflow: hidden;
+  color: #f5f0e9;
+  font-family: var(--display);
+  background:
+    radial-gradient(circle at 78% 24%, rgba(244, 107, 78, .24), transparent 44%),
+    linear-gradient(139deg, #234452 0%, #142c3a 57%, #0b1b29 100%);
+}
+.vb-video-gate[hidden] { display: none !important; }
+.vb-video-gate::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 42px 42px;
+  pointer-events: none;
+}
+.vb-video-gate-label {
+  color: #ffa086;
+  letter-spacing: .13em;
+  font: 800 10px/1.55 var(--display);
+}
+.vb-video-gate-title {
+  margin: 0;
+  font: 850 clamp(22px, 3vw, 37px)/1.15 var(--display);
+  letter-spacing: -.045em;
+  color: #fffdf8;
+  text-wrap: balance;
+}
+.vb-video-gate-description {
+  max-width: 370px;
+  color: #d0dce0;
+  font: 500 clamp(11px, 1.2vw, 13px)/1.65 var(--display);
+  margin: 0;
+}
+.vb-video-start {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  padding: 12px 17px;
+  min-height: 43px;
+  border: 1px solid #ff8b69;
+  background: #ed6b4b;
+  color: #101f29;
+  font: 850 11px/1.4 var(--display);
+  letter-spacing: .035em;
+  box-shadow: 4px 5px 0 rgba(0,0,0,.27);
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+.vb-video-start span {
+  display: inline-block;
+  font-size: 14px;
+}
+.vb-video-start:hover { background: #ff9e80; }
+.vb-video-start:focus-visible,
+.vb-video-drive-link:focus-visible {
+  outline: 3px solid #ffac91;
+  outline-offset: 4px;
+}
+.vb-video-drive-link {
+  color: #e8eff0;
+  border-bottom: 1px solid #83a0ad;
+  padding-bottom: 5px;
+  font: 700 11px/1.5 var(--display);
+  text-decoration: none;
+}
+.vb-video-drive-link:hover { color: #ffa086; }
+.vb-video-active iframe {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.vb-compare-controls {
+  display: none;
+  gap: 8px;
+  margin: 18px 0 13px;
+  font-family: var(--display);
+}
+.vb-compare-controls button {
+  flex: 1 1 50%;
+  min-width: 0;
+  min-height: 51px;
+  padding: 13px 12px;
+  border: 1px solid #acbdbb;
+  background: #f8f6ee;
+  color: #183440;
+  font: 800 12px/1.4 var(--display);
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+.vb-compare-controls button[aria-pressed="true"] {
+  background: #153440;
+  border-color: #153440;
+  color: #fff;
+  box-shadow: inset 0 -3px 0 #ff8b6b;
+}
+.vb-compare-controls button:focus-visible {
+  outline: 3px solid #e55d3d;
+  outline-offset: 3px;
+}
+.vb-compare-context {
+  display: none;
+  font: 550 12px/1.6 var(--display);
+  color: #54666d;
+  margin: 0 0 13px;
+}
+.vb-compare-context strong { color: #ba4b31; }
+@media (max-width: 720px) {
+  .vb-compare-ready .vb-compare-controls { display: flex; }
+  .vb-compare-ready .vb-compare-context { display: block; }
+  .vb-compare-ready .vb-compare-case:not(.is-active) { display: none !important; }
+  .vb-compare-ready .demo-stage { gap: 0; }
+  .vb-compare-ready .demo-case { margin: 0; }
+  .vb-video-gate { gap: 9px; padding: 18px; }
+  .vb-video-gate-title { font-size: clamp(19px, 4.9vw, 29px); }
+  .vb-video-gate-description { font-size: 11px; line-height: 1.5; }
+  .vb-video-start { font-size: 10px; padding: 9px 12px; min-height: 39px; }
+}
+@media (max-width: 420px) {
+  .vb-video-gate-label { font-size: 9px; }
+  .vb-video-gate { gap: 8px; padding: 13px; }
+  .vb-video-gate-title { font-size: 18px; }
+  .vb-video-gate-description { display: none; }
+  .vb-video-start { min-height: 36px; padding: 8px 11px; }
+  .vb-video-drive-link { font-size: 10px; }
+  .vb-compare-controls button { font-size: 11px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vb-video-start, .vb-compare-controls button { transition: none; }
+}
