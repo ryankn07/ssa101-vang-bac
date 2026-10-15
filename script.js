@@ -140,16 +140,20 @@ const motionLayers = [
 let scrollTicking = false;
 let pendingMeasurements = false;
 let maxScroll = 1;
+let mobileParallaxDisabled = false;
 function measureMotion() {
   pendingMeasurements = false;
   // Batch geometry reads. No layout measurements in the scroll rAF below.
   const sy = window.scrollY;
   maxScroll = Math.max(1, document.documentElement.scrollHeight - innerHeight);
-  motionLayers.forEach(layer => {
-    const r = layer.element.getBoundingClientRect();
-    layer.top = r.top + sy;
-    layer.height = r.height;
-  });
+  // Mobile keeps the reading indicator but skips unused parallax geometry.
+  if (window.innerWidth > 800 && !reducedMotion.matches) {
+    motionLayers.forEach(layer => {
+      const r = layer.element.getBoundingClientRect();
+      layer.top = r.top + sy;
+      layer.height = r.height;
+    });
+  }
   scheduleScrollUpdate();
 }
 function scheduleMeasure() {
@@ -164,9 +168,20 @@ function updateScrollState() {
   const progress = Math.min(1, Math.max(0, sy / maxScroll));
   progressBar.style.transform = `scaleX(${progress})`;
   header.classList.toggle("is-scrolled", sy > 18);
-  if (reducedMotion.matches) return;
+  // Keep the progress bar on phones, but do not spend each scroll frame
+  // updating decorative parallax transforms. Clear any desktop leftovers
+  // once when the viewport crosses into the mobile breakpoint.
+  const isMobile = window.innerWidth <= 800;
+  if (isMobile && !mobileParallaxDisabled) {
+    for (const layer of motionLayers) {
+      layer.element.style.removeProperty(layer.variable);
+      layer.lastValue = undefined;
+    }
+  }
+  mobileParallaxDisabled = isMobile;
+  if (reducedMotion.matches || isMobile) return;
   const vh = window.innerHeight;
-  const strength = window.innerWidth <= 800 ? .55 : 1;
+  const strength = 1;
   for (const layer of motionLayers) {
     const top = layer.top - sy;
     if (top + layer.height < -60 || top > vh + 60) continue;
