@@ -1,0 +1,235 @@
+/* SSA101 / VÀNG BẠC — DEMO EXPERIENCE V7
+   Product evidence navigation + readable per-day agenda, progressive enhancement. */
+#demo-video, #vb-calendar-switcher, #demo { scroll-margin-top: 100px; }
+.demo-heading { align-items: end; margin-bottom: clamp(23px, 3vw, 36px); }
+.demo-heading p { max-width: 360px; font-size: 14px; line-height: 1.78; color: #50636b; }
+.vb-demo-rail {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 11px;
+  margin: 0 0 clamp(28px, 3.7vw, 47px);
+  font-family: var(--display);
+}
+.vb-demo-rail a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  min-height: 162px;
+  padding: 19px 50px 18px 20px;
+  background: #f9f7f0;
+  border: 1px solid #b5c2c1;
+  box-shadow: 4px 5px 0 rgba(18,37,53,.07);
+  text-decoration: none;
+  transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+}
+.vb-demo-rail a:first-child {
+  background: #162e3c;
+  border-color: #162e3c;
+  color: #fffaf1;
+  box-shadow: 5px 6px 0 #e86746;
+}
+.vb-rail-number { font: 800 10px/1.4 var(--display); letter-spacing: .11em; color: #bd5139; }
+.vb-demo-rail a:first-child .vb-rail-number { color: #ff9c7d; }
+.vb-demo-rail strong {
+  margin-top: 20px;
+  display: block;
+  font: 800 clamp(17px, 2vw, 22px)/1.25 var(--display);
+  letter-spacing: -.04em;
+}
+.vb-rail-description { display: block; margin-top: 7px; font: 500 12px/1.6 var(--display); color: #546770; }
+.vb-demo-rail a:first-child .vb-rail-description { color: #c4d6db; }
+.vb-rail-arrow {
+  position: absolute; right: 17px; top: 17px;
+  color: #d75d42; font-size: 25px; line-height: 1;
+  transition: transform 240ms ease;
+}
+.vb-demo-rail a:first-child .vb-rail-arrow { color: #ff9879; }
+.vb-demo-rail a:focus-visible { outline: 3px solid #e76044; outline-offset: 4px; }
+.vb-demo-rail a:hover { border-color: #e36a4e; }
+.vb-demo-rail a:hover .vb-rail-arrow { transform: translate3d(3px, -3px, 0); }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .vb-demo-rail a:hover { transform: translateY(-3px); box-shadow: 5px 8px 0 rgba(18,37,53,.12); }
+  .vb-demo-rail a:first-child:hover { box-shadow: 6px 9px 0 #e86746; }
+}
+.demo .evidence-video {
+  margin-top: 0;
+  padding: clamp(25px, 3.4vw, 38px);
+  border: 1px solid #aebcb9;
+  background: linear-gradient(125deg, #f9f8f3, #e3eae8);
+  box-shadow: 7px 9px 0 rgba(18,37,53,.1);
+}
+.demo .evidence-video-copy { align-self: center; }
+.demo .evidence-video-copy .demo-case-index {
+  background: #f3dbd0; padding: 7px 10px; border: 1px solid #e9bbac;
+}
+.vb-calendar-switcher { margin-top: clamp(40px, 5vw, 65px); }
+.vb-switch-heading { padding: 4px 0 12px; }
+.vb-switch-tabs { width: 100%; gap: 8px; }
+.vb-switch-tabs button {
+  flex: 1 1 210px;
+  text-align: left;
+  padding: 15px 17px;
+  border-bottom: 3px solid #b9c4c2;
+  background: #f8f7f0;
+}
+.vb-switch-tabs button[aria-selected="true"] { border-bottom-color: #f47f5c; }
+.vb-switch-footer {
+  position: relative;
+  background: #e8ece7;
+  border: 1px solid #c4cfca;
+  padding: 12px 10px;
+}
+.vb-switch-arrow { min-width: 45px; min-height: 43px; }
+.vb-day-explorer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  margin: 11px 0 16px;
+  padding: 17px 18px;
+  background: #1a3443;
+  border: 1px solid #2e4b59;
+  color: #f9f7ed;
+  font-family: var(--display);
+}
+.vb-day-explorer-title { display:block; margin-bottom: 6px; font: 800 10px/1.4 var(--display); letter-spacing: .13em; color: #ffa081; }
+.vb-day-explorer-info { margin: 0; font: 800 clamp(17px,2.4vw,24px)/1.32 var(--display); letter-spacing: -.035em; }
+.vb-day-explorer-count { display: block; margin-top: 5px; font: 600 12px/1.5 var(--display); color: #c4d2d8; }
+.vb-day-explorer-arrows { display: flex; gap: 6px; }
+.vb-day-explorer-arrows button {
+  display: grid; place-items: center;
+  width: 43px; height: 43px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #7e9aa4;
+  font: 800 23px/1 var(--display);
+  transition: background-color 170ms ease;
+}
+.vb-day-explorer-arrows button:disabled { opacity: .3; cursor: not-allowed; }
+.vb-day-explorer-arrows button:hover:not(:disabled) { background: #335767; }
+.vb-day-explorer-arrows button:focus-visible { outline: 3px solid #ff9173; outline-offset: 3px; }
+.vb-calendar-mode {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 13px;
+  font-family: var(--display);
+}
+.vb-calendar-mode-label {
+  font: 800 10px/1.5 var(--display); letter-spacing: .09em;
+  color: #425762;
+}
+.vb-calendar-mode-actions { display: inline-flex; border: 1px solid #8caaa9; background: #fbfaf5; }
+.vb-calendar-mode-actions button {
+  min-height: 39px;
+  padding: 9px 14px;
+  border: 0;
+  border-right: 1px solid #b8c6c1;
+  background: transparent;
+  color: #294653;
+  font: 800 11px/1.4 var(--display);
+}
+.vb-calendar-mode-actions button:last-child { border-right: 0; }
+.vb-calendar-mode-actions button[aria-pressed="true"] { background: #1b3948; color: #fff; }
+.vb-calendar-mode-actions button:focus-visible { position: relative; outline: 3px solid #e86d52; outline-offset: 3px; z-index: 1; }
+.vb-agenda-list {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  background: #edf0e9;
+  border: 1px solid #aebfbb;
+}
+.vb-agenda-list[hidden], .vb-week-calendar .vb-calendar-scroll[hidden] { display: none !important; }
+.vb-agenda-event {
+  --agenda-accent: #a3afb1;
+  display: grid;
+  grid-template-columns: minmax(114px, .32fr) minmax(0, 1fr);
+  gap: 13px;
+  align-items: center;
+  min-height: 70px;
+  padding: 13px 16px;
+  background: #fffdfa;
+  border: 1px solid #cad4cd;
+  border-left: 4px solid var(--agenda-accent);
+}
+.vb-agenda-event.cat-school { --agenda-accent: #e77a5b; }
+.vb-agenda-event.cat-self { --agenda-accent: #67acc6; }
+.vb-agenda-event.cat-assign { --agenda-accent: #8b92cd; }
+.vb-agenda-event.cat-hobby { --agenda-accent: #ad80c3; }
+.vb-agenda-event.cat-sport { --agenda-accent: #6daf88; }
+.vb-agenda-event.cat-rest { --agenda-accent: #adb3a4; }
+.vb-agenda-event.cat-audit { --agenda-accent: #e0a946; }
+.vb-agenda-time { font: 800 12px/1.5 var(--display); color: #405863; }
+.vb-agenda-activity { font: 700 clamp(13px,1.6vw,15px)/1.5 var(--display); color: #172e3a; overflow-wrap: anywhere; }
+.vb-agenda-milestone {
+  display: grid;
+  grid-template-columns: minmax(114px, .32fr) minmax(0,1fr);
+  align-items: center;
+  gap: 13px;
+  padding: 13px 16px;
+  background: #f5e4be;
+  border: 1px solid #deb872;
+  border-left: 4px solid #d79b2d;
+  font: 750 13px/1.5 var(--display);
+  color: #533b19;
+}
+.vb-agenda-milestone span:first-child { font-size: 11px; letter-spacing: .06em; }
+.vb-cal-context {
+  margin: 14px 1px 0;
+  font: 500 12px/1.65 var(--display);
+  color: #536973;
+}
+.vb-cal-context strong { font-weight: 800; color: #a84934; }
+@media (max-width: 850px) {
+  .vb-demo-rail { gap: 9px; }
+  .vb-demo-rail a { padding: 17px 32px 16px 15px; min-height: 160px; }
+  .demo .evidence-video { padding: 21px; }
+}
+@media (max-width: 720px) {
+  .vb-demo-rail { grid-template-columns: 1fr; gap: 9px; }
+  .vb-demo-rail a {
+    display: grid;
+    grid-template-columns: 34px minmax(0,1fr) 23px;
+    align-items: center;
+    column-gap: 13px;
+    min-height: 87px;
+    padding: 15px 17px;
+  }
+  .vb-rail-number { grid-column: 1; grid-row: 1 / span 2; align-self: center; }
+  .vb-demo-rail strong { grid-column: 2; grid-row: 1; margin: 0; font-size: 19px; }
+  .vb-rail-description { grid-column: 2; grid-row: 2; margin: 0; font-size: 12px; }
+  .vb-rail-arrow { position: static; grid-column: 3; grid-row: 1 / span 2; }
+  .vb-switch-tabs button { text-align: center; }
+}
+@media (max-width: 510px) {
+  #demo-video, #vb-calendar-switcher, #demo { scroll-margin-top: 83px; }
+  .demo-heading p { font-size: 14px; }
+  .vb-demo-rail { margin-bottom: 24px; }
+  .demo .evidence-video { padding: 16px; }
+  .demo .evidence-video-copy h3 { font-size: 27px; }
+  .vb-day-nav { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .vb-day-nav button { min-height: 44px; }
+  .vb-day-explorer { padding: 14px 12px; grid-template-columns: minmax(0, 1fr) auto; gap: 9px; }
+  .vb-day-explorer-info { font-size: 18px; }
+  .vb-day-explorer-count { font-size: 11px; }
+  .vb-day-explorer-arrows { gap: 4px; }
+  .vb-day-explorer-arrows button { width: 38px; height: 40px; font-size: 21px; }
+  .vb-calendar-mode { align-items: flex-start; }
+  .vb-calendar-mode-label { width: 100%; }
+  .vb-calendar-mode-actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
+  .vb-calendar-mode-actions button { min-height: 44px; font-size: 12px; }
+  .vb-agenda-list { padding: 8px; gap: 7px; }
+  .vb-agenda-event, .vb-agenda-milestone { grid-template-columns: minmax(0,1fr); gap: 4px; padding: 11px 12px; }
+  .vb-agenda-activity { font-size: 14px; }
+  .vb-agenda-time { font-size: 12px; }
+  .vb-switch-footer { gap: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vb-demo-rail a, .vb-rail-arrow, .vb-day-explorer-arrows button { transition: none; }
+}
