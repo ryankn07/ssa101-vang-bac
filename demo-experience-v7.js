@@ -19,6 +19,8 @@
         const offset = (header?.getBoundingClientRect().height || 0) + 13;
         const y = Math.max(0, slider.getBoundingClientRect().top + window.scrollY - offset);
         window.scrollTo({ top: y, left: 0, behavior: "instant" });
+        // Keyboard users should land on the selected calendar tab after the jump.
+        if (event.detail === 0) tab.focus({ preventScroll: true });
       });
     });
   });
