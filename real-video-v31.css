@@ -1,0 +1,43 @@
+/* SSA101 / V31 — real video players, no synthetic promotional cover.
+   Keep the existing section positions and text content outside the media. */
+.video-section .video-frame.vb-video-native,
+.demo .evidence-frame.vb-video-native {
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 16 / 9;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+  outline: none;
+  border: 1px solid rgba(24, 54, 65, .23);
+  border-radius: 8px;
+  background: #12202b;
+  box-shadow: 0 16px 36px rgba(17, 39, 49, .14);
+  display: block;
+}
+.video-section .video-frame.vb-video-native iframe,
+.demo .evidence-frame.vb-video-native iframe {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+  border-radius: inherit;
+  background: #12202b;
+}
+@media (max-width: 800px) {
+  .video-section .video-frame.vb-video-native,
+  .demo .evidence-frame.vb-video-native {
+    border-radius: 5px;
+    box-shadow: 0 9px 22px rgba(17, 39, 49, .11);
+  }
+}
+@media (forced-colors: active) {
+  .video-section .video-frame.vb-video-native,
+  .demo .evidence-frame.vb-video-native {
+    border: 1px solid CanvasText;
+    box-shadow: none;
+  }
+}
