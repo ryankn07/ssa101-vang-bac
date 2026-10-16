@@ -2684,3 +2684,145 @@ html.force-instant-top {scroll-behavior:auto !important;}
   html { scroll-behavior: auto; }
 }
 
+
+/* SOURCE: wide-canvas-v17.css */
+/* SSA101 / VÀNG BẠC — Wide Canvas V17.
+ * Desktop composition: increase usable width, then make the actual outer
+ * margins intentional. Mobile/tablet retain all earlier layout behavior.
+ * Pure static CSS, zero new assets, no extra JS or continuous animation.
+ */
+@media (min-width: 1440px) {
+  .wrap {
+    max-width: 1520px;
+    padding-inline: clamp(51px, 3.5vw, 68px);
+  }
+  .hero-topline { max-width: 100%; }
+  .hero-title-stack { padding-bottom: clamp(21px, 2.8vw, 38px); }
+  .hero-backprint {
+    right: -.16em;
+    top: -.032em;
+    font-size: clamp(300px, 23vw, 425px);
+    color: rgba(31, 54, 63, .036);
+    letter-spacing: -.095em;
+  }
+  .hero-bottom {
+    grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+    gap: clamp(45px, 3.6vw, 70px);
+  }
+  .hero-art {
+    margin-right: -17px;
+    min-width: 0;
+  }
+  /* Spread the components, but cap text measure to prevent long lines. */
+  .hero-intro p { max-width: 440px; }
+  .section-title-row p { max-width: 380px; }
+  .roadmap .session-description p { max-width: 640px; }
+  .demo .demo-heading p { max-width: 380px; }
+  .footer-main { gap: clamp(35px, 5vw, 86px); }
+}
+
+/* Site-wide margin furniture. It is deliberately outside the reading columns.
+   The rails never capture pointer input and are excluded from assistive tech. */
+.vb-edge-rails { display: none; }
+@media (min-width: 1680px) {
+  .vb-edge-rails {
+    position: fixed;
+    display: block;
+    inset: 86px 0 0;
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+    isolation: isolate;
+  }
+  .vb-edge-rails::before,
+  .vb-edge-rails::after {
+    content: "";
+    position: absolute;
+    top: 5%;
+    bottom: 4%;
+    width: max(60px, calc((100vw - 1520px) / 2 - 14px));
+    background:
+      linear-gradient(to right, rgba(30, 63, 76, .12) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(30, 63, 76, .095) 1px, transparent 1px);
+    background-size: 39px 39px;
+    opacity: .48;
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 11%, #000 84%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 11%, #000 84%, transparent);
+  }
+  .vb-edge-rails::before {
+    left: 0;
+    -webkit-mask-image: linear-gradient(to right, #000 0%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 0%, transparent 100%);
+  }
+  .vb-edge-rails::after {
+    right: 0;
+    -webkit-mask-image: linear-gradient(to left, #000 0%, transparent 100%);
+    mask-image: linear-gradient(to left, #000 0%, transparent 100%);
+  }
+  .vb-edge-rail {
+    position: absolute;
+    top: 8.5%;
+    bottom: 7.5%;
+    width: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    color: #748990;
+    font: 800 9px/1.35 var(--display);
+    letter-spacing: .15em;
+    opacity: .72;
+  }
+  .vb-edge-rail--left { left: clamp(12px, 2vw, 35px); }
+  .vb-edge-rail--right { right: clamp(12px, 2vw, 35px); }
+  .vb-edge-rail::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    flex: 0 0 5px;
+    background: #e06d4e;
+    border-radius: 50%;
+  }
+  .vb-edge-rail::after {
+    content: "";
+    width: 1px;
+    min-height: 50px;
+    flex: 1;
+    background: linear-gradient(to bottom, #b2bec0, rgba(178, 190, 192, 0));
+    opacity: .55;
+  }
+  .vb-edge-rail span {
+    display: block;
+    writing-mode: vertical-rl;
+    white-space: nowrap;
+  }
+  .vb-edge-rail--left span { transform: rotate(180deg); }
+  .vb-edge-rail small {
+    color: #cc684b;
+    font: 800 9px/1 var(--display);
+    letter-spacing: .1em;
+  }
+}
+
+/* Wide but not ultrawide displays get an editorial section guide, not rails.
+   The guide sits inside normal padding, never over live content. */
+@media (min-width: 1440px) {
+  .about::before {
+    left: clamp(51px, 3.5vw, 68px);
+    right: clamp(51px, 3.5vw, 68px);
+  }
+  .about .section-title-row,
+  .roadmap .section-title-row,
+  .demo .demo-heading {
+    column-gap: clamp(40px, 5vw, 95px);
+  }
+}
+
+/* Hard stop for side furniture when the viewport shrinks or users zoom in. */
+@media (max-width: 1679px) {
+  .vb-edge-rails { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vb-edge-rails, .vb-edge-rails * { animation: none !important; transition: none !important; }
+}
+
