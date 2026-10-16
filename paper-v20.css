@@ -1,0 +1,84 @@
+/* SSA101 / VÀNG BẠC — V20 / Planning paper chapter.
+ * Completes the open space of section 02 without moving cards or text.
+ * Pure CSS: restrained grid, giant outlined section number, soft warm ink.
+ */
+
+/* Our about section remains the same centred editorial wrap. Decorative layers
+ * paint behind actual children and cannot intercept pointer or keyboard input. */
+.about {
+  isolation: isolate;
+  background-image:
+    radial-gradient(ellipse 43% 39% at 98% 24%, rgba(72, 109, 112, .078), transparent 79%),
+    radial-gradient(ellipse 37% 30% at 0% 91%, rgba(233, 117, 83, .072), transparent 84%),
+    linear-gradient(to right,
+      rgba(241, 238, 230, .98) 2%,
+      rgba(241, 238, 230, .88) 45%,
+      rgba(241, 238, 230, .16) 100%),
+    linear-gradient(rgba(42, 79, 89, .062) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(42, 79, 89, .062) 1px, transparent 1px);
+  background-size: auto, auto, auto, 74px 74px, 74px 74px;
+  background-position: center, center, center, 0 0, 0 0;
+}
+
+/* Existing .about::before is the horizontal separator; preserve it.
+ * Use the free ::after slot for an editorial outlined chapter numeral. */
+.about::after {
+  content: "02";
+  position: absolute;
+  top: clamp(45px, 5.4vw, 96px);
+  right: clamp(-75px, -3.7vw, -22px);
+  z-index: 0;
+  color: transparent;
+  -webkit-text-stroke: 1.3px rgba(69, 101, 109, .23);
+  font: 900 clamp(200px, 21vw, 350px)/1 var(--display);
+  letter-spacing: -.115em;
+  opacity: .65;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.about > .section-tag,
+.about > .section-title-row,
+.about > .problem-grid {
+  position: relative;
+  z-index: 1;
+}
+/* Crisp front card surfaces: ambient texture stays behind the problem cards. */
+.about .problem-grid .problem { isolation: isolate; }
+
+/* On large desktops, fill a little more of the outer empty right margin. */
+@media (min-width: 1680px) {
+  .about::after {
+    right: -82px;
+    top: 65px;
+    font-size: clamp(330px, 19.6vw, 394px);
+    opacity: .68;
+  }
+}
+/* Medium screens keep the chapter marker but protect explanatory copy. */
+@media (min-width: 801px) and (max-width: 1250px) {
+  .about::after {
+    top: 42px;
+    right: -18px;
+    font-size: clamp(160px, 19vw, 240px);
+    opacity: .36;
+  }
+  .about {
+    background-size: auto, auto, auto, 88px 88px, 88px 88px;
+  }
+}
+
+/* Do not crowd the smaller single-column reading layout. */
+@media (max-width: 800px) {
+  .about::after { display: none; }
+  .about {
+    background-image:
+      radial-gradient(ellipse 59% 31% at 100% 9%, rgba(83, 128, 131, .049), transparent 81%),
+      radial-gradient(ellipse 45% 26% at 0% 96%, rgba(226, 112, 81, .041), transparent 89%);
+  }
+}
+
+/* Nothing in the background needs animation, even if other page motion is on. */
+@media (prefers-reduced-motion: reduce) {
+  .about::after { animation: none !important; transition: none !important; }
+}
