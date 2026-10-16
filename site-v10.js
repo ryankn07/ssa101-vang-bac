@@ -328,6 +328,8 @@ document.querySelectorAll('[data-scroll-top]').forEach(link => {
     event.preventDefault();
     document.documentElement.classList.add('force-instant-top');
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    // Keep keyboard position in sync with the visual jump to the header.
+    document.querySelector('.site-header .brand')?.focus({ preventScroll: true });
     requestAnimationFrame(() => document.documentElement.classList.remove('force-instant-top'));
   });
 });
@@ -475,10 +477,15 @@ document.querySelectorAll('[data-scroll-top]').forEach(link => {
   tabs.forEach((t,i)=>{
     t.addEventListener("click",()=>go(i));
     t.addEventListener("keydown",event=>{
-      if(event.key!=="ArrowRight"&&event.key!=="ArrowLeft")return;
+      let nextIndex;
+      if(event.key==="ArrowRight")nextIndex=(i+1)%panels.length;
+      else if(event.key==="ArrowLeft")nextIndex=(i+panels.length-1)%panels.length;
+      else if(event.key==="Home")nextIndex=0;
+      else if(event.key==="End")nextIndex=panels.length-1;
+      else return;
       event.preventDefault();
-      const nextIndex=(i+(event.key==="ArrowRight"?1:-1)+panels.length)%panels.length;
-      go(nextIndex);tabs[nextIndex].focus();
+      go(nextIndex);
+      tabs[nextIndex].focus();
     });
   });
   if(prev)prev.addEventListener("click",()=>go(active-1));
@@ -528,7 +535,16 @@ document.querySelectorAll('[data-scroll-top]').forEach(link => {
 
   button.addEventListener("click", () => setOpen(!isOpen));
   panel.addEventListener("click", event => {
-    if (event.target.closest('a[href^="#"]')) setOpen(false);
+    const link = event.target.closest('a[href^="#"]');
+    if (!link || !panel.contains(link)) return;
+    const destination = document.getElementById(link.getAttribute("href").slice(1));
+    setOpen(false);
+    // Anchor navigation scrolls by default; after it completes, put keyboard
+    // focus at that destination instead of leaving it in the hidden menu.
+    if (destination) requestAnimationFrame(() => {
+      if (!destination.hasAttribute("tabindex")) destination.setAttribute("tabindex", "-1");
+      destination.focus({ preventScroll: true });
+    });
   });
   document.addEventListener("pointerdown", event => {
     if (isOpen && !header.contains(event.target)) setOpen(false);
@@ -736,6 +752,7 @@ document.querySelectorAll('[data-scroll-top]').forEach(link => {
     // Controls remain above the iframe, even when the third-party player fails.
     const actions = document.createElement("div");
     actions.className = "vb-video-utility";
+    actions.setAttribute("role", "group");
     actions.hidden = true;
     actions.setAttribute("aria-label", "Tùy chọn trình phát video");
     const drive = document.createElement("a");
@@ -779,6 +796,14 @@ document.querySelectorAll('[data-scroll-top]').forEach(link => {
     }
     start.addEventListener("click", play);
     close.addEventListener("click", stop);
+    // Esc closes the loaded player whenever focus remains on its controls.
+    shell.addEventListener("keydown", event => {
+      if (event.key === "Escape" && frame) {
+        event.preventDefault();
+        event.stopPropagation();
+        stop();
+      }
+    });
   });
 
   const compare = document.querySelector(".vb-calendar-slide .demo-stage");
