@@ -1,0 +1,29 @@
+/* V24 — Desktop visual audit corrections, editorial geometry preserved. */
+@media(min-width:1101px){
+.hero-backprint{
+  color:rgba(31,54,63,.057);
+  right:-.10em;
+  letter-spacing:-.08em;
+}
+.hero::before{opacity:.31;background-size:126px 100%}
+.site-header{
+  border-bottom:1px solid #98aaa9;
+  box-shadow:0 1px 0 rgba(255,255,255,.55);
+}
+.hero-art::before{
+  background:
+  linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px),
+  radial-gradient(circle at 68% 42%,rgba(244,124,90,.20),transparent 62%);
+  background-size:44px 44px,44px 44px,100% 100%;
+}
+.hero-art .art-top-note{
+  outline:1px solid rgba(250,246,236,.30);
+  outline-offset:3px;
+}
+}
+@media(min-width:1680px){
+.hero-backprint{color:rgba(31,54,63,.05)}
+}
+@media(max-width:1100px){.hero-backprint{opacity:.72}}
+@media(prefers-reduced-motion:reduce){.hero-backprint{animation:none!important}}
