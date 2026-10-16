@@ -83,6 +83,21 @@
       tabs[nextIndex].focus();
     });
   });
+  // The viewport is keyboard-focusable; make its Left/Right and Home/End
+  // behavior match the tab list, without intercepting keys in child controls.
+  viewport.setAttribute("aria-label", "Hai lịch: vuốt ngang, dùng phím mũi tên hoặc chọn tab để chuyển");
+  viewport.addEventListener("keydown", event => {
+    if (event.target !== viewport) return;
+    let index = active;
+    if (event.key === "ArrowRight") index = Math.min(active + 1, panels.length - 1);
+    else if (event.key === "ArrowLeft") index = Math.max(active - 1, 0);
+    else if (event.key === "Home") index = 0;
+    else if (event.key === "End") index = panels.length - 1;
+    else return;
+    event.preventDefault();
+    go(index);
+    tabs[index].focus({ preventScroll: true });
+  });
   if(prev)prev.addEventListener("click",()=>go(active-1));
   if(next)next.addEventListener("click",()=>go(active+1));
   viewport.addEventListener("scroll",()=>{
