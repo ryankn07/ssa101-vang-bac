@@ -389,17 +389,17 @@ document.querySelectorAll('[data-scroll-top]').forEach(link => {
   }
   wrapper.append(grid);host.replaceChildren(wrapper);
   const buttons=document.querySelectorAll("[data-vb-day]");
-  function showDay(d){
+  function showDay(d, userInitiated = true){
     if(!Number.isInteger(d)||d<0||d>6)return;
     grid.querySelectorAll("[data-day]").forEach(el=>el.classList.toggle("vb-day-active",Number(el.dataset.day)===d));
     buttons.forEach(b=>b.setAttribute("aria-pressed",String(Number(b.dataset.vbDay)===d)));
-    if(!window.matchMedia("(max-width:640px)").matches){
+    if(userInitiated && !window.matchMedia("(max-width:640px)").matches){
       const header=grid.querySelector('.vb-calendar-dayhead[data-day="'+d+'"]');
-      if(header)wrapper.scrollTo({left:Math.max(0,header.offsetLeft-52),behavior:"smooth"});
+      if(header)wrapper.scrollTo({left:Math.max(0,header.offsetLeft-52),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
     }
   }
   buttons.forEach(b=>b.addEventListener("click",()=>showDay(Number(b.dataset.vbDay))));
-  showDay(0);
+  showDay(0, false);
 })();
 
 ;/* SOURCE: calendar-switch.js */
@@ -488,6 +488,21 @@ document.querySelectorAll('[data-scroll-top]').forEach(link => {
       tabs[nextIndex].focus();
     });
   });
+  // The viewport is keyboard-focusable; make its Left/Right and Home/End
+  // behavior match the tab list, without intercepting keys in child controls.
+  viewport.setAttribute("aria-label", "Hai lịch: vuốt ngang, dùng phím mũi tên hoặc chọn tab để chuyển");
+  viewport.addEventListener("keydown", event => {
+    if (event.target !== viewport) return;
+    let index = active;
+    if (event.key === "ArrowRight") index = Math.min(active + 1, panels.length - 1);
+    else if (event.key === "ArrowLeft") index = Math.max(active - 1, 0);
+    else if (event.key === "Home") index = 0;
+    else if (event.key === "End") index = panels.length - 1;
+    else return;
+    event.preventDefault();
+    go(index);
+    tabs[index].focus({ preventScroll: true });
+  });
   if(prev)prev.addEventListener("click",()=>go(active-1));
   if(next)next.addEventListener("click",()=>go(active+1));
   viewport.addEventListener("scroll",()=>{
@@ -552,6 +567,11 @@ document.querySelectorAll('[data-scroll-top]').forEach(link => {
   document.addEventListener("keydown", event => {
     if (event.key === "Escape" && isOpen) setOpen(false, true);
   });
+  // Closing the expanded menu after keyboard focus leaves its header prevents
+  // an invisible-but-open menu from lingering while tabbing through the page.
+  document.addEventListener("focusin", event => {
+    if (isOpen && !header.contains(event.target)) setOpen(false);
+  });
 
   const desktop = window.matchMedia("(min-width: 801px)");
   const handleBreakpoint = () => { if (desktop.matches && isOpen) setOpen(false); };
@@ -606,6 +626,8 @@ document.querySelectorAll('[data-scroll-top]').forEach(link => {
         const offset = (header?.getBoundingClientRect().height || 0) + 13;
         const y = Math.max(0, slider.getBoundingClientRect().top + window.scrollY - offset);
         window.scrollTo({ top: y, left: 0, behavior: "instant" });
+        // Keyboard users should land on the selected calendar tab after the jump.
+        if (event.detail === 0) tab.focus({ preventScroll: true });
       });
     });
   });
