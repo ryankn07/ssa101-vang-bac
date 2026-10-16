@@ -325,6 +325,8 @@ document.querySelectorAll('[data-scroll-top]').forEach(link => {
     event.preventDefault();
     document.documentElement.classList.add('force-instant-top');
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    // Keep keyboard position in sync with the visual jump to the header.
+    document.querySelector('.site-header .brand')?.focus({ preventScroll: true });
     requestAnimationFrame(() => document.documentElement.classList.remove('force-instant-top'));
   });
 });
