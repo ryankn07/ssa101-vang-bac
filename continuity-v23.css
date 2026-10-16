@@ -1,0 +1,22 @@
+/* V23 — continuity & accessibility of the unified full-page canvas. */
+@media(min-width:801px){
+.hero{border-bottom:1px solid rgba(54,84,89,.12)}
+.about,.roadmap{border-bottom:1px solid rgba(54,84,89,.09)}
+.video-section,.register{border-bottom:1px solid rgba(54,84,89,.11)}
+.roadmap .session-list{isolation:isolate}
+.roadmap .session-row{position:relative;z-index:1}
+.demo .vb-demo-rail,.demo .vb-calendar-switcher{position:relative;z-index:1}
+}
+@media(min-width:1680px){
+.about,.roadmap,.video-section,.register{background-repeat:no-repeat}
+.vb-edge-rails{pointer-events:none}
+.vb-edge-rail{opacity:.54}
+}
+@media(max-width:800px){
+.hero,.about,.roadmap,.video-section,.register{border-bottom:0}
+.vb-edge-rails{display:none!important}
+}
+@media(forced-colors:active){
+.vb-edge-rails,.vb-time-dial,.about::after,.demo::before,.faq::before,
+.roadmap .session-list::before,.roadmap .session-row::before{display:none!important}
+}
