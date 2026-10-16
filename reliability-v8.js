@@ -13,6 +13,7 @@
     // Controls remain above the iframe, even when the third-party player fails.
     const actions = document.createElement("div");
     actions.className = "vb-video-utility";
+    actions.setAttribute("role", "group");
     actions.hidden = true;
     actions.setAttribute("aria-label", "Tùy chọn trình phát video");
     const drive = document.createElement("a");
@@ -56,6 +57,14 @@
     }
     start.addEventListener("click", play);
     close.addEventListener("click", stop);
+    // Esc closes the loaded player whenever focus remains on its controls.
+    shell.addEventListener("keydown", event => {
+      if (event.key === "Escape" && frame) {
+        event.preventDefault();
+        event.stopPropagation();
+        stop();
+      }
+    });
   });
 
   const compare = document.querySelector(".vb-calendar-slide .demo-stage");
