@@ -3019,3 +3019,123 @@ html.force-instant-top {scroll-behavior:auto !important;}
   }
 }
 
+
+/* SOURCE: finish-v19.css */
+/* SSA101 / VÀNG BẠC — V19: background density and visual continuity.
+ * Balance the decorative systems from V17/V18 without changing the layout.
+ * Static CSS only; no script, images, fonts or long-running effects.
+ */
+
+/* Paper chapters: extremely restrained warm/cool gradients at the edges,
+ * not repeated decoration behind body text. */
+@media (min-width: 801px) {
+  .about {
+    background-image:
+      radial-gradient(ellipse 25% 34% at 100% 4%, rgba(91, 121, 119, .062), transparent 83%);
+  }
+  .roadmap {
+    background-image:
+      radial-gradient(ellipse 26% 19% at 0% 9%, rgba(222, 111, 79, .052), transparent 85%),
+      radial-gradient(ellipse 27% 23% at 100% 86%, rgba(102, 135, 131, .048), transparent 87%);
+  }
+  .video-section {
+    background-image:
+      radial-gradient(ellipse 23% 40% at 100% 65%, rgba(222, 111, 79, .048), transparent 83%);
+  }
+  .register {
+    background-image:
+      radial-gradient(ellipse 24% 45% at 0% 75%, rgba(95, 128, 138, .065), transparent 82%);
+  }
+}
+
+/* Dark time chapter: a soft matte edge with reduced dial contrast. */
+.outcomes {
+  border-top: 1px solid rgba(223, 236, 233, .08);
+  border-bottom: 1px solid rgba(223, 236, 233, .08);
+}
+.outcomes::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+    rgba(240, 249, 243, .029) 0%, transparent 17%,
+    transparent 82%, rgba(5, 19, 31, .085) 100%);
+}
+@media (min-width: 801px) {
+  .vb-time-dial {
+    opacity: .58;
+    border-color: rgba(226, 238, 237, .11);
+  }
+  .vb-time-dial::before {
+    background: rgba(240, 126, 89, .39);
+  }
+  .vb-time-dial::after {
+    background: rgba(219, 232, 230, .28);
+  }
+}
+
+/* Roadmap: connected timeline is navigation decoration, not another card.
+ * Make the rail quieter while keeping session 03 as the strong focal point. */
+@media (min-width: 601px) {
+  .roadmap .session-list::before { opacity: .76; }
+  .roadmap .session-row:not(.featured)::before {
+    border-color: #9aa9a4;
+    background: #f1eee6;
+  }
+}
+
+/* Demo blueprint: less ink on a long, content-heavy evidence section.
+ * Background remains layered behind the demo-wrap and all controls. */
+.demo::before {
+  opacity: .36;
+  background-size: 70px 70px;
+}
+@media (min-width: 1440px) {
+  .demo::before {
+    opacity: .40;
+    background-size: 76px 76px;
+    -webkit-mask-image: linear-gradient(to right,
+      #000 0%, rgba(0,0,0,.46) 9%, transparent 26%,
+      transparent 74%, rgba(0,0,0,.46) 91%, #000 100%);
+    mask-image: linear-gradient(to right,
+      #000 0%, rgba(0,0,0,.46) 9%, transparent 26%,
+      transparent 74%, rgba(0,0,0,.46) 91%, #000 100%);
+  }
+  .demo::after { color: rgba(37, 70, 78, .23); }
+}
+
+/* Ultra-wide margins: keep the V17 furniture but avoid a dense wallpaper
+ * competing with V18's blueprint and time dial. */
+@media (min-width: 1680px) {
+  .vb-edge-rails::before,
+  .vb-edge-rails::after {
+    background-size: 46px 46px;
+    opacity: .34;
+  }
+  .vb-edge-rail { opacity: .61; }
+}
+@media (min-width: 1850px) {
+  .vb-edge-rails::before,
+  .vb-edge-rails::after { opacity: .27; }
+  .vb-edge-rail { opacity: .56; }
+  .vb-time-dial { opacity: .52; }
+  .demo::before { opacity: .35; }
+}
+
+/* On smaller touch layouts, the content remains primary and the existing
+ * 360–768px layout grids are untouched. */
+@media (max-width: 800px) {
+  .demo::before { opacity: .20; }
+}
+@media (max-width: 600px) {
+  .demo::before { opacity: .15; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vb-time-dial, .demo::before, .outcomes::before {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
