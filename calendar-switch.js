@@ -72,10 +72,15 @@
   tabs.forEach((t,i)=>{
     t.addEventListener("click",()=>go(i));
     t.addEventListener("keydown",event=>{
-      if(event.key!=="ArrowRight"&&event.key!=="ArrowLeft")return;
+      let nextIndex;
+      if(event.key==="ArrowRight")nextIndex=(i+1)%panels.length;
+      else if(event.key==="ArrowLeft")nextIndex=(i+panels.length-1)%panels.length;
+      else if(event.key==="Home")nextIndex=0;
+      else if(event.key==="End")nextIndex=panels.length-1;
+      else return;
       event.preventDefault();
-      const nextIndex=(i+(event.key==="ArrowRight"?1:-1)+panels.length)%panels.length;
-      go(nextIndex);tabs[nextIndex].focus();
+      go(nextIndex);
+      tabs[nextIndex].focus();
     });
   });
   if(prev)prev.addEventListener("click",()=>go(active-1));
