@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>SSA101 · Planning Paper QA V23</title>
+  <style>
+    :root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color-scheme:dark}
+    body{background:#102532;color:#eff4f1;margin:0;padding:clamp(16px,4vw,36px)}
+    main{max-width:1060px;margin:auto}
+    h1{font-size:clamp(22px,3.5vw,40px);margin:5px 0 9px}
+    p{line-height:1.55;color:#c8d6dc}
+    .eyebrow{color:#ff9777;font-weight:750;font-size:11px;letter-spacing:.18em}
+    button{min-height:43px;padding:11px 18px;background:#ee7656;border:0;color:#172e3a;font:800 13px system-ui;cursor:pointer}
+    button:disabled{opacity:.5;cursor:wait}
+    .status{padding:10px 12px;border-left:3px solid #ed7457;background:#183a4a;margin:17px 0}
+    .table-scroll{overflow-x:auto}
+    table{width:100%;border-collapse:collapse;background:#173544;font-size:13px}
+    th,td{text-align:left;padding:12px;border-bottom:1px solid #42606c}
+    th{color:#adc4d0;font-size:11px;letter-spacing:.06em}
+    tr.fail{background:#61372c}
+    tr.pass{background:#16453b}
+    .panel{margin-top:22px;border:1px solid #617985;padding:15px;background:#1c3947}
+    .frame-viewport{width:100%;overflow-x:auto;max-height:540px;border:1px solid #54717d;background:#d9dad5}
+    iframe{display:block;border:0;background:#f1eee6;height:790px}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:460px;overflow:auto;color:#c6dadd;font-size:11px}
+    small{color:#a0b9c4}
+  </style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">VÀNG BẠC / SSA101 / AUTOMATED RESPONSIVE QA</div>
+  <h1>V23 · Planning Paper & Responsive</h1>
+  <p>Kiểm thử website Production từ 360px đến 1920px. Ngoài chức năng, V16 kiểm tra tên truy cập, cấu trúc ngữ nghĩa, điều hướng bằng bàn phím và bảo mật liên kết. Đây là các kiểm tra tự động giới hạn, không thay thế kiểm thử thủ công hay Lighthouse.</p>
+  <button id="run" type="button">CHẠY LẠI KIỂM THỬ</button>
+  <div class="status" id="status" role="status" aria-live="polite">Đang khởi tạo…</div>
+  <div class="table-scroll">
+    <table aria-label="Kết quả kiểm thử responsive">
+      <thead><tr><th>Viewport</th><th>Đạt</th><th>Trượt</th><th>Chi tiết</th></tr></thead>
+      <tbody id="qa-rows"></tbody>
+    </table>
+  </div>
+  <section class="panel">
+    <strong>Khung xem được kiểm thử</strong>
+    <p><small>Mỗi lần đổi kích thước, website thật sẽ được tải mới để đánh giá đúng điều kiện media query.</small></p>
+    <div class="frame-viewport" id="frame-host"></div>
+  </section>
+  <section class="panel">
+    <strong>Máy đọc kết quả (JSON)</strong>
+    <pre id="qa-json" aria-label="Chi tiết kiểm thử">Chưa có kết quả.</pre>
+  </section>
+</main>
+<script>
+(() => {
+  "use strict";
+  const sizes = [360,390,430,768,1360,1680,1850,1920];
+  const status = document.getElementById("status");
+  const rows = document.getElementById("qa-rows");
+  const output = document.getElementById("qa-json");
+  const host = document.getElementById("frame-host");
+  const button = document.getElementById("run");
+  let running = false;
+
+  function pause(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
+  function isVisible(w, element) {
+    if (!element || element.hidden) return false;
+    const s = w.getComputedStyle(element);
+    return s.display !== "none" && s.visibility !== "hidden" && element.getBoundingClientRect().width > 0;
+  }
+  function hasText(el,text) { return !!el && el.textContent.includes(text); }
+  function runTest(doc,win,width) {
+    const checks = {};
+    function check(k,result,details="") { checks[k] = { pass: !!result, detail: details }; }
+    check("viewportWidth", win.innerWidth === width, "window.innerWidth=" + win.innerWidth);
+    const html = doc.documentElement;
+    const scrollWidth = html.scrollWidth;
+    const overflow = [...doc.querySelectorAll("body *")].filter(el => {
+      const r = el.getBoundingClientRect();
+      const s = win.getComputedStyle(el);
+      return (s.position !== "fixed") && r.width>0 && (r.right > width + 2 || r.left < -2) && s.display !== "none";
+    }).filter(el => !el.closest(".vb-calendar-scroll,.demo-case-image,.vb-slide-viewport")).slice(0,6).map(el=>el.tagName.toLowerCase()+"."+(el.className||"").toString().split(" ").slice(0,2).join("."));
+    check("noDocumentOverflow",scrollWidth <= width + 1,"scrollWidth="+scrollWidth+"; suspects="+overflow.join(", "));
+    const canvas = doc.querySelector(".hero-inner.wrap");
+    const rect = canvas?.getBoundingClientRect();
+    if (width >= 1440) {
+      check("wideContainerWidth", !!rect && rect.width >= Math.min(width, 1520) - 2,
+        "hero inner width=" + (rect?.width || 0));
+    }
+    const rails = doc.querySelector(".vb-edge-rails");
+    check("edgeRailsBreakpoint", !!rails && (width >= 1680 ? isVisible(win,rails) : !isVisible(win,rails)));
+    if (width >= 1680) {
+      const left = doc.querySelector(".vb-edge-rail--left");
+      const right = doc.querySelector(".vb-edge-rail--right");
+      check("railLabelsVisible",isVisible(win,left) && isVisible(win,right));
+      check("railLabelsWithinMargins",
+        !!rect && !!left && !!right &&
+        left.getBoundingClientRect().right < rect.left + 1 &&
+        right.getBoundingClientRect().left > rect.right - 1,
+        "canvas left="+(rect?.left||0)+", right="+(rect?.right||0));
+    }
+    // V18 decorative layers are static, noninteractive, hidden on small phones
+    // where they would compete with the reading column.
+    const dial=doc.querySelector(".vb-time-dial");
+    const outcomes=doc.querySelector(".outcomes");
+    check("timeDialAccessibleAndScoped", !!dial &&
+      dial.getAttribute("aria-hidden")==="true" &&
+      !!outcomes && outcomes.contains(dial));
+    check("timeDialResponsive",!!dial &&
+      (width<=600 ? !isVisible(win,dial) : isVisible(win,dial)));
+    const list=doc.querySelector(".roadmap .session-list");
+    const row=doc.querySelector(".roadmap .session-row");
+    const line=list?win.getComputedStyle(list,"::before"):null;
+    const marker=row?win.getComputedStyle(row,"::before"):null;
+    check("timelineResponsive", !!list && !!row && !!line && !!marker &&
+      (width<=600 ? line.display==="none" && marker.display==="none" :
+        line.display!=="none" && marker.display!=="none"));
+    const demo=doc.getElementById("demo");
+    const blueprint=demo?win.getComputedStyle(demo,"::before"):null;
+    const demoWrap=doc.querySelector(".demo .demo-wrap");
+    check("demoBlueprintBehindContent",
+      !!blueprint && blueprint.backgroundImage.includes("linear-gradient") &&
+      blueprint.pointerEvents==="none" && !!demoWrap &&
+      win.getComputedStyle(demoWrap).zIndex==="1");
+    // V19 verifies quieter background density on desktop without disturbing
+    // the previous V18 clock, timeline, blueprint and functional assertions.
+    const dialOpacity = dial ? Number(win.getComputedStyle(dial).opacity) : NaN;
+    if (width > 800) {
+      check("v21DialDensity",
+        dialOpacity >= .4 && dialOpacity <= .7,
+        "opacity=" + dialOpacity);
+    }
+    const demoDensity = blueprint ? Number(blueprint.opacity) : NaN;
+    const expectedDemoDensity = width <= 600 ? .13 : width <= 800 ? .21 : .39;
+    check("v21BlueprintDensity",
+      demoDensity >= .09 && demoDensity <= .42,
+      "opacity=" + demoDensity + "; expected=" + expectedDemoDensity);
+    if (width >= 1680) {
+      const railDensity = Number(win.getComputedStyle(rails,"::before").opacity);
+      const expectedRail = width >= 1850 ? .32 : .36;
+      check("v21RailDensity",
+        railDensity >= .2 && railDensity <= .4,
+        "opacity=" + railDensity + "; expected=" + expectedRail);
+    }
+    const editorialBackground = doc.querySelector(".roadmap");
+    if (width > 800) {
+      check("v19EditorialContinuity",
+        !!editorialBackground &&
+        win.getComputedStyle(editorialBackground).backgroundImage.includes("radial-gradient"));
+    }
+    // V20 checks visual layering and responsive composition of About/Chapter 02.
+    const about = doc.getElementById("about");
+    const aboutStyle = about ? win.getComputedStyle(about) : null;
+    const chapter02 = about ? win.getComputedStyle(about, "::after") : null;
+    const issueCards = [...(about?.querySelectorAll(".problem-grid > .problem") || [])];
+    const issues = about?.querySelector(".problem-grid");
+    check("v20Chapter02Responsive", !!chapter02 &&
+      (width <= 800 ? chapter02.display === "none" :
+        chapter02.content.includes("02") && chapter02.display !== "none" &&
+        chapter02.position === "absolute"),
+      "chapter display=" + chapter02?.display + "; content=" + chapter02?.content);
+    check("v20PlanningPaperGrid", !!aboutStyle &&
+      aboutStyle.backgroundImage.includes("radial-gradient") &&
+      (width <= 800 ? !aboutStyle.backgroundImage.includes("linear-gradient") :
+        aboutStyle.backgroundImage.includes("linear-gradient")),
+      "background=" + (aboutStyle?.backgroundImage || "").slice(0,145));
+    check("v20IssueCardsUnchanged", issueCards.length === 3 &&
+      !!issues && win.getComputedStyle(issues).position === "relative" &&
+      win.getComputedStyle(issues).zIndex === "1" &&
+      issueCards.every(card => isVisible(win,card)));
+    // V23: unified atmosphere on all chapters, checked on actual computed styles.
+    const chapters=[".hero",".about",".outcomes",".roadmap",".demo",".video-section",".faq",".register",".site-footer"];
+    check("v21EverySectionHasAtmosphere",chapters.every(sel=>{
+      const el=doc.querySelector(sel);
+      return el && win.getComputedStyle(el).backgroundImage !== "none";
+    }));
+    check("v21FAQBlueprint",!!doc.querySelector(".faq") &&
+      win.getComputedStyle(doc.querySelector(".faq"),"::before").backgroundImage.includes("linear-gradient"));
+    const mobile = width <= 800;
+    const toggle = doc.querySelector(".mobile-nav-toggle");
+    const panel = doc.getElementById("mobile-navigation");
+    const desktop = doc.querySelector(".desktop-nav");
+    check("responsiveNav",mobile ? isVisible(win,toggle)&&!isVisible(win,desktop):isVisible(win,desktop)&&!isVisible(win,toggle));
+    if(mobile && toggle && panel){
+      toggle.click();
+      check("mobileMenuOpen",toggle.getAttribute("aria-expanded")==="true"&&!panel.hidden);
+      doc.dispatchEvent(new win.KeyboardEvent("keydown",{key:"Escape",bubbles:true}));
+      check("mobileMenuClose",toggle.getAttribute("aria-expanded")==="false"&&panel.hidden);
+    }
+    const title = doc.getElementById("hero-title");
+    check("heroExists",!!title && hasText(title,"TIME"));
+    const month = doc.querySelector('.toggle-button[data-view="month"]');
+    const week = doc.querySelector('.toggle-button[data-view="week"]');
+    month?.click();
+    // Data rendering occurs 215ms after an animated exit; caller waits before checking.
+    return {checks,month,week,doc,win};
+  }
+  async function testWidth(width,frame) {
+    const doc=frame.contentDocument,win=frame.contentWindow;
+    const data=runTest(doc,win,width);
+    const checks=data.checks;
+    function check(k,result,detail=""){checks[k]={pass:!!result,detail};}
+    // V16 semantic and security assertions run against fully rendered production DOM.
+    check("pageLangVietnamese", doc.documentElement.lang === "vi");
+    check("oneMainLandmark", doc.querySelectorAll("main").length === 1);
+    const skip = doc.querySelector(".skip-link");
+    check("skipLinkFocusTarget", skip?.getAttribute("href") === "#main" && doc.querySelector("#main")?.getAttribute("tabindex") === "-1");
+    const imgs = [...doc.querySelectorAll("img")];
+    check("allImagesHaveAlt", imgs.length > 0 && imgs.every(el => el.hasAttribute("alt")));
+    const nodes = [...doc.querySelectorAll("[id]")].map(el => el.id);
+    check("noDuplicateIds", new Set(nodes).size === nodes.length);
+    const links = [...doc.querySelectorAll('a[target="_blank"]')];
+    check("externalWindowSecurity", links.length > 0 && links.every(el => el.rel.split(/\s+/).includes("noopener")));
+    const controls = [...doc.querySelectorAll("button")];
+    check("buttonsHaveNames", controls.length >= 14 && controls.every(el =>
+      Boolean((el.getAttribute("aria-label") || el.textContent || "").trim())
+    ));
+    const namedGroups = [".hero-art",".hero-method",".roadmap-path",
+      ".vb-day-nav",".vb-slide-viewport",".evidence-metrics",".evidence-process",
+      ".demo-stage",".vb-switch-footer"].map(sel => doc.querySelector(sel));
+    check("namedSemanticGroups", namedGroups.every(el =>
+      !!el && ["group","region"].includes(el.getAttribute("role")) && !!el.getAttribute("aria-label")
+    ));
+    check("sliderTabsNamed", [...doc.querySelectorAll('[role="tab"]')].length === 2 &&
+      [...doc.querySelectorAll('[role="tab"]')].every(el =>
+        Boolean(doc.getElementById(el.getAttribute("aria-controls")))
+      ));
+    await pause(340);
+    check("monthSwitch",!!doc.querySelector("#calendar-content .month-calendar"));
+    data.week?.click();
+    await pause(340);
+    check("weekSwitch",!!doc.querySelector("#calendar-content .weekly-calendar"));
+
+    const day=doc.querySelector('[data-vb-day="1"]');
+    day?.click();
+    check("selectDay",hasText(doc.getElementById("vb-day-current"),"13/10/2026"));
+    const list=doc.querySelector('[data-vb-cal-mode="list"]');
+    const grid=doc.querySelector('[data-vb-cal-mode="grid"]');
+    list?.click();
+    const agenda=doc.getElementById("vb-calendar-agenda");
+    const timeline=doc.getElementById("vb-calendar-scroll");
+    check("listMode",!!agenda && !agenda.hidden && !!timeline && timeline.hidden && agenda.children.length>0);
+    grid?.click();
+    check("gridMode",!!agenda && agenda.hidden && !!timeline && !timeline.hidden);
+
+    doc.querySelector('[data-vb-slide="1"]')?.click();
+    await pause(95);
+    check("switchMember",hasText(doc.getElementById("vb-switch-counter"),"THÀNH VIÊN 02"));
+    const compare=doc.querySelector(".vb-compare-controls");
+    const after=doc.querySelector('[data-compare-select="1"]');
+    const before=doc.querySelector('[data-compare-select="0"]');
+    if(width<=720) {
+      check("comparisonControls",isVisible(win,compare)&&isVisible(win,after));
+      after?.click();
+      const afterCard=doc.querySelector('.vb-compare-case[data-compare-index="1"]');
+      const beforeCard=doc.querySelector('.vb-compare-case[data-compare-index="0"]');
+      check("afterCardShows",isVisible(win,afterCard)&&!isVisible(win,beforeCard));
+      before?.click();
+      check("beforeCardShows",isVisible(win,beforeCard)&&!isVisible(win,afterCard));
+    } else {
+      check("comparisonDesktop",!isVisible(win,compare)&&
+        isVisible(win,doc.querySelector('.vb-compare-case[data-compare-index="0"]'))&&
+        isVisible(win,doc.querySelector('.vb-compare-case[data-compare-index="1"]')));
+    }
+    const shell=doc.querySelector("#demo-video .vb-video-shell");
+    const start=shell?.querySelector(".vb-video-start");
+    const stop=shell?.querySelector(".vb-video-close");
+    const fallback=shell?.querySelector(".vb-video-utility-link");
+    start?.click();
+    check("videoStart",!!shell && shell.classList.contains("vb-video-active"));
+    check("videoFallback",isVisible(win,fallback)&&isVisible(win,stop));
+    check("videoControlsNamed",shell?.querySelector(".vb-video-utility")?.getAttribute("role") === "group");
+    stop?.dispatchEvent(new win.KeyboardEvent("keydown", { key: "Escape", bubbles: true, cancelable: true }));
+    check("escapeClosesVideo",!!shell&&!shell.classList.contains("vb-video-active")&&isVisible(win,start));
+    start?.click();
+    stop?.click();
+    check("videoClose",!!shell&&!shell.classList.contains("vb-video-active")&&isVisible(win,start));
+
+    const faq=doc.querySelector("#faq details");
+    if(faq) { faq.open=true;check("faq",faq.open);}
+    const targets=[...doc.querySelectorAll('a[href^="#"]')].map(a=>a.getAttribute("href").slice(1));
+    check("anchorTargets",targets.every(id=>doc.getElementById(id)));
+    // Home/End follow the ARIA tabs pattern (with both tab panels present).
+    const firstTab = doc.getElementById("vb-tab-personal");
+    const lastTab = doc.getElementById("vb-tab-member");
+    lastTab?.dispatchEvent(new win.KeyboardEvent("keydown", { key: "Home", bubbles: true, cancelable: true }));
+    check("tabHomeKey",firstTab?.getAttribute("aria-selected") === "true" && doc.activeElement === firstTab);
+    firstTab?.dispatchEvent(new win.KeyboardEvent("keydown", { key: "End", bubbles: true, cancelable: true }));
+    check("tabEndKey",lastTab?.getAttribute("aria-selected") === "true" && doc.activeElement === lastTab);
+    if (width <= 800) {
+      const menuToggle = doc.querySelector(".mobile-nav-toggle");
+      menuToggle?.click();
+      const destination = doc.getElementById("roadmap");
+      doc.querySelector('#mobile-navigation a[href="#roadmap"]')?.click();
+      await pause(90);
+      check("mobileLinkFocusDestination", doc.activeElement === destination && !!destination?.hasAttribute("tabindex"));
+    }
+    doc.querySelector(".footer-back-top")?.click();
+    check("backToTopFocus",doc.activeElement === doc.querySelector(".site-header .brand"));
+    const failed=Object.entries(checks).filter(([,v])=>!v.pass).map(([key,v])=>key+(v.detail?" ("+v.detail+")":""));
+    return {width,passed:Object.values(checks).filter(x=>x.pass).length,failed:failed.length,failedChecks:failed,checks};
+  }
+  async function loadFrame(width) {
+    host.replaceChildren();
+    const frame=document.createElement("iframe");
+    frame.width=width;
+    frame.height=790;
+    frame.setAttribute("title","Website SSA101 ở độ rộng "+width+"px");
+    frame.style.width=width+"px";
+    frame.style.maxWidth="none";
+    host.append(frame);
+    await new Promise((resolve,reject)=>{
+      const timer=setTimeout(()=>reject(new Error("iframe timeout "+width)),21000);
+      frame.onload=()=>{clearTimeout(timer);resolve();};
+      frame.onerror=()=>{clearTimeout(timer);reject(new Error("iframe load error "+width));};
+      frame.src="/?v23qa="+width+"-"+Date.now();
+    });
+    if(!frame.contentDocument || !frame.contentDocument.getElementById("hero-title")) throw new Error("Trang nguồn chưa tải xong");
+    return frame;
+  }
+  async function start() {
+    if(running) return;
+    running=true;
+    button.disabled=true;
+    rows.replaceChildren();
+    const results=[];
+    output.textContent="Đang chạy…";
+    for(const width of sizes){
+      status.textContent="Đang kiểm thử "+width+"px…";
+      let result;
+      try {
+        const frame=await loadFrame(width);
+        result=await testWidth(width,frame);
+      } catch(error) {
+        result={width,passed:0,failed:1,failedChecks:["loadError: "+String(error)],checks:{}};
+      }
+      results.push(result);
+      const tr=document.createElement("tr");
+      tr.className=result.failed ? "fail" : "pass";
+      [width+"px",String(result.passed),String(result.failed),result.failedChecks.length?result.failedChecks.join("; "):"Tất cả đạt"].forEach(value=>{
+        const td=document.createElement("td");td.textContent=value;tr.append(td);
+      });
+      rows.append(tr);
+      output.textContent=JSON.stringify({status:"RUNNING",results},null,2);
+    }
+    const fails=results.reduce((sum,r)=>sum+r.failed,0);
+    const total=results.reduce((sum,r)=>sum+r.failed+r.passed,0);
+    status.textContent=(fails ? "ĐÃ HOÀN THÀNH · CÓ LỖI" : "HOÀN THÀNH · TẤT CẢ ĐẠT")+" · "+(total-fails)+"/"+total+" kiểm tra; "+fails+" lỗi.";
+    output.textContent=JSON.stringify({status:"DONE",failures:fails,total,results},null,2);
+    button.disabled=false;running=false;
+  }
+  button.addEventListener("click",start);
+  start();
+})();
+</script>
+</body>
+</html>
