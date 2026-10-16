@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><title>SSA101 · V25 Performance Audit</title>
+<style>body{font:14px/1.65 system-ui;background:#112b39;color:#f4f3ec;margin:0;padding:22px}main{max-width:960px;margin:auto}h1{font-size:30px}button{padding:12px 18px;background:#ed7857;color:#102b37;border:0;font-weight:700;cursor:pointer}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#1b3b4a;padding:16px}iframe{display:block;border:0;width:100%;height:900px;background:#f1eee6}small{color:#bdd0d4}</style></head><body><main><h1>V25 / Performance & CSS Audit</h1><p>Đo số liệu trình duyệt trên website Production. Số liệu được lấy từ Navigation/Resource Timing API của iframe cùng nguồn, không phải điểm Lighthouse hay Core Web Vitals thực địa.</p><button id="run">Đo lại</button><p id="status">Đang khởi động…</p><pre id="metrics-json"></pre><iframe id="frame" src="/?perf-audit=v25" title="Trang SSA101 để đo hiệu năng"></iframe><small>Chỉ đo các tài nguyên trình duyệt cung cấp. Không gửi biểu mẫu hoặc dữ liệu ra ngoài.</small></main><script>
+const frame=document.getElementById("frame"),out=document.getElementById("metrics-json"),status=document.getElementById("status");
+function round(n){return Number.isFinite(n)?Math.round(n*10)/10:null}
+function measure(){
+ try{
+  const w=frame.contentWindow,p=w.performance,nav=p.getEntriesByType("navigation")[0],all=p.getEntriesByType("resource");
+  const assets=all.map(x=>({type:x.initiatorType,name:x.name.split("/").pop().split("?")[0],duration_ms:round(x.duration),transfer_bytes:x.transferSize||0,encoded_bytes:x.encodedBodySize||0})).sort((a,b)=>b.duration_ms-a.duration_ms);
+  const groups={};for(const x of all){const k=x.initiatorType||"other";if(!groups[k])groups[k]={count:0,transfer_bytes:0};groups[k].count++;groups[k].transfer_bytes+=x.transferSize||0}
+  const result={status:"DONE",date:new Date().toISOString(),viewport:w.innerWidth,nav:{response_start_ms:round(nav?.responseStart),dom_content_loaded_ms:round(nav?.domContentLoadedEventEnd),load_event_ms:round(nav?.loadEventEnd),document_transfer_bytes:nav?.transferSize??null},resource_count:all.length,resource_transferred_bytes:all.reduce((a,x)=>a+(x.transferSize||0),0),groups,slowest_resources:assets.slice(0,12),stylesheets:[...w.document.styleSheets].map(x=>x.href?.split("/").pop()||"inline"),scripts:[...w.document.scripts].filter(x=>x.src).map(x=>x.src.split("/").pop()),image_count:w.document.images.length,pending_images:[...w.document.images].filter(x=>!x.complete).length};
+  out.textContent=JSON.stringify(result,null,2);status.textContent="HOÀN THÀNH · Đã thu thập số liệu";return result;
+ }catch(e){status.textContent="Không đo được: "+e.message;return null}
+}
+frame.addEventListener("load",()=>{status.textContent="Đang đọc số liệu…";measure()});
+document.getElementById("run").addEventListener("click",()=>{status.textContent="Đang tải lại…";frame.src="/?perf-audit=v25&t="+Date.now()});
+</script></body></html>
