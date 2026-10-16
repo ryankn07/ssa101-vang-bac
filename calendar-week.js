@@ -51,15 +51,15 @@
   }
   wrapper.append(grid);host.replaceChildren(wrapper);
   const buttons=document.querySelectorAll("[data-vb-day]");
-  function showDay(d){
+  function showDay(d, userInitiated = true){
     if(!Number.isInteger(d)||d<0||d>6)return;
     grid.querySelectorAll("[data-day]").forEach(el=>el.classList.toggle("vb-day-active",Number(el.dataset.day)===d));
     buttons.forEach(b=>b.setAttribute("aria-pressed",String(Number(b.dataset.vbDay)===d)));
-    if(!window.matchMedia("(max-width:640px)").matches){
+    if(userInitiated && !window.matchMedia("(max-width:640px)").matches){
       const header=grid.querySelector('.vb-calendar-dayhead[data-day="'+d+'"]');
-      if(header)wrapper.scrollTo({left:Math.max(0,header.offsetLeft-52),behavior:"smooth"});
+      if(header)wrapper.scrollTo({left:Math.max(0,header.offsetLeft-52),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth"});
     }
   }
   buttons.forEach(b=>b.addEventListener("click",()=>showDay(Number(b.dataset.vbDay))));
-  showDay(0);
+  showDay(0, false);
 })();
