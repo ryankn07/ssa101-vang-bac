@@ -1,0 +1,173 @@
+/* SSA101 / VÀNG BẠC — Finishing V15
+ * Consistent editorial rhythm, text readability and feedback.
+ * Applied after V14. No layout rebuild, new fonts or JavaScript.
+ */
+:root {
+  --vb-text: #344c57;
+  --vb-muted: #526873;
+  --vb-hairline: #b6c4c0;
+  --vb-timing: 200ms;
+}
+
+/* Clear targets under the existing 70–85px sticky navigation. */
+#about, #roadmap, #demo, #faq, #register,
+#demo-video, #vb-calendar-switcher, #video-title,
+#footer {
+  scroll-margin-top: 102px;
+}
+
+/* One consistent headline system. Avoid changing layout widths or grid columns. */
+.about .section-title-row h2,
+.roadmap .section-title-row h2,
+.demo .section-title-row h2,
+.video-section .video-layout h2 {
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -.05em;
+  text-wrap: balance;
+}
+.outcomes-title h2, .faq-lead h2, .register h2 {
+  line-height: 1.11;
+  text-wrap: balance;
+}
+.vb-footer-intro h2,
+.vb-evidence-end h3 {
+  text-wrap: balance;
+}
+
+/* Breathe between labels, explanations and their associated content. */
+.about .section-title-row,
+.roadmap .section-title-row,
+.demo .section-title-row {
+  row-gap: 22px;
+}
+.about .section-tag,
+.roadmap .section-tag,
+.demo .section-tag,
+.video-section .section-tag,
+.register .section-tag {
+  line-height: 1.55;
+}
+.about .section-title-row p,
+.roadmap .section-title-row p,
+.demo .section-title-row p,
+.video-section .video-layout p {
+  color: var(--vb-text);
+  line-height: 1.76;
+  text-wrap: pretty;
+}
+.problem p, .outcome p, .session-description p,
+.vb-execution-grid p, .evidence-process p,
+.demo-case-copy p, .faq-questions p,
+.register-content p, .footer-identity p, .footer-join p {
+  text-wrap: pretty;
+}
+
+/* Typography at medium breakpoints must not shrink to microcopy. */
+.roadmap .session-description p { line-height: 1.75; }
+.demo .vb-rail-description { line-height: 1.65; }
+.demo .vb-case-label h3 { line-height: 1.31; }
+.demo .vb-execution h4 { line-height: 1.35; }
+.demo .vb-execution-grid p { line-height: 1.72; }
+.vb-evidence-end p { line-height: 1.74; }
+.faq-questions summary {
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+.faq-questions details p { line-height: 1.74; }
+
+/* Focus states: consistent, clearly perceivable and keyboard-only. */
+.vb-demo-rail a:focus-visible,
+.roadmap-proof-link:focus-visible,
+.vb-evidence-next:focus-visible,
+.site-footer a:focus-visible,
+.registration-link:focus-visible,
+.nav-cta:focus-visible {
+  outline: 3px solid #e76d4c;
+  outline-offset: 4px;
+}
+.vb-video-shell button:focus-visible,
+.vb-compare-controls button:focus-visible,
+.vb-calendar-mode-actions button:focus-visible {
+  outline-offset: 3px;
+}
+:where(.hero-actions a, .faq-questions summary, .vb-switch-tabs button):focus-visible {
+  outline: 3px solid #ea7454;
+  outline-offset: 4px;
+}
+
+/* Interactive motion communicates state, but never becomes perpetual animation. */
+:where(.vb-demo-rail a, .roadmap-proof-link, .vb-evidence-next,
+       .registration-link, .footer-cta, .nav-cta, .hero-demo-link) {
+  transition-duration: var(--vb-timing);
+}
+
+/* Consistent sectional cadence on compact screens, without swapping grids. */
+@media (max-width: 800px) {
+  #about.section-pad, #roadmap.section-pad,
+  .video-section.section-pad, #register.section-pad {
+    padding-block: clamp(66px, 9vw, 82px);
+  }
+  .demo .demo-wrap { padding-block: clamp(68px, 9vw, 88px); }
+  .faq .faq-inner { padding-block: clamp(66px, 9vw, 88px); }
+  .outcomes .outcomes-inner { padding-block: clamp(68px, 9vw, 91px); }
+
+  .about .section-title-row,
+  .roadmap .section-title-row,
+  .demo .section-title-row {
+    row-gap: 17px;
+  }
+  .about .section-title-row p,
+  .roadmap .section-title-row p,
+  .demo .section-title-row p,
+  .video-section .video-layout p {
+    line-height: 1.72;
+  }
+  #about, #roadmap, #demo, #faq, #register,
+  #demo-video, #vb-calendar-switcher, #video-title, #footer {
+    scroll-margin-top: 86px;
+  }
+}
+
+@media (max-width: 510px) {
+  /* Match the existing 20px editorial margins; don't force extra columns. */
+  #about.section-pad, #roadmap.section-pad,
+  .video-section.section-pad, #register.section-pad {
+    padding-block: 64px;
+  }
+  .demo .demo-wrap { padding-block: 65px; }
+  .faq .faq-inner { padding-block: 64px; }
+  .outcomes .outcomes-inner { padding-block: 65px; }
+
+  .section-title-row { margin-bottom: 31px; }
+  .about .section-title-row,
+  .roadmap .section-title-row,
+  .demo .section-title-row { row-gap: 13px; }
+
+  .about .section-title-row p,
+  .roadmap .section-title-row p,
+  .demo .section-title-row p,
+  .video-section .video-layout p,
+  .problem p, .outcome p {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+  .roadmap .session-description p {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .vb-evidence-end p { font-size: 14px; line-height: 1.72; }
+  .faq-questions summary { font-size: 15px; line-height: 1.5; }
+  .faq-questions details p { font-size: 14px; }
+  .site-footer .footer-label { letter-spacing: .09em; }
+  .site-footer .footer-bottom small { line-height: 1.8; }
+}
+
+/* Preserve low-power and accessibility preferences. */
+@media (prefers-reduced-motion: reduce) {
+  :where(.vb-demo-rail a, .roadmap-proof-link, .vb-evidence-next,
+         .registration-link, .footer-cta, .nav-cta, .hero-demo-link) {
+    transition: none !important;
+  }
+  html { scroll-behavior: auto; }
+}
