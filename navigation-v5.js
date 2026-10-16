@@ -35,6 +35,11 @@
   document.addEventListener("keydown", event => {
     if (event.key === "Escape" && isOpen) setOpen(false, true);
   });
+  // Closing the expanded menu after keyboard focus leaves its header prevents
+  // an invisible-but-open menu from lingering while tabbing through the page.
+  document.addEventListener("focusin", event => {
+    if (isOpen && !header.contains(event.target)) setOpen(false);
+  });
 
   const desktop = window.matchMedia("(min-width: 801px)");
   const handleBreakpoint = () => { if (desktop.matches && isOpen) setOpen(false); };
