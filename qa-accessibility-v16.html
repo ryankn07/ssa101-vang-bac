@@ -115,7 +115,7 @@
     const nodes = [...doc.querySelectorAll("[id]")].map(el => el.id);
     check("noDuplicateIds", new Set(nodes).size === nodes.length);
     const links = [...doc.querySelectorAll('a[target="_blank"]')];
-    check("externalWindowSecurity", links.length > 0 && links.every(el => el.rel.split(/\\s+/).includes("noopener")));
+    check("externalWindowSecurity", links.length > 0 && links.every(el => el.rel.split(/\s+/).includes("noopener")));
     const controls = [...doc.querySelectorAll("button")];
     check("buttonsHaveNames", controls.length >= 14 && controls.every(el =>
       Boolean((el.getAttribute("aria-label") || el.textContent || "").trim())
