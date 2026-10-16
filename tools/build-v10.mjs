@@ -16,8 +16,13 @@ async function bundle(paths, dest, kind) {
     pieces.push((kind === 'JavaScript' ? '\n;/* SOURCE: ' : '\n/* SOURCE: ') + path + ' */\n' + contents);
   }
   const result = pieces.join('\n') + '\n';
-  await writeFile(join(root, dest), result, 'utf8');
-  console.log(dest + ': ' + Buffer.byteLength(result) + ' bytes from ' + paths.length + ' source files');
+  // V26: remove CSS-only comments from production; preserve source CSS files.
+  // JS keeps its exact source concatenation and remains unchanged.
+  const output = kind === 'CSS'
+    ? result.replace(/\/\*[\s\S]*?\*\//g, '').replace(/^[ \t]*\n/gm, '')
+    : result;
+  await writeFile(join(root, dest), output, 'utf8');
+  console.log(dest + ': ' + Buffer.byteLength(output) + ' bytes from ' + paths.length + ' source files');
 }
 await bundle(cssSources, 'site-v10.css', 'CSS');
 await bundle(jsSources, 'site-v10.js', 'JavaScript');
