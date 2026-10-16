@@ -18,7 +18,16 @@
 
   button.addEventListener("click", () => setOpen(!isOpen));
   panel.addEventListener("click", event => {
-    if (event.target.closest('a[href^="#"]')) setOpen(false);
+    const link = event.target.closest('a[href^="#"]');
+    if (!link || !panel.contains(link)) return;
+    const destination = document.getElementById(link.getAttribute("href").slice(1));
+    setOpen(false);
+    // Anchor navigation scrolls by default; after it completes, put keyboard
+    // focus at that destination instead of leaving it in the hidden menu.
+    if (destination) requestAnimationFrame(() => {
+      if (!destination.hasAttribute("tabindex")) destination.setAttribute("tabindex", "-1");
+      destination.focus({ preventScroll: true });
+    });
   });
   document.addEventListener("pointerdown", event => {
     if (isOpen && !header.contains(event.target)) setOpen(false);
