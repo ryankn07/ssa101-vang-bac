@@ -1,0 +1,56 @@
+/* SSA101 V22 — Unified visual finishing for the full-page canvas.
+   Decorative only, static, responsive, and deliberately behind content. */
+@media (min-width: 1440px) {
+  /* Same vertical guide coordinates across sections, not unrelated margins. */
+  .hero, .outcomes, .demo, .faq, .site-footer { background-attachment: scroll; }
+  .about, .roadmap, .video-section, .register {
+    background-origin: border-box;
+    background-clip: border-box;
+  }
+  /* Use restrained editorial corner ticks to connect chapters visually. */
+  .roadmap > .section-tag::after,
+  .video-section > .section-tag::after,
+  .register > .section-tag::after {
+    content: "";
+    display: inline-block;
+    width: clamp(22px, 3vw, 43px);
+    height: 1px;
+    background: rgba(54,89,94,.34);
+    vertical-align: middle;
+    margin-left: 8px;
+  }
+  /* More breathing room for the surrounding blueprints and labels. */
+  .demo .demo-wrap { isolation: isolate; }
+  .demo::before { opacity: .31; }
+  .faq::before { opacity: .19; }
+  .about::after { opacity: .53; }
+}
+@media (min-width: 1680px) {
+  /* Rails belong to the page, not to each chapter: low-density ink. */
+  .vb-edge-rails::before,.vb-edge-rails::after {
+    opacity: .29;
+    background-size: 56px 56px;
+  }
+  .vb-edge-rail { opacity: .57; }
+  .demo::before { opacity: .28; }
+}
+@media (min-width: 1850px) {
+  .vb-edge-rails::before,.vb-edge-rails::after { opacity: .27; }
+  .vb-edge-rail { opacity: .55; }
+  .vb-time-dial { opacity: .54; }
+  .about::after { opacity: .50; }
+}
+/* On smaller screens preserve type, tap targets and the simpler palette. */
+@media (max-width: 800px) {
+  .vb-edge-rails { display: none !important; }
+  .demo::before { opacity: .17; }
+  .faq::before { opacity: .09; }
+}
+@media (max-width: 600px) {
+  .demo::before { opacity: .11; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .roadmap > .section-tag::after,
+  .video-section > .section-tag::after,
+  .register > .section-tag::after { animation: none !important; }
+}
