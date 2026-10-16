@@ -3226,3 +3226,176 @@ html.force-instant-top {scroll-behavior:auto !important;}
   .about::after { animation: none !important; transition: none !important; }
 }
 
+
+/* SOURCE: canvas-v21.css */
+/* SSA101 / VANG BAC — Unified Canvas V21
+ * A single art direction from hero through footer: warm architectural paper,
+ * structured timelines, soft blueprint margins and connected color chapters.
+ * Pure CSS — no new assets, dependencies or JavaScript.
+ */
+:root {
+  --canvas-paper: #f1eee6;
+  --canvas-line: rgba(41,75,83,.075);
+  --canvas-coral: rgba(221,101,69,.075);
+}
+html { background: #f1eee6; }
+body {
+  background-color: var(--canvas-paper);
+  background-image:
+    radial-gradient(ellipse 65% 16% at 94% 9%, rgba(97,137,143,.085),transparent 85%),
+    radial-gradient(ellipse 55% 13% at 0% 31%, rgba(221,102,70,.065),transparent 85%),
+    radial-gradient(ellipse 55% 17% at 100% 63%, rgba(93,137,143,.070),transparent 85%),
+    radial-gradient(ellipse 62% 14% at 0% 89%, rgba(230,116,80,.055),transparent 86%),
+    linear-gradient(180deg,#f3f0e9 0%,#efede6 42%,#f1eee6 75%,#edece5 100%);
+  background-repeat:no-repeat;
+}
+main { isolation:isolate; }
+/* Shared chapter rule. A single line rhythm through all pale sections. */
+.about, .roadmap, .video-section, .register { position:relative; }
+.about .section-tag, .roadmap>.section-tag, .demo .section-tag,
+.video-section>.section-tag, .register .section-tag { letter-spacing:.14em; }
+@media (min-width: 801px) {
+  .hero {
+    background:
+      radial-gradient(ellipse 40% 55% at 95% 37%, rgba(234,126,90,.095),transparent 78%),
+      radial-gradient(ellipse 37% 33% at 0% 86%, rgba(93,136,142,.065),transparent 82%),
+      linear-gradient(180deg,rgba(244,241,233,.97),rgba(241,238,230,.90) 80%,rgba(236,237,230,.92));
+  }
+  .hero::before {opacity:.49;}
+  /* Section 02 / planning paper — extend gentle paper grid to the left and
+     right of the reading column without layering over paragraph copy. */
+  .about {
+    background-image:
+      radial-gradient(ellipse 37% 35% at 100% 15%,rgba(86,128,134,.10),transparent 82%),
+      radial-gradient(ellipse 33% 30% at 0% 91%,rgba(231,121,88,.075),transparent 83%),
+      linear-gradient(to right,rgba(242,239,232,.98) 5%,rgba(241,238,230,.67) 63%,rgba(240,240,232,.33)),
+      linear-gradient(rgba(54,89,94,.065) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(54,89,94,.065) 1px,transparent 1px);
+    background-size:auto,auto,auto,78px 78px,78px 78px;
+  }
+  /* Section 04 / roadmap: use the same warm paper as 02 with coral on the
+     opposite side, so scrolling feels continuous rather than a hard reset. */
+  .roadmap {
+    background:
+      radial-gradient(ellipse 45% 23% at 0% 12%,rgba(225,112,78,.088),transparent 84%),
+      radial-gradient(ellipse 37% 24% at 100% 86%,rgba(84,132,139,.087),transparent 86%),
+      linear-gradient(180deg,rgba(239,238,230,.85),rgba(245,241,233,.95) 52%,rgba(239,239,231,.88));
+  }
+  .video-section {
+    background:
+      radial-gradient(ellipse 44% 60% at 100% 16%,rgba(218,105,76,.085),transparent 79%),
+      radial-gradient(ellipse 30% 42% at 0% 90%,rgba(83,132,143,.065),transparent 84%),
+      linear-gradient(180deg,rgba(242,240,233,.83),rgba(235,237,231,.88));
+  }
+  .register {
+    background:
+      radial-gradient(ellipse 48% 50% at 0% 45%,rgba(102,142,147,.095),transparent 83%),
+      radial-gradient(ellipse 41% 50% at 100% 88%,rgba(232,115,84,.078),transparent 83%),
+      linear-gradient(180deg,rgba(241,239,231,.93),rgba(237,236,228,.93));
+  }
+}
+/* Consistent interface engraving at the seams of deep chapters.
+   The existing foreground content retains priority over these backgrounds. */
+.outcomes {
+  background:
+    radial-gradient(ellipse 40% 73% at 100% 32%,rgba(110,149,157,.17),transparent 80%),
+    linear-gradient(145deg,#152f3d 0%,#112736 65%,#193542 100%);
+}
+.outcomes::before {
+  background:
+    linear-gradient(180deg,rgba(237,246,240,.045),transparent 21%,transparent 78%,rgba(8,21,31,.17));
+}
+.demo {
+  background:
+    radial-gradient(ellipse 35% 33% at 0% 17%,rgba(91,136,144,.13),transparent 85%),
+    radial-gradient(ellipse 31% 38% at 100% 82%,rgba(223,111,81,.09),transparent 85%),
+    linear-gradient(180deg,#e6e8e1 0%,#e3e5df 55%,#e8e7df 100%);
+}
+.demo::before {
+  background-image:
+    linear-gradient(rgba(51,89,96,.115) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(51,89,96,.115) 1px,transparent 1px);
+  opacity:.39;
+}
+/* FAQ has its own calm navy blueprint; section labels stay legible. */
+.faq {
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse 52% 110% at 103% 18%,rgba(84,126,141,.16),transparent 77%),
+    linear-gradient(145deg,#112735,#182f3d 70%,#122836);
+}
+.faq::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(229,241,237,.065) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(229,241,237,.065) 1px,transparent 1px);
+  background-size:81px 81px;
+  opacity:.28;
+  -webkit-mask-image:linear-gradient(to right,transparent 15%,transparent 66%,#000 100%);
+  mask-image:linear-gradient(to right,transparent 15%,transparent 66%,#000 100%);
+}
+.faq .faq-inner {position:relative;z-index:1;}
+.site-footer {
+  background:
+    radial-gradient(ellipse 45% 110% at 100% 5%,rgba(77,118,137,.18),transparent 80%),
+    linear-gradient(155deg,#122d3c 0%,#102634 65%,#142d3b);
+}
+/* Change in underlying tonal temperature between sections, using unobtrusive
+   inner rules rather than adding visually heavy separators/cards. */
+@media (min-width:801px) {
+  .outcomes {border-block-color:rgba(28,60,73,.25);}
+  .demo {border-top-color:#b9cac8;border-bottom-color:#c4c9c3;}
+  .faq {border-top:1px solid rgba(19,44,57,.35);}
+  .site-footer {border-top:1px solid rgba(230,238,232,.10);}
+  .vb-time-dial {opacity:.60;}
+  .vb-edge-rail {opacity:.69;}
+}
+@media (min-width:1680px) {
+  /* The rail system finally remains part of the whole-page canvas rather
+     than looking like decorations belonging only to individual sections. */
+  .vb-edge-rails::before,.vb-edge-rails::after {opacity:.36;background-size:50px 50px;}
+  .vb-edge-rail {opacity:.64;}
+}
+@media (min-width:1850px) {
+  .vb-edge-rails::before,.vb-edge-rails::after {opacity:.32;}
+  .vb-edge-rail {opacity:.59;}
+}
+@media (max-width:800px) {
+  body {
+    background-image:linear-gradient(180deg,#f3f0e9,#f0eee7 44%,#efeee8 75%,#edece5);
+  }
+  .hero {
+    background:linear-gradient(180deg,#f4f0e9,#ecece5);
+  }
+  .about {
+    background-image:
+      radial-gradient(ellipse 54% 31% at 100% 8%,rgba(83,128,131,.06),transparent 84%),
+      radial-gradient(ellipse 48% 26% at 0% 96%,rgba(226,112,81,.053),transparent 88%);
+  }
+  .roadmap {
+    background:
+      radial-gradient(ellipse 58% 24% at 100% 18%,rgba(83,128,131,.052),transparent 85%),
+      linear-gradient(180deg,#f1efe8,#f0eee7);
+  }
+  .video-section {
+    background:linear-gradient(175deg,#f0eee7,#e9ebe6);
+  }
+  .register {background:linear-gradient(180deg,#f0eee7,#eaeae4);}
+  .demo::before {opacity:.21;}
+  .faq::before {opacity:.13;}
+  .vb-edge-rails {display:none!important;}
+}
+@media (max-width:600px) {
+  .demo::before {opacity:.13;}
+  .faq::before {opacity:.10;}
+}
+@media (prefers-reduced-motion:reduce) {
+  .faq::before {animation:none!important;transition:none!important;}
+}
+
