@@ -1,0 +1,51 @@
+/* SSA101 / V32 — careful visual finishing, preserving the V31 page architecture.
+   Desktop audit was cross-checked against source CSS; no unnecessary new cards. */
+@media (min-width: 1101px) {
+  /* Large backprint is decorative and must stay behind the actual title. */
+  .hero-backprint {
+    color: rgba(31, 54, 63, .031);
+  }
+}
+@media (min-width: 1680px) {
+  .hero-backprint {
+    color: rgba(31, 54, 63, .029);
+  }
+}
+/* Clear selection in the real weekly calendar without altering button sizes. */
+.vb-day-nav button[aria-pressed="true"] {
+  border-color: #315363;
+  box-shadow: inset 0 -3px 0 #f0815e;
+}
+.vb-day-nav button:focus-visible,
+.vb-switch-tabs button:focus-visible,
+.vb-switch-arrow:focus-visible {
+  outline: 3px solid #e86e4e;
+  outline-offset: 3px;
+}
+/* FAQ already has dividers; improve interaction cues, not card count or layout. */
+.faq .faq-questions summary {
+  transition: background-color 160ms ease, color 160ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .faq .faq-questions summary:hover {
+    background-color: rgba(255, 255, 255, .035);
+  }
+}
+/* The return-to-top action remains an editorial text link, not another CTA. */
+.site-footer .footer-back-top {
+  transition: color 160ms ease, border-color 160ms ease;
+}
+.site-footer .footer-back-top:hover {
+  color: #ffb095 !important;
+  border-bottom-color: #ffb095;
+}
+.site-footer .footer-back-top:focus-visible {
+  outline: 3px solid #ffb095;
+  outline-offset: 5px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq .faq-questions summary,
+  .site-footer .footer-back-top {
+    transition: none !important;
+  }
+}
