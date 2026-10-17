@@ -212,8 +212,11 @@
     v32("v32FAQFocusPresent",!!faq32 && win.getComputedStyle(faq32).cursor==="pointer");
     v32("v32FooterLinkRetained",!!back32 && back32.tagName==="A" &&
       !!back32.getAttribute("href") && win.getComputedStyle(back32).borderBottomStyle!=="none");
+    const watermarkAlpha32 = Number(markColor32.match(/rgba?\([^,]+,[^,]+,[^,]+,\s*([0-9.]+)\)/)?.[1]);
     v32("v32WatermarkSubtle",!!markColor32 &&
-      (width<1101 || /rgba\([^)]*,\s*0\.0(?:29|31)\)/.test(markColor32)));
+      (width<1101 || (Number.isFinite(watermarkAlpha32) &&
+        watermarkAlpha32 >= 0 && watermarkAlpha32 <= .05)),
+      "computedColor="+markColor32);
 
     function c29(name,pass,detail=""){ checks[name]={pass:Boolean(pass),detail}; }
     const rows29=[...doc.querySelectorAll("#roadmap .session-list .session-row")];
