@@ -3387,3 +3387,45 @@ main { isolation:isolate; }
     transition: none !important;
   }
 }
+.demo .vb-evidence-note {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  margin: 5px 0 18px;
+  padding: 11px 15px;
+  border-left: 3px solid #d96848;
+  background: rgba(255, 255, 255, .47);
+  color: #435c65;
+  font: 500 13px/1.65 var(--sans);
+  letter-spacing: normal;
+  max-width: 920px;
+}
+.demo .vb-evidence-note strong {
+  flex: 0 0 auto;
+  color: #a94230;
+  font: 850 10px/1.6 var(--display);
+  letter-spacing: .11em;
+}
+.demo .vb-evidence-note span {
+  flex: 1 1 340px;
+  min-width: 0;
+}
+.demo .vb-execution-head .vb-evidence-note-review {
+  margin: 13px 0 4px;
+  background: rgba(56, 120, 98, .055);
+  border-left-color: #408871;
+}
+.demo .vb-execution-head .vb-evidence-note-review strong { color: #2c6a58; }
+@media (max-width: 640px) {
+  .demo .vb-evidence-note {
+    display: block;
+    padding: 11px 12px;
+    font-size: 12px;
+    line-height: 1.65;
+  }
+  .demo .vb-evidence-note strong {
+    display: block;
+    margin-bottom: 3px;
+  }
+}
