@@ -97,7 +97,10 @@
   border-radius:9px;
   background:#f7f7f1;
   color:#6b797b;
-  font:500 11px/1.55 var(--display);
+  font:400 12px/1.55 var(--sans);
+}
+.vb-calendar-slide:first-child > .vb-evidence-note span{
+  font:400 12px/1.5 var(--sans);
 }
 .vb-calendar-slide:first-child > .vb-evidence-note strong{
   flex:0 0 auto;
@@ -608,7 +611,7 @@
 .vb-cal-context{
   margin:12px 2px 0;
   color:#84908e;
-  font:500 9px/1.6 var(--display);
+  font:400 10px/1.65 var(--sans);
 }
 .vb-cal-context strong{color:#b9553b;font-weight:850}
 
