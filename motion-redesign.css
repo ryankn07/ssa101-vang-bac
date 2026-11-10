@@ -1,0 +1,40 @@
+
+/* MOTION REDESIGN — progressive enhancement, no layout/content changes */
+:root{--motion-ease:cubic-bezier(.2,.75,.25,1);--motion-duration:850ms}
+html{scroll-behavior:smooth}
+::selection{background:#f05b3c;color:#fff}
+.site-header{transition:background .35s ease,box-shadow .35s ease,backdrop-filter .35s ease}
+.site-header.is-scrolled{background:rgba(241,238,230,.92);backdrop-filter:blur(18px);box-shadow:0 10px 35px rgba(18,37,53,.08)}
+.hero-inner{perspective:1100px}
+.hero-title-stack{transform-style:preserve-3d;animation:vbHeroIn 1.15s var(--motion-ease) both}
+.hero-art{animation:vbFloat 8s ease-in-out infinite}
+.planner-paper{transition:transform .6s var(--motion-ease),box-shadow .6s var(--motion-ease);box-shadow:0 24px 60px rgba(18,37,53,.12)}
+.planner-paper:hover{transform:translate3d(0,-8px,0) rotate(-1deg);box-shadow:0 34px 80px rgba(18,37,53,.18)}
+.hero-ticker{overflow:hidden}
+.hero-ticker>*{animation:vbTickerFloat 5s ease-in-out infinite}
+.hero-ticker>*:nth-child(2){animation-delay:.4s}.hero-ticker>*:nth-child(3){animation-delay:.8s}.hero-ticker>*:nth-child(4){animation-delay:1.2s}
+.problem,.outcome,.session-row,.vb-demo-rail>a,.evidence-video,.vb-calendar-slide,.vb50-ebook-copy,.vb50-book-wrap,.vb50-podcast-copy,.vb50-audio,.vb50-episodes li,.video-layout,.faq-questions details,.register-card{transition:transform .55s var(--motion-ease),box-shadow .55s var(--motion-ease),border-color .35s ease}
+.problem:hover,.outcome:hover,.vb-demo-rail>a:hover{transform:translateY(-7px)}
+.session-row{position:relative;isolation:isolate}
+.session-row::before{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--orange);transform:scaleY(0);transform-origin:bottom;transition:transform .45s var(--motion-ease);z-index:-1}
+.session-row:hover::before{transform:scaleY(1)}
+.session-row:hover{transform:translateX(7px)}
+.roadmap-path-item{transition:transform .45s var(--motion-ease)}
+.roadmap-path-item:hover{transform:translateY(-5px)}
+.vb50-book{transition:transform .7s var(--motion-ease),filter .7s var(--motion-ease);transform-style:preserve-3d}
+.vb50-book:hover{transform:perspective(900px) rotateY(-12deg) rotateX(3deg) translateY(-8px);filter:drop-shadow(22px 24px 16px rgba(9,40,59,.18))}
+.vb50-audio:hover,.vb50-episodes li:hover{transform:translateX(6px)}
+.registration-link,.nav-cta,.hero-demo-link,.vb50-read,.vb50-download,.footer-cta{transition:transform .3s var(--motion-ease),box-shadow .3s ease}
+.registration-link:hover,.nav-cta:hover,.hero-demo-link:hover,.vb50-read:hover,.vb50-download:hover,.footer-cta:hover{transform:translateY(-3px)}
+.vb-motion-ready [data-reveal]{opacity:0;transform:translate3d(0,30px,0);transition:opacity .8s var(--motion-ease),transform .8s var(--motion-ease);transition-delay:var(--reveal-delay,0ms)}
+.vb-motion-ready [data-reveal].is-visible{opacity:1;transform:none}
+.vb-motion-ready [data-reveal="left"]{transform:translate3d(-34px,0,0)}
+.vb-motion-ready [data-reveal="right"]{transform:translate3d(34px,0,0)}
+.vb-motion-ready [data-reveal="scale"]{transform:scale(.94)}
+.vb-motion-ready [data-reveal].is-visible{transform:none}
+.vb-cursor-glow{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:0;transition:opacity .4s ease;background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),rgba(240,91,60,.075),transparent 70%)}
+@keyframes vbHeroIn{from{opacity:0;transform:translateY(32px) rotateX(4deg)}to{opacity:1;transform:translateY(0) rotateX(0)}}
+@keyframes vbFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes vbTickerFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media (hover:hover) and (pointer:fine){.vb-cursor-glow{opacity:1}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.vb-motion-ready [data-reveal]{opacity:1;transform:none}}
