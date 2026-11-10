@@ -66,3 +66,17 @@
   z-index:1;
   color:#f07150;
 }
+
+
+/* v53 — lift the PDF button above the dark podcast shape */
+.vb50-library .vb50-download::before{
+  filter:
+    drop-shadow(7px 8px 0 #ef6b4f)
+    drop-shadow(0 10px 13px rgba(5,28,42,.28));
+}
+.vb50-library .vb50-download{
+  transform:translate(-2px,-3px);
+}
+.vb50-library .vb50-download:hover{
+  transform:translate(-2px,-6px);
+}
