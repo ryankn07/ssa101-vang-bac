@@ -3438,7 +3438,7 @@ main { isolation:isolate; }
 .library-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:36px;margin:27px 0 34px}
 .library-heading-main{min-width:0}
 .library-kicker{display:block;color:#a94834;font:850 9px/1.5 var(--display);letter-spacing:.17em}
-.library-heading h2{margin:13px 0 0;color:var(--ink);font:900 clamp(38px,5.7vw,74px)/.96 var(--display);letter-spacing:-.075em}
+.library-heading h2{margin:13px 0 0;color:var(--ink);font:900 clamp(38px,5.7vw,74px)/1.2 var(--display);letter-spacing:-.075em}
 .library-heading h2 em{color:var(--orange-dark);font-style:normal}
 .library-heading-aside{max-width:330px;padding:0 0 4px 22px;border-left:1px solid #b9beb8}
 .library-aside-index{display:flex;align-items:center;gap:9px;color:#a94834;font:850 9px/1.5 var(--display);letter-spacing:.12em;white-space:nowrap}
