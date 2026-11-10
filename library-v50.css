@@ -33,3 +33,36 @@
 .vb50-library .vb50-download{color:#102e40}
 @media(max-width:900px){.vb50-canvas>.vb50-book-wrap{width:230px;height:360px}.vb50-podcast-copy p{max-width:none}.vb50-library .vb50-read,.vb50-library .vb50-folder,.vb50-library .vb50-audio,.vb50-library .vb50-episodes a{color:#fff7ef}.vb50-canvas>.vb50-ebook-actions{display:flex;width:100%}.vb50-ebook-actions a{font-size:13px}.vb50-canvas>.vb50-podcast-copy{width:100%}.vb50-canvas>.vb50-episodes{width:100%}.vb50-canvas>.vb50-audio{width:100%}.vb50-canvas>.vb50-folder{width:100%}}
 @media(max-width:480px){.vb50-canvas>.vb50-book-wrap{width:225px;height:350px}.vb50-book{inset:0}.vb50-ebook-actions a{flex:1;min-width:0;max-width:50%}.vb50-audio-foot{font-size:7px}.vb50-head h2{font-size:clamp(39px,10vw,50px)}}
+
+
+/* v52 — draw the PDF button border along the clipped parallelogram */
+.vb50-library .vb50-download{
+  position:relative;
+  isolation:isolate;
+  overflow:visible;
+  border:0;
+  clip-path:none;
+  background:transparent;
+}
+.vb50-library .vb50-download::before,
+.vb50-library .vb50-download::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  clip-path:polygon(10% 0,100% 0,92% 100%,0 100%);
+}
+.vb50-library .vb50-download::before{
+  z-index:-2;
+  inset:0;
+  background:#234051;
+}
+.vb50-library .vb50-download::after{
+  z-index:-1;
+  inset:2px;
+  background:#fff7ed;
+}
+.vb50-library .vb50-download span{
+  position:relative;
+  z-index:1;
+  color:#f07150;
+}
