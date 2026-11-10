@@ -80,3 +80,81 @@
 .vb50-library .vb50-download:hover{
   transform:translate(-2px,-6px);
 }
+
+
+/* v54 — give the PDF action a real layered offset, not a hidden negative-z shadow */
+.vb50-library .vb50-download{
+  position:relative;
+  isolation:isolate;
+  overflow:visible;
+  border:0;
+  clip-path:none;
+  background:transparent;
+  filter:none;
+  padding:0 1.6cqw;
+  justify-content:space-between;
+  gap:1cqw;
+  transform:translate(-2px,-4px);
+  z-index:7;
+}
+.vb50-library .vb50-download::before,
+.vb50-library .vb50-download::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  clip-path:polygon(10% 0,100% 0,92% 100%,0 100%);
+}
+.vb50-library .vb50-download::before{
+  z-index:0;
+  inset:9px -9px -9px 9px;
+  background:#f36b4e;
+  filter:drop-shadow(0 10px 12px rgba(7,31,45,.30));
+}
+.vb50-library .vb50-download::after{
+  z-index:1;
+  inset:0;
+  background:#234051;
+}
+.vb50-library .vb50-download .vb50-download-face{
+  position:absolute;
+  z-index:2;
+  inset:2px;
+  display:block;
+  padding:0;
+  background:#fff7ed;
+  clip-path:polygon(10% 0,100% 0,92% 100%,0 100%);
+  pointer-events:none;
+}
+.vb50-library .vb50-download .vb50-download-label,
+.vb50-library .vb50-download .vb50-download-arrow{
+  position:relative;
+  z-index:3;
+}
+.vb50-library .vb50-download .vb50-download-label{
+  color:#0d2a3a;
+  font-size:1.3cqw;
+  font-weight:900;
+  letter-spacing:-.03em;
+}
+.vb50-library .vb50-download .vb50-download-arrow{
+  color:#f07150;
+  font-size:1.7cqw;
+}
+.vb50-library .vb50-download:hover{
+  transform:translate(-2px,-8px);
+}
+@media(max-width:900px){
+  .vb50-library .vb50-download{
+    width:auto;
+    height:58px;
+    padding:0 25px;
+    gap:15px;
+    transform:translate(-2px,-3px);
+  }
+  .vb50-library .vb50-download::before{
+    inset:6px -6px -6px 6px;
+  }
+  .vb50-library .vb50-download .vb50-download-label{font-size:13px}
+  .vb50-library .vb50-download .vb50-download-arrow{font-size:17px}
+  .vb50-library .vb50-download:hover{transform:translate(-2px,-6px)}
+}
