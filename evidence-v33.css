@@ -45,39 +45,63 @@
 
 
 #ebook{scroll-margin-top:100px}
-.ebook-section{background:#f3f0e8;border-block:1px solid #c4c6bf}
-.ebook-wrap{padding-block:clamp(70px,8vw,108px)}
-.ebook-grid{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);gap:clamp(30px,5vw,66px);align-items:start;margin-top:32px}
-.ebook-copy{display:flex;flex-direction:column;min-width:0}
-.ebook-eyebrow{font:800 10px/1.5 var(--display);letter-spacing:.16em;color:#bd5139}
-.ebook-copy h2{font:900 clamp(39px,5.1vw,70px)/.99 var(--display);letter-spacing:-.07em;margin:15px 0 18px;color:var(--ink)}
-.ebook-copy h2 span{color:var(--orange-dark)}
-.ebook-lead{max-width:455px;margin:0 0 17px;color:#4d5d65;font:400 14px/1.85 var(--sans)}
-.ebook-facts{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 21px}
-.ebook-facts span{padding:8px 10px;border:1px solid #b9c1bd;color:#344b56;font:800 9px/1.4 var(--display);letter-spacing:.08em}
-.ebook-chapters{border-top:1px solid #c2c5bf;margin:0 0 22px}
-.ebook-chapters article{display:grid;grid-template-columns:34px minmax(0,1fr);gap:9px;align-items:start;padding:9px 0;border-bottom:1px solid #c2c5bf}
-.ebook-chapters article>b{font:850 17px/1.4 var(--display);color:var(--orange-dark)}
-.ebook-chapters article strong{display:block;color:var(--ink);font:800 11px/1.5 var(--display);letter-spacing:.035em}
-.ebook-chapters article small{display:block;margin-top:2px;color:#596970;font:400 12px/1.6 var(--sans)}
-.ebook-actions{display:flex;flex-wrap:wrap;gap:10px}
-.ebook-actions a{display:flex;align-items:center;justify-content:space-between;gap:22px;min-height:50px;padding:14px 18px;font:800 11px/1.4 var(--display);letter-spacing:.055em;text-decoration:none;transition:transform .2s,background-color .2s}
-.ebook-primary{background:var(--ink);border:1px solid var(--ink);color:#fffaf1;box-shadow:4px 5px 0 #e36a4e}
-.ebook-primary span{color:#ff9c7d;font-size:18px}
+.learning-hub-section{background:#f3f0e8;border-block:1px solid #c4c6bf}
+.learning-hub-wrap{padding-block:clamp(70px,8vw,108px)}
+.learning-hub-intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(250px,.9fr);gap:35px;align-items:end;margin:27px 0 30px}
+.learning-hub-kicker{display:block;color:#bd5139;font:800 10px/1.5 var(--display);letter-spacing:.16em}
+.learning-hub-intro h2{margin:12px 0 0;color:var(--ink);font:900 clamp(34px,4.6vw,59px)/1.02 var(--display);letter-spacing:-.065em}
+.learning-hub-intro h2 em{color:var(--orange-dark);font-style:normal}
+.learning-hub-intro>p{max-width:440px;margin:0 0 4px;color:#50616a;font:400 14px/1.8 var(--sans)}
+.learning-hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:19px;align-items:stretch}
+.learning-resource{display:flex;flex-direction:column;min-width:0;padding:clamp(18px,2.2vw,27px);border:1px solid #b8c1bd;box-shadow:6px 7px 0 rgba(18,37,53,.08)}
+.learning-resource--ebook{background:#fbf9f2;color:var(--ink)}
+.learning-resource--podcast{background:#162e3c;border-color:#344e5a;color:#fffaf1;box-shadow:6px 7px 0 #e36a4e}
+.resource-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid #c2c7c1;color:#a94834;font:800 9px/1.5 var(--display);letter-spacing:.12em}
+.learning-resource--podcast .resource-topline{border-color:#48616b;color:#ffad95}
+.resource-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:13px;margin:19px 0 15px}
+.resource-heading>div{min-width:0}
+.resource-heading h3{margin:0 0 11px;color:var(--ink);font:900 clamp(26px,3vw,38px)/1.02 var(--display);letter-spacing:-.065em}
+.resource-heading h3 em{color:var(--orange-dark);font-style:normal}
+.resource-heading p{max-width:440px;margin:0;color:#52636b;font:400 12px/1.75 var(--sans)}
+.learning-resource--podcast .resource-heading h3{color:#fffaf1}
+.learning-resource--podcast .resource-heading h3 em{color:#ff9b7d}
+.learning-resource--podcast .resource-heading p{color:#c6d4d8}
+.resource-stamp{display:flex;flex:0 0 58px;width:58px;height:58px;align-items:center;justify-content:center;text-align:center;transform:rotate(5deg);font:900 10px/1.35 var(--display);letter-spacing:.09em}
+.resource-stamp--read{border:2px solid var(--orange-dark);color:var(--orange-dark)}
+.resource-stamp--listen{border:2px solid #ff9b7d;color:#ffad95;transform:rotate(-5deg);border-radius:50%}
+.resource-facts{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 16px}
+.resource-facts span{padding:7px 9px;border:1px solid #b9c1bd;color:#344b56;font:800 9px/1.4 var(--display);letter-spacing:.08em}
+.ebook-actions{display:flex;flex-wrap:wrap;gap:9px;margin:0 0 17px}
+.ebook-actions a{display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:44px;padding:12px 15px;font:800 10px/1.4 var(--display);letter-spacing:.055em;text-decoration:none;transition:transform .2s,background-color .2s}
+.ebook-primary{background:var(--ink);border:1px solid var(--ink);color:#fffaf1;box-shadow:3px 4px 0 #e36a4e}
+.ebook-primary span{color:#ff9c7d;font-size:17px}
 .ebook-secondary{background:#fffdf8;border:1px solid var(--ink);color:var(--ink)}
-.ebook-secondary span{color:var(--orange-dark);font-size:18px}
+.ebook-secondary span{color:var(--orange-dark);font-size:17px}
 .ebook-actions a:hover{transform:translateY(-2px)}
 .ebook-primary:hover{background:#244353}
 .ebook-secondary:hover{background:#e7e5dd}
-.ebook-note{display:block;margin-top:15px;color:#6b767b;font:400 11px/1.7 var(--sans)}
-.ebook-preview{min-width:0;padding:14px;background:#162e3c;border:1px solid #344e5a;box-shadow:8px 9px 0 #e36a4e;color:#fffaf1}
-.ebook-preview-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 2px 12px;color:#ffad95;font:800 10px/1.4 var(--display);letter-spacing:.1em}
-.ebook-preview-head a{color:#fffaf1;font:700 10px/1.4 var(--display);text-decoration:underline;text-underline-offset:4px}
-.ebook-preview-frame{height:clamp(500px,58vw,740px);overflow:hidden;background:#fff}
+.resource-preview-label,.podcast-list-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 8px;color:#64747a;font:800 9px/1.5 var(--display);letter-spacing:.11em}
+.ebook-preview-frame{height:clamp(350px,34vw,455px);overflow:hidden;background:#fff;border:1px solid #c7cbc6}
 .ebook-preview-frame iframe{display:block;width:100%;height:100%;border:0;background:#fff}
-.ebook-preview-foot{display:flex;justify-content:space-between;gap:10px;padding:12px 2px 0;color:#bdcbd0;font:700 9px/1.4 var(--display);letter-spacing:.11em}
-.ebook-actions a:focus-visible,.ebook-preview-head a:focus-visible{outline:3px solid var(--orange);outline-offset:4px}
-@media(max-width:850px){.ebook-grid{grid-template-columns:1fr;gap:34px}.ebook-copy h2{font-size:clamp(42px,8vw,68px)}.ebook-preview-frame{height:650px}}
-@media(max-width:640px){.ebook-wrap{padding-block:65px}.ebook-grid{margin-top:25px}.ebook-preview{padding:10px;box-shadow:5px 6px 0 #e36a4e}.ebook-preview-frame{height:560px}.ebook-actions{flex-direction:column}.ebook-actions a{width:100%}.ebook-preview-head{align-items:flex-start;flex-direction:column;gap:6px}.ebook-preview-foot{font-size:8px}}
-@media(max-width:390px){.ebook-preview-frame{height:500px}.ebook-copy h2{font-size:40px}}
+.resource-card-foot{display:flex;justify-content:space-between;gap:10px;margin-top:auto;padding-top:13px;color:#69777a;font:800 8px/1.5 var(--display);letter-spacing:.11em}
+.learning-resource--podcast .resource-card-foot{color:#b9cbd0}
+.podcast-signal{display:flex;align-items:center;justify-content:center;gap:4px;height:64px;margin:0 0 18px;padding:0 10px;background:#203e4d;border:1px solid #3a5865}
+.podcast-signal span{display:block;width:4px;height:var(--bar,18px);background:#f18b6d;border-radius:2px;opacity:.9}
+.podcast-signal span:nth-child(5n+1){--bar:16px}.podcast-signal span:nth-child(5n+2){--bar:28px}.podcast-signal span:nth-child(5n+3){--bar:39px}.podcast-signal span:nth-child(5n+4){--bar:23px}.podcast-signal span:nth-child(5n){--bar:33px}
+.podcast-list-heading{color:#ffad95;margin-bottom:7px}
+.podcast-episodes{display:flex;flex-direction:column;border-top:1px solid #48616b}
+.podcast-episode{display:flex;align-items:center;gap:13px;min-height:57px;padding:8px 9px;border-bottom:1px solid #48616b;color:#fffaf1;text-decoration:none;transition:background-color .18s,padding .18s}
+.podcast-episode:hover{background:#234453;padding-left:14px}
+.podcast-episode:focus-visible,.podcast-folder-link:focus-visible,.ebook-actions a:focus-visible{outline:3px solid #ff9b7d;outline-offset:3px}
+.podcast-episode-number{display:flex;flex:0 0 34px;width:34px;height:34px;align-items:center;justify-content:center;border:1px solid #66808a;color:#ffad95;font:850 11px/1 var(--display)}
+.podcast-episode-copy{display:flex;flex:1;flex-direction:column;gap:3px;min-width:0}
+.podcast-episode-copy strong{font:850 10px/1.4 var(--display);letter-spacing:.08em}
+.podcast-episode-copy small{color:#c1d0d4;font:400 10px/1.45 var(--sans)}
+.podcast-episode-arrow{color:#ff9b7d;font-size:18px}
+.podcast-folder-link{display:flex;align-items:center;justify-content:space-between;gap:15px;min-height:47px;margin-top:15px;padding:12px 15px;background:#f2ede1;border:1px solid #f2ede1;color:#173341;text-decoration:none;font:850 10px/1.4 var(--display);letter-spacing:.07em;box-shadow:3px 4px 0 #e36a4e;transition:transform .18s,background-color .18s}
+.podcast-folder-link span{font-size:17px;color:#bd5139}
+.podcast-folder-link:hover{transform:translateY(-2px);background:#fffaf1}
+@media(max-width:900px){.learning-hub-grid{grid-template-columns:1fr;gap:22px}.learning-hub-intro{grid-template-columns:1fr;gap:13px}.ebook-preview-frame{height:480px}}
+@media(max-width:640px){.learning-hub-wrap{padding-block:63px}.learning-hub-intro{margin:23px 0 22px}.learning-hub-intro h2{font-size:clamp(32px,8vw,48px)}.learning-resource{padding:17px;box-shadow:4px 5px 0 rgba(18,37,53,.08)}.learning-resource--podcast{box-shadow:4px 5px 0 #e36a4e}.resource-heading h3{font-size:clamp(25px,7vw,34px)}.resource-stamp{flex-basis:48px;width:48px;height:48px;font-size:9px}.ebook-preview-frame{height:420px}.ebook-actions{flex-direction:column}.ebook-actions a{width:100%}.podcast-episode{min-height:60px}}
+@media(max-width:390px){.ebook-preview-frame{height:380px}.resource-topline{font-size:8px}.resource-heading h3{font-size:25px}}
 
