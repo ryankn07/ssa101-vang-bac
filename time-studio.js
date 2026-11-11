@@ -45,8 +45,22 @@
   }
 
   const saved = readSavedState();
-  let audit = { ...auditDefaults, ...(saved && saved.audit ? saved.audit : {}) };
-  let tasks = saved && Array.isArray(saved.tasks) ? saved.tasks : sampleTasks.slice();
+  let audit = { ...auditDefaults };
+  auditItems.forEach(item => {
+    const value = Number(saved && saved.audit ? saved.audit[item.key] : auditDefaults[item.key]);
+    if (Number.isFinite(value) && value >= 0 && value <= 24) audit[item.key] = value;
+  });
+  let tasks = saved && Array.isArray(saved.tasks)
+    ? saved.tasks.filter(task =>
+        task &&
+        typeof task.id === "string" &&
+        typeof task.title === "string" &&
+        /^\\d{2}:\\d{2}$/.test(task.start) &&
+        Number.isFinite(Number(task.duration)) &&
+        Number(task.duration) > 0 &&
+        Boolean(categoryLabels[task.category])
+      )
+    : sampleTasks.slice();
   let idCounter = 0;
 
   const auditInputs = [...root.querySelectorAll("[data-audit-input]")];
@@ -117,6 +131,9 @@
       renderAudit();
       persist();
     });
+    input.addEventListener("change", () => {
+      input.value = String(audit[input.dataset.auditInput]);
+    });
   });
 
   root.querySelector("[data-audit-reset]")?.addEventListener("click", () => {
@@ -163,7 +180,11 @@
       time.className = "vb-studio-task-time";
       const start = minutesFromTime(task.start);
       const end = start + Number(task.duration) * 60;
-      time.innerHTML = "<strong>" + task.start + "</strong><span>" + timeFromMinutes(end) + "</span>";
+      const startLabel = document.createElement("strong");
+      startLabel.textContent = task.start;
+      const endLabel = document.createElement("span");
+      endLabel.textContent = timeFromMinutes(end);
+      time.append(startLabel, endLabel);
 
       const copy = document.createElement("div");
       copy.className = "vb-studio-task-copy";
@@ -277,5 +298,5 @@
 
   renderAudit();
   renderTasks();
-  if (saveStatus) saveStatus.textContent = "Dữ liệu được lưu riêng trên trình duyệt này";
+  persist();
 })();
