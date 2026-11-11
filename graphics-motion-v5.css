@@ -15,7 +15,6 @@
 }
 .demo-case-image img{
   display:block;
-  width:100%;
   height:auto;
   border:1px solid rgba(24,54,67,.13);
   border-radius:12px;
