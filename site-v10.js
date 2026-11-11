@@ -674,7 +674,7 @@ document.querySelectorAll('[data-scroll-top]').forEach(link => {
 
   const note = document.createElement("p");
   note.className = "vb-cal-context";
-  note.innerHTML = '<strong>Lưu ý:</strong> Đây là các hoạt động đã lên lịch trong tuần 12–18/10/2026, không phải dữ liệu đồng bộ trực tiếp hay xác nhận hoàn thành.';
+  note.innerHTML = '<strong>LỊCH TUẦN 12–18/10/2026:</strong> Các khung giờ được phân bổ theo kế hoạch cá nhân.';
   calendar.after(note);
 
   function setMode(next) {
