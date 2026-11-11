@@ -1,0 +1,237 @@
+/* VÀNG BẠC — VISUAL REFINEMENT V4
+   Quiet editorial polish for the existing V3 design.
+   CSS only: preserve copy, assets, layout logic and all interactions. */
+
+:root{
+  --vb4-ink:#142d3b;
+  --vb4-orange:#f05b3c;
+  --vb4-line:rgba(24,54,67,.14);
+  --vb4-shadow:0 16px 38px rgba(17,43,57,.085);
+  --vb4-shadow-hover:0 22px 46px rgba(17,43,57,.13);
+}
+
+/* Navigation: a calmer, more deliberate top bar. */
+@media(min-width:801px){
+  .site-header{
+    min-height:80px;
+    gap:clamp(18px,2.4vw,34px);
+  }
+}
+.site-header.is-scrolled{
+  border-bottom-color:rgba(20,45,59,.13);
+  box-shadow:0 8px 28px rgba(20,45,59,.075);
+}
+.brand{gap:14px}
+.brand-copy{gap:5px}
+.brand-copy strong{letter-spacing:.14em}
+.desktop-nav a{
+  font-size:11px;
+  letter-spacing:.015em;
+  line-height:1.5;
+}
+.desktop-nav a.is-current{color:var(--vb4-ink)}
+.nav-cta{
+  min-height:44px;
+  padding:10px 17px;
+  border-radius:999px;
+  transition:transform 180ms ease,box-shadow 180ms ease,background-color 180ms ease;
+}
+@media(hover:hover) and (pointer:fine){
+  .nav-cta:hover{transform:translateY(-2px);box-shadow:0 7px 18px rgba(20,45,59,.13)}
+}
+
+/* Hero: improve reading width without changing its composition. */
+.hero-intro{max-width:500px}
+.hero-intro p{
+  max-width:42ch;
+  font-size:15px;
+  line-height:1.82;
+}
+.hero-method{
+  flex-wrap:wrap;
+  row-gap:10px;
+}
+.hero-art .planner-paper{
+  border-color:rgba(23,57,70,.13);
+  box-shadow:0 22px 48px rgba(13,39,53,.17),5px 6px 0 rgba(20,45,59,.10);
+}
+
+/* Section introductions: a consistent editorial rhythm. */
+.section-title-row{gap:clamp(24px,4vw,58px)}
+.section-title-row p{
+  max-width:39ch;
+  padding-left:18px;
+  border-left:1px solid rgba(20,45,59,.22);
+  line-height:1.85;
+}
+.section-tag{line-height:1.6}
+
+/* Demo rail: clearer card hierarchy and calmer hover feedback. */
+.demo .vb-demo-rail a{
+  border-radius:20px 42px 20px 20px;
+  border-color:rgba(35,75,88,.17);
+  background:rgba(255,253,247,.88);
+  box-shadow:0 8px 20px rgba(20,45,59,.055);
+  transition:transform 200ms ease,border-color 200ms ease,box-shadow 200ms ease;
+}
+.demo .vb-demo-rail a .vb-rail-number{color:#b94c34}
+@media(hover:hover) and (pointer:fine){
+  .demo .vb-demo-rail a:hover{
+    transform:translateY(-4px);
+    border-color:rgba(240,91,60,.4);
+    box-shadow:var(--vb4-shadow-hover);
+  }
+}
+
+/* Interactive lab: keep the navy/coral identity, soften the hard shadow. */
+.vb-lab-stage{
+  border-radius:32px 32px 46px 32px;
+  box-shadow:8px 8px 0 rgba(240,91,60,.76),0 20px 48px rgba(18,37,53,.12);
+}
+.vb-lab-tab,.vb-pomo-mode,.vb-pomo-control,.vb-matrix-next{
+  min-height:44px;
+}
+.vb-matrix-choice{
+  border-color:rgba(255,255,255,.17);
+  background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.035));
+}
+
+/* Time Studio: make the tool feel like a finished product, not a form. */
+.vb-studio-shell{
+  border:1px solid rgba(255,255,255,.10);
+  box-shadow:0 22px 52px rgba(16,43,58,.16);
+}
+.vb-studio-app{
+  border:1px solid rgba(20,45,59,.09);
+  box-shadow:0 14px 34px rgba(0,0,0,.11),inset 0 1px 0 rgba(255,255,255,.9);
+}
+.vb-studio-panel-head p{font-size:13px;line-height:1.7}
+.vb-audit-field{
+  border-color:rgba(20,45,59,.10);
+  border-radius:11px;
+  transition:border-color 160ms ease,box-shadow 160ms ease,background-color 160ms ease;
+}
+.vb-audit-field:focus-within{
+  border-color:rgba(240,91,60,.48);
+  box-shadow:0 0 0 3px rgba(240,91,60,.09);
+  background:#fffdf8;
+}
+.vb-audit-field input{min-height:40px}
+.vb-studio-task-form{
+  border:1px solid rgba(20,45,59,.08);
+  border-radius:13px;
+}
+.vb-studio-form-field input,.vb-studio-form-field select{
+  min-height:42px;
+  border-radius:8px;
+}
+.vb-studio-add{
+  min-height:42px;
+  border-radius:8px 8px 13px 8px;
+  box-shadow:0 4px 10px rgba(217,81,53,.16);
+}
+.vb-studio-task{
+  border-radius:11px;
+  transition:transform 160ms ease,border-color 160ms ease,box-shadow 160ms ease;
+}
+.vb-studio-task-remove{
+  width:34px;height:34px;
+}
+.vb-studio-reset,.vb-studio-clear{min-height:40px}
+@media(hover:hover) and (pointer:fine){
+  .vb-studio-task:hover{
+    transform:translateY(-2px);
+    border-color:rgba(20,45,59,.2);
+    box-shadow:0 7px 17px rgba(20,45,59,.06);
+  }
+}
+
+/* Calendar evidence: one quiet surface for the controls and the real schedules. */
+.vb-calendar-switcher{
+  border-color:rgba(31,70,82,.15);
+  background:linear-gradient(145deg,#fffdf7 0%,#f0f1e9 100%);
+  box-shadow:0 16px 38px rgba(18,37,53,.075);
+}
+.vb-switch-tabs button{
+  min-height:46px;
+  border-radius:999px;
+  transition:transform 160ms ease,background-color 160ms ease,border-color 160ms ease,color 160ms ease;
+}
+@media(hover:hover) and (pointer:fine){
+  .vb-switch-tabs button:hover{transform:translateY(-1px);border-color:#82969a}
+}
+.evidence-video{
+  border-color:rgba(35,75,88,.16);
+  box-shadow:0 16px 38px rgba(20,45,59,.09);
+}
+.evidence-frame{
+  border-radius:16px;
+  box-shadow:0 10px 24px rgba(15,38,51,.13);
+}
+.evidence-metrics article{
+  border-radius:13px;
+  box-shadow:0 6px 16px rgba(23,55,71,.045);
+}
+.evidence-process article{
+  border-radius:12px 12px 20px 12px;
+  box-shadow:0 6px 17px rgba(23,55,71,.04);
+}
+
+/* FAQ and registration: make the final actions feel easier to scan. */
+.faq-questions summary{
+  min-height:70px;
+  padding-block:20px;
+}
+.faq-questions details[open]{
+  border-bottom-color:rgba(255,156,126,.48);
+}
+.register-card{
+  border-color:rgba(30,65,78,.14);
+  box-shadow:10px 12px 0 rgba(21,38,53,.11),0 18px 42px rgba(18,37,53,.075);
+}
+.registration-link{
+  min-height:54px;
+  box-shadow:0 8px 18px rgba(216,74,46,.15);
+  transition:transform 180ms ease,box-shadow 180ms ease,background-color 180ms ease;
+}
+@media(hover:hover) and (pointer:fine){
+  .registration-link:not(.is-unavailable):hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 22px rgba(216,74,46,.2);
+  }
+}
+.site-footer{border-top:1px solid rgba(229,239,239,.10)}
+.footer-nav a,.footer-brand,.footer-back-top{transition:color 160ms ease,opacity 160ms ease}
+
+/* Responsive finish: preserve comfortable reading and touch targets. */
+@media(max-width:800px){
+  .section-title-row p{
+    max-width:58ch;
+    padding-left:0;
+    border-left:0;
+  }
+  .hero-intro p{font-size:15px}
+  .demo .vb-demo-rail a{min-height:145px}
+}
+@media(max-width:640px){
+  .vb-lab-stage{
+    border-radius:24px 24px 34px 24px;
+    box-shadow:5px 5px 0 rgba(240,91,60,.72),0 13px 28px rgba(18,37,53,.10);
+  }
+  .vb-studio-shell{box-shadow:0 14px 32px rgba(16,43,58,.14)}
+  .vb-studio-form-field input,.vb-studio-form-field select,
+  .vb-studio-add,.vb-studio-reset,.vb-studio-clear,
+  .vb-studio-tab,.vb-switch-tabs button{min-height:44px}
+  .vb-studio-task-form{gap:9px}
+  .vb-studio-task{padding:10px}
+  .vb-calendar-switcher{padding:14px 12px 17px}
+  .vb-switch-tabs{width:100%}
+  .vb-switch-tabs button{flex:1;padding-inline:10px;font-size:11px}
+  .evidence-video{padding:17px}
+  .register-card{box-shadow:5px 6px 0 rgba(21,38,53,.10),0 12px 26px rgba(18,37,53,.07)}
+}
+@media(prefers-reduced-motion:reduce){
+  .nav-cta,.demo .vb-demo-rail a,.vb-audit-field,.vb-studio-task,
+  .vb-switch-tabs button,.registration-link,.footer-nav a,
+  .footer-brand,.footer-back-top{transition:none!important}
+}
