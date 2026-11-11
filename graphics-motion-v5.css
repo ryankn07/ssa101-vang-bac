@@ -1,0 +1,234 @@
+/* VÀNG BẠC — GRAPHICS & MOTION V5
+   Adds motion to the real product/evidence surfaces that were missing from V4.
+   No new libraries, image payloads, autoplay media, or background loops off-screen. */
+
+:root{
+  --vb5-ease:cubic-bezier(.22,.8,.22,1);
+  --vb5-spring:cubic-bezier(.19,1,.22,1);
+  --vb5-shadow:0 20px 46px rgba(18,37,53,.13);
+}
+
+/* Keep real screenshots crisp and visually integrated with their frames. */
+.demo-case-image{
+  border-radius:14px;
+  background:#e8eae4;
+}
+.demo-case-image img{
+  display:block;
+  height:auto;
+  border:1px solid rgba(24,54,67,.13);
+  border-radius:12px;
+  box-shadow:0 8px 22px rgba(18,37,53,.09);
+  image-rendering:auto;
+}
+.vb50-art{
+  shape-rendering:geometricPrecision;
+  text-rendering:geometricPrecision;
+}
+.vb50-canvas{
+  isolation:isolate;
+  box-shadow:0 22px 50px rgba(20,45,59,.12);
+}
+.evidence-frame{
+  overflow:hidden;
+  background:#122b39;
+}
+.evidence-frame iframe{
+  display:block;
+}
+
+/* A quiet, coordinated reveal for the hands-on tools and actual evidence. */
+@media(prefers-reduced-motion:no-preference){
+  .motion-ready .vb-lab-module.reveal.is-visible .vb-lab-copy,
+  .motion-ready .evidence-video.reveal.is-visible .evidence-video-copy,
+  .motion-ready .vb-time-studio.reveal.is-visible .vb-studio-intro{
+    animation:vb5-rise 680ms var(--vb5-spring) 70ms both;
+  }
+  .motion-ready .vb-lab-module.reveal.is-visible .vb-lab-stage,
+  .motion-ready .evidence-video.reveal.is-visible .evidence-frame,
+  .motion-ready .vb-time-studio.reveal.is-visible .vb-studio-app{
+    animation:vb5-rise 760ms var(--vb5-spring) 150ms both;
+  }
+  .motion-ready .vb-demo-rail.reveal.is-visible>a{
+    animation:vb5-fade 560ms var(--vb5-ease) both;
+  }
+  .motion-ready .vb-demo-rail.reveal.is-visible>a:nth-child(2){animation-delay:90ms}
+  .motion-ready .vb-demo-rail.reveal.is-visible>a:nth-child(3){animation-delay:180ms}
+
+  .motion-ready .vb-calendar-switcher.reveal.is-visible .vb-switch-tabs button,
+  .motion-ready .vb-calendar-switcher.reveal.is-visible .vb-day-nav button{
+    animation:vb5-fade 460ms var(--vb5-ease) both;
+  }
+  .motion-ready .vb-calendar-switcher.reveal.is-visible .vb-switch-tabs button:nth-child(2){animation-delay:90ms}
+  .motion-ready .vb-calendar-switcher.reveal.is-visible .vb-day-nav button:nth-child(2){animation-delay:35ms}
+  .motion-ready .vb-calendar-switcher.reveal.is-visible .vb-day-nav button:nth-child(3){animation-delay:70ms}
+  .motion-ready .vb-calendar-switcher.reveal.is-visible .vb-day-nav button:nth-child(4){animation-delay:105ms}
+  .motion-ready .vb-calendar-switcher.reveal.is-visible .vb-day-nav button:nth-child(5){animation-delay:140ms}
+  .motion-ready .vb-calendar-switcher.reveal.is-visible .vb-day-nav button:nth-child(6){animation-delay:175ms}
+  .motion-ready .vb-calendar-switcher.reveal.is-visible .vb-day-nav button:nth-child(7){animation-delay:210ms}
+
+  .motion-ready .vb50-canvas.reveal.is-visible .vb50-ebook-copy,
+  .motion-ready .vb50-canvas.reveal.is-visible .vb50-podcast-copy,
+  .motion-ready .vb50-canvas.reveal.is-visible .vb50-book,
+  .motion-ready .vb50-canvas.reveal.is-visible .vb50-audio,
+  .motion-ready .vb50-canvas.reveal.is-visible .vb50-headphones{
+    animation:vb5-fade 760ms var(--vb5-ease) both;
+  }
+  .motion-ready .vb50-canvas.reveal.is-visible .vb50-book{animation-delay:90ms}
+  .motion-ready .vb50-canvas.reveal.is-visible .vb50-ebook-copy{animation-delay:150ms}
+  .motion-ready .vb50-canvas.reveal.is-visible .vb50-podcast-copy{animation-delay:220ms}
+  .motion-ready .vb50-canvas.reveal.is-visible .vb50-audio{animation-delay:280ms}
+  .motion-ready .vb50-canvas.reveal.is-visible .vb50-headphones{animation-delay:340ms}
+
+  /* The hero's concentric artwork moves only while the hero is on screen. */
+  .motion-ready .hero-art::before{
+    transform-origin:center;
+    animation:vb5-ring-breathe 12s ease-in-out infinite alternate;
+  }
+  .motion-ready .hero-art::after{
+    transform-origin:center;
+    animation:vb5-orb-drift 10s ease-in-out infinite alternate;
+  }
+  .ambient-paused .hero-art::before,
+  .ambient-paused .hero-art::after{
+    animation-play-state:paused!important;
+  }
+}
+
+@keyframes vb5-rise{
+  from{opacity:0;transform:translate3d(0,14px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+@keyframes vb5-fade{
+  from{opacity:0}
+  to{opacity:1}
+}
+@keyframes vb5-ring-breathe{
+  from{transform:scale(.985);opacity:.52}
+  to{transform:scale(1.018);opacity:.82}
+}
+@keyframes vb5-orb-drift{
+  from{transform:translate3d(0,0,0) scale(1)}
+  to{transform:translate3d(-8px,9px,0) scale(1.045)}
+}
+
+/* Micro-interactions: visible feedback, without making the page feel like a game. */
+.vb-lab-stage,
+.vb-studio-app,
+.vb50-canvas,
+.evidence-video{
+  transition:border-color 220ms ease,box-shadow 260ms ease;
+}
+.vb-lab-tab,
+.vb-pomo-mode,
+.vb-pomo-control,
+.vb-matrix-choice,
+.vb-studio-tab,
+.vb-studio-add,
+.vb-studio-task-remove,
+.vb-switch-tabs button,
+.vb-day-nav button,
+.vb-day-explorer-arrows button,
+.vb-switch-arrow{
+  -webkit-tap-highlight-color:transparent;
+}
+.vb50-audio-vinyl{
+  transition:transform 620ms var(--vb5-spring);
+  transform-origin:center;
+}
+.vb50-bars i{
+  transform-origin:center;
+  transition:transform 360ms var(--vb5-ease);
+}
+.vb50-book{
+  position:absolute;
+  isolation:isolate;
+}
+.vb50-book::after{
+  content:"";
+  position:absolute;
+  z-index:3;
+  top:-35%;
+  bottom:-35%;
+  left:-85%;
+  width:42%;
+  pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  transform:rotate(22deg) translateX(-170%);
+  transition:transform 760ms var(--vb5-spring);
+}
+.vb50-book-inset{z-index:1;position:relative}
+
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+  .vb-demo-rail a{
+    transition:transform 240ms var(--vb5-spring),box-shadow 240ms ease,border-color 240ms ease;
+  }
+  .vb-demo-rail a:hover .vb-rail-arrow{
+    transform:translate3d(4px,-4px,0);
+  }
+  .vb-rail-arrow{transition:transform 240ms var(--vb5-spring)}
+  .evidence-video:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--vb5-shadow);
+  }
+  .vb-lab-stage:hover{
+    border-color:rgba(255,154,124,.34);
+    box-shadow:9px 10px 0 rgba(240,91,60,.72),0 28px 62px rgba(18,37,53,.18);
+  }
+  .vb-studio-shell:hover{
+    box-shadow:0 28px 66px rgba(16,43,58,.19);
+  }
+  .vb50-canvas:hover{
+    box-shadow:0 27px 58px rgba(20,45,59,.16);
+  }
+  .vb50-book:hover::after{
+    transform:rotate(22deg) translateX(470%);
+  }
+  .vb50-audio:hover .vb50-audio-vinyl,
+  .vb50-audio:focus-visible .vb50-audio-vinyl{
+    transform:rotate(24deg);
+  }
+  .vb50-audio:hover .vb50-bars i,
+  .vb50-audio:focus-visible .vb50-bars i{
+    transform:scaleY(1.16);
+  }
+  .vb50-audio:hover .vb50-bars i:nth-child(3n),
+  .vb50-audio:focus-visible .vb50-bars i:nth-child(3n){transform:scaleY(.72)}
+}
+.vb-lab-module button:active,
+.vb-studio-app button:active,
+.vb-calendar-switcher button:active{
+  transform:scale(.985);
+  transition-duration:90ms;
+}
+
+/* Mobile: keep the same visual cues, but remove hover-only lift and shorten travel. */
+@media(max-width:800px){
+  .motion-ready .vb-calendar-switcher.reveal.is-visible .vb-calendar-slide{
+    animation-duration:520ms;
+  }
+  .vb50-canvas{box-shadow:0 14px 34px rgba(20,45,59,.10)}
+}
+@media(max-width:640px){
+  .evidence-video:hover{transform:none}
+  .vb-lab-stage:hover{box-shadow:5px 5px 0 rgba(240,91,60,.72),0 13px 28px rgba(18,37,53,.10)}
+}
+
+/* Accessibility: the page remains fully visible and static when motion is reduced. */
+@media(prefers-reduced-motion:reduce){
+  .motion-ready .hero-art::before,
+  .motion-ready .hero-art::after,
+  .motion-ready .vb-lab-module.reveal.is-visible *,
+  .motion-ready .evidence-video.reveal.is-visible *,
+  .motion-ready .vb-demo-rail.reveal.is-visible>a,
+  .motion-ready .vb-calendar-switcher.reveal.is-visible *,
+  .motion-ready .vb-time-studio.reveal.is-visible *,
+  .motion-ready .vb50-canvas.reveal.is-visible *,
+  .vb50-book::after{
+    animation:none!important;
+    transition:none!important;
+  }
+  .vb-lab-module button:active,
+  .vb-studio-app button:active,
+  .vb-calendar-switcher button:active{transform:none}
+}

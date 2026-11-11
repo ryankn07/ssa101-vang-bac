@@ -80,7 +80,9 @@ const revealSelectors = [
   ".about > .section-tag", ".about > .section-title-row", ".problem-grid",
   ".outcomes .section-tag", ".outcomes-title", ".outcomes-grid",
   ".roadmap > .section-tag", ".roadmap > .section-title-row", ".session-row",
-  ".demo .section-tag", ".demo .section-title-row", ".demo-stage", ".demo-caveat",
+  ".demo .section-tag", ".demo .section-title-row", ".vb-lab-module", ".demo-stage",
+  ".vb-demo-rail", ".evidence-video", ".vb-calendar-switcher", ".vb-evidence-end-actions",
+  ".demo-caveat", ".vb-time-studio", ".vb50-canvas",
   ".video-section > .section-tag", ".video-layout", ".faq-lead", ".faq-questions",
   ".register-card"
 ];
