@@ -55,7 +55,7 @@
         task &&
         typeof task.id === "string" &&
         typeof task.title === "string" &&
-        /^\\d{2}:\\d{2}$/.test(task.start) &&
+        /^\d{2}:\d{2}$/.test(task.start) &&
         Number.isFinite(Number(task.duration)) &&
         Number(task.duration) > 0 &&
         Boolean(categoryLabels[task.category])
