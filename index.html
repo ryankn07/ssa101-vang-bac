@@ -17,10 +17,12 @@
   <link rel="stylesheet" href="library-v50.css?v=20261110-v54">
   <script defer src="site-v10.js?v=20261016-v28"></script>
   <script defer src="interactive-lab.js?v=20261111-v1"></script>
+  <script defer src="time-studio.js?v=20261111-v1"></script>
   <link rel="stylesheet" href="motion-redesign.css?v=20261111-v2">
   <link rel="stylesheet" href="calendar-polish.css?v=20261111-v2">
   <link rel="stylesheet" href="visual-upgrade-v3.css?v=20261111-v3">
   <link rel="stylesheet" href="interactive-lab.css?v=20261111-v1">
+  <link rel="stylesheet" href="time-studio.css?v=20261111-v1">
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
@@ -208,6 +210,69 @@
             </section>
           </div>
         </div>
+        <section class="vb-time-studio" id="time-studio" aria-labelledby="vb-studio-title">
+          <div class="vb-studio-shell">
+            <div class="vb-studio-intro">
+              <span class="vb-studio-kicker">06 / TIME STUDIO · THỬ NGAY</span>
+              <h3 id="vb-studio-title">Thử sắp xếp <em>24 giờ</em> của bạn.</h3>
+              <p>Nhìn lại một ngày đang diễn ra như thế nào, sau đó tự xây dựng một lịch mới phù hợp hơn với nhịp sống của bạn.</p>
+              <span class="vb-studio-privacy">KHÔNG CẦN ĐĂNG NHẬP · DỮ LIỆU LƯU TRÊN THIẾT BỊ</span>
+            </div>
+            <div class="vb-studio-app" data-vb-studio>
+              <div class="vb-studio-tabs" role="tablist" aria-label="Chọn công cụ quản lý thời gian">
+                <button class="vb-studio-tab" id="vb-studio-tab-audit" type="button" role="tab" aria-selected="true" aria-controls="vb-studio-audit" tabindex="0" data-studio-tab="audit">01 / TIME AUDIT</button>
+                <button class="vb-studio-tab" id="vb-studio-tab-plan" type="button" role="tab" aria-selected="false" aria-controls="vb-studio-plan" tabindex="-1" data-studio-tab="plan">02 / LẬP LỊCH</button>
+              </div>
+              <section class="vb-studio-panel" id="vb-studio-audit" role="tabpanel" aria-labelledby="vb-studio-tab-audit" data-studio-panel="audit">
+                <div class="vb-studio-panel-head">
+                  <div><h4>24 giờ của bạn đang đi đâu?</h4><p>Điều chỉnh số giờ cho từng hoạt động để xem bức tranh tổng thể.</p></div>
+                  <span class="vb-studio-save" data-studio-save-status>Dữ liệu được lưu riêng trên trình duyệt này</span>
+                </div>
+                <div class="vb-audit-layout">
+                  <div class="vb-audit-visual">
+                    <div class="vb-audit-chart" data-audit-chart role="img" aria-label="Biểu đồ phân bổ 24 giờ">
+                      <div class="vb-audit-chart-center"><strong data-audit-total>24</strong><small>GIỜ ĐÃ PHÂN BỔ</small></div>
+                    </div>
+                    <div class="vb-audit-legend" aria-label="Chú giải biểu đồ">
+                      <span><i style="background:#ef7254"></i>Ngủ nghỉ</span>
+                      <span><i style="background:#183b4b"></i>Học trên trường</span>
+                      <span><i style="background:#718d91"></i>Tự học</span>
+                      <span><i style="background:#d7a45f"></i>Ăn uống &amp; sinh hoạt</span>
+                      <span><i style="background:#9aabb0"></i>Di chuyển</span>
+                      <span><i style="background:#c5a995"></i>Giải trí &amp; nghỉ ngơi</span>
+                    </div>
+                  </div>
+                  <div class="vb-audit-fields">
+                    <div class="vb-audit-field" data-audit-key="sleep"><label for="vb-audit-sleep">Ngủ nghỉ</label><input id="vb-audit-sleep" type="number" min="0" max="24" step="0.5" value="8" data-audit-input="sleep"><small>Giờ mỗi ngày</small></div>
+                    <div class="vb-audit-field" data-audit-key="school"><label for="vb-audit-school">Học trên trường</label><input id="vb-audit-school" type="number" min="0" max="24" step="0.5" value="6" data-audit-input="school"><small>Giờ mỗi ngày</small></div>
+                    <div class="vb-audit-field" data-audit-key="self"><label for="vb-audit-self">Tự học</label><input id="vb-audit-self" type="number" min="0" max="24" step="0.5" value="3" data-audit-input="self"><small>Giờ mỗi ngày</small></div>
+                    <div class="vb-audit-field" data-audit-key="meals"><label for="vb-audit-meals">Ăn uống &amp; sinh hoạt</label><input id="vb-audit-meals" type="number" min="0" max="24" step="0.5" value="2" data-audit-input="meals"><small>Giờ mỗi ngày</small></div>
+                    <div class="vb-audit-field" data-audit-key="commute"><label for="vb-audit-commute">Di chuyển</label><input id="vb-audit-commute" type="number" min="0" max="24" step="0.5" value="1" data-audit-input="commute"><small>Giờ mỗi ngày</small></div>
+                    <div class="vb-audit-field" data-audit-key="leisure"><label for="vb-audit-leisure">Giải trí &amp; nghỉ ngơi</label><input id="vb-audit-leisure" type="number" min="0" max="24" step="0.5" value="4" data-audit-input="leisure"><small>Giờ mỗi ngày</small></div>
+                  </div>
+                </div>
+                <p class="vb-audit-summary" data-audit-summary role="status" aria-live="polite">Bạn đã phân bổ đủ 24 giờ.</p>
+                <div class="vb-studio-actions"><span></span><button class="vb-studio-reset" type="button" data-audit-reset>ĐẶT LẠI SỐ LIỆU MẪU ↺</button></div>
+              </section>
+              <section class="vb-studio-panel" id="vb-studio-plan" role="tabpanel" aria-labelledby="vb-studio-tab-plan" data-studio-panel="plan" hidden aria-hidden="true">
+                <div class="vb-studio-panel-head">
+                  <div><h4>Tự xây dựng lịch trong ngày.</h4><p>Thêm công việc, chọn giờ bắt đầu và thời lượng. Hệ thống sẽ cảnh báo nếu lịch bị trùng.</p></div>
+                  <span class="vb-studio-save">Lịch mẫu có thể xóa hoặc chỉnh lại</span>
+                </div>
+                <form class="vb-studio-task-form" data-studio-task-form>
+                  <div class="vb-studio-form-field"><label for="vb-task-title">TÊN CÔNG VIỆC</label><input id="vb-task-title" data-task-title type="text" maxlength="60" placeholder="Ví dụ: Ôn bài MAD101" required></div>
+                  <div class="vb-studio-form-field"><label for="vb-task-category">PHÂN LOẠI</label><select id="vb-task-category" data-task-category><option value="school">Học trên trường</option><option value="self">Tự học</option><option value="assignment">Bài tập</option><option value="personal">Sinh hoạt</option></select></div>
+                  <div class="vb-studio-form-field"><label for="vb-task-start">BẮT ĐẦU</label><input id="vb-task-start" data-task-start type="time" value="16:00" required></div>
+                  <div class="vb-studio-form-field"><label for="vb-task-duration">THỜI LƯỢNG (GIỜ)</label><input id="vb-task-duration" data-task-duration type="number" min="0.25" max="12" step="0.25" value="1" required></div>
+                  <button class="vb-studio-add" type="submit">THÊM VIỆC +</button>
+                </form>
+                <div class="vb-studio-task-toolbar"><span class="vb-studio-task-summary" data-task-summary>03 công việc · 4.5 giờ đã lên lịch</span><button class="vb-studio-clear" type="button" data-task-clear>XÓA LỊCH</button></div>
+                <div class="vb-studio-task-list" data-studio-task-list aria-label="Các công việc đã lên lịch"></div>
+                <p class="vb-studio-task-status" data-task-status role="status" aria-live="polite">Đây là lịch minh họa. Bạn có thể xóa và thêm công việc của riêng mình.</p>
+              </section>
+            </div>
+          </div>
+        </section>
         <nav class="vb-demo-rail" aria-label="Xem nhanh các minh chứng dự án">
           <a href="#demo-video">
             <span class="vb-rail-number">01 / VIDEO MINH HỌA</span>
