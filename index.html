@@ -16,9 +16,11 @@
   <link rel="stylesheet" href="site-v10.css?v=20261110-editorial-v49">
   <link rel="stylesheet" href="library-v50.css?v=20261110-v54">
   <script defer src="site-v10.js?v=20261016-v28"></script>
+  <script defer src="interactive-lab.js?v=20261111-v1"></script>
   <link rel="stylesheet" href="motion-redesign.css?v=20261111-v2">
   <link rel="stylesheet" href="calendar-polish.css?v=20261111-v2">
   <link rel="stylesheet" href="visual-upgrade-v3.css?v=20261111-v3">
+  <link rel="stylesheet" href="interactive-lab.css?v=20261111-v1">
 </head>
 <body>
   <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
@@ -146,6 +148,65 @@
         <div class="section-title-row demo-heading">
           <h2 id="demo-title">NÓI ÍT.<br><span>CHO XEM NHIỀU.</span></h2>
           <p>Khám phá video minh họa và hai bộ lịch Google Calendar của thành viên nhóm. Mỗi phần đều có minh chứng cụ thể để bạn tự xem và đối chiếu.</p>
+        </div>
+        <div class="vb-lab-module" id="interactive-lab" data-vb-interactive-lab aria-labelledby="vb-lab-title">
+          <div class="vb-lab-copy">
+            <span class="vb-lab-kicker">TRY IT / THỬ NGAY</span>
+            <h3 id="vb-lab-title">Đừng chỉ đọc.<br><em>Hãy thử một cách.</em></h3>
+            <p>Chọn một công cụ để trải nghiệm nhanh hai phương pháp được giới thiệu trong chương trình. Mọi thao tác chỉ chạy trên trình duyệt của bạn.</p>
+            <div class="vb-lab-note">TÌNH HUỐNG MINH HỌA · KHÔNG LƯU DỮ LIỆU</div>
+          </div>
+          <div class="vb-lab-stage">
+            <div class="vb-lab-tabs" role="tablist" aria-label="Chọn công cụ trải nghiệm">
+              <button class="vb-lab-tab" id="vb-lab-tab-pomodoro" type="button" role="tab" aria-selected="true" aria-controls="vb-lab-pomodoro" tabindex="0" data-vb-lab-tab="vb-lab-pomodoro">01 / POMODORO</button>
+              <button class="vb-lab-tab" id="vb-lab-tab-matrix" type="button" role="tab" aria-selected="false" aria-controls="vb-lab-matrix" tabindex="-1" data-vb-lab-tab="vb-lab-matrix">02 / ƯU TIÊN</button>
+            </div>
+            <section class="vb-lab-panel" id="vb-lab-pomodoro" role="tabpanel" aria-labelledby="vb-lab-tab-pomodoro" data-vb-lab-panel tabindex="0">
+              <div class="vb-pomo-layout">
+                <div class="vb-pomo-ring" data-pomo-ring role="timer" aria-label="Tập trung: 25 phút 00 giây">
+                  <div class="vb-pomo-face">
+                    <span data-pomo-mode-label>TẬP TRUNG</span>
+                    <strong data-pomo-time>25:00</strong>
+                    <small>PHÚT : GIÂY</small>
+                  </div>
+                </div>
+                <div class="vb-pomo-copy">
+                  <span class="vb-lab-overline">FOCUS SESSION / 25 — 05</span>
+                  <h4>Một việc tại một thời điểm.</h4>
+                  <p>Tập trung trong 25 phút, sau đó nghỉ ngắn 5 phút. Chọn chế độ rồi bắt đầu bộ đếm.</p>
+                  <div class="vb-pomo-modes" role="group" aria-label="Chọn phiên Pomodoro">
+                    <button class="vb-pomo-mode" type="button" data-pomo-mode="focus" aria-pressed="true">TẬP TRUNG · 25'</button>
+                    <button class="vb-pomo-mode" type="button" data-pomo-mode="break" aria-pressed="false">NGHỈ NGẮN · 5'</button>
+                  </div>
+                  <div class="vb-pomo-controls">
+                    <button class="vb-pomo-control primary" type="button" data-pomo-toggle>BẮT ĐẦU</button>
+                    <button class="vb-pomo-control" type="button" data-pomo-reset>ĐẶT LẠI</button>
+                  </div>
+                  <p class="vb-pomo-status" data-pomo-status role="status">Sẵn sàng cho một phiên tập trung 25 phút.</p>
+                </div>
+              </div>
+            </section>
+            <section class="vb-lab-panel" id="vb-lab-matrix" role="tabpanel" aria-labelledby="vb-lab-tab-matrix" data-vb-lab-panel tabindex="0" hidden aria-hidden="true">
+              <div class="vb-matrix-layout">
+                <div class="vb-matrix-prompt">
+                  <span class="vb-matrix-count" data-matrix-count>01 / 04</span>
+                  <h4>Việc này nên được xếp vào đâu?</h4>
+                  <strong class="vb-matrix-task" data-matrix-task>Bài tập phải nộp trước 23:59 hôm nay.</strong>
+                  <p class="vb-matrix-context" data-matrix-context>Deadline chỉ còn vài giờ và bạn cần trực tiếp hoàn thành bài.</p>
+                  <div class="vb-matrix-feedback" data-matrix-feedback role="status" aria-live="polite">Chọn một nhóm bên phải để phân loại tình huống này.</div>
+                  <div class="vb-matrix-progress"><span data-matrix-progress></span></div>
+                  <span class="vb-matrix-score" data-matrix-score>ĐÚNG 0 / 04</span>
+                  <button class="vb-matrix-next" type="button" data-matrix-next hidden>TIẾP THEO ↗</button>
+                </div>
+                <div class="vb-matrix-choices" role="group" aria-label="Bốn nhóm trong ma trận Eisenhower">
+                  <button class="vb-matrix-choice" type="button" data-matrix-answer="do"><small>QUAN TRỌNG · KHẨN CẤP</small><strong>LÀM NGAY</strong><span>Ưu tiên xử lý trước.</span></button>
+                  <button class="vb-matrix-choice" type="button" data-matrix-answer="schedule"><small>QUAN TRỌNG · CHƯA KHẨN CẤP</small><strong>LÊN LỊCH</strong><span>Chia nhỏ và chủ động sắp xếp.</span></button>
+                  <button class="vb-matrix-choice" type="button" data-matrix-answer="delegate"><small>ÍT QUAN TRỌNG · KHẨN CẤP</small><strong>GIAO / NHỜ HỖ TRỢ</strong><span>Cân nhắc giao lại nếu phù hợp.</span></button>
+                  <button class="vb-matrix-choice" type="button" data-matrix-answer="eliminate"><small>ÍT QUAN TRỌNG · CHƯA KHẨN CẤP</small><strong>LOẠI BỎ</strong><span>Hạn chế việc không cần thiết.</span></button>
+                </div>
+              </div>
+            </section>
+          </div>
         </div>
         <nav class="vb-demo-rail" aria-label="Xem nhanh các minh chứng dự án">
           <a href="#demo-video">
