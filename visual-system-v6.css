@@ -1056,3 +1056,32 @@
     transform:none!important;
   }
 }
+
+/* 2026-11-13 — Keep roadmap session numbers inside their compact badges.
+   The legacy .roadmap .session-num rule in site-v10.css has higher
+   specificity than the original .session-num rule and was leaking its
+   oversized typography into the newer badge component. */
+.roadmap .session-num {
+  display: grid;
+  place-items: center;
+  width: 53px;
+  min-width: 53px;
+  height: 53px;
+  padding: 0;
+  font: 950 19px/1 var(--display);
+  letter-spacing: 0;
+}
+
+.roadmap .session-num::after {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .roadmap .session-num {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    padding: 0;
+    font-size: 15px;
+  }
+}
