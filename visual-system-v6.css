@@ -1085,3 +1085,26 @@
     font-size: 15px;
   }
 }
+
+/* 2026-11-13 — Restore readable contrast in the evidence hand-off panel.
+   The visual refresh changed this panel from dark to light, but three
+   text colors were still inherited from the previous dark-surface design. */
+.vb-evidence-end .vb-evidence-next-label {
+  color: #405761;
+}
+
+.vb-evidence-end .vb-evidence-next {
+  color: #fffaf2;
+}
+
+.vb-evidence-end .vb-evidence-next:hover {
+  color: #fffaf2;
+}
+
+.vb-evidence-end .vb-evidence-next span:last-child {
+  color: #ff9d80;
+}
+
+.vb-evidence-end p strong {
+  color: #173341;
+}
